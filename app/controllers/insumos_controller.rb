@@ -14,7 +14,7 @@ class InsumosController < ApplicationController
 
 	def create
 		@insumo = Insumo.new(nombre: params[:insumo][:nombre],precio: params[:insumo][:precio],
-					cantidad: params[:insumo][:cantidad],nombre: params[:insumo][:nombre],
+					nombre: params[:insumo][:nombre],
 					u_medida: params[:insumo][:u_medida])
 		@insumo.save
 		redirect_to @insumo

@@ -1,6 +1,6 @@
 class Producto < ApplicationRecord
-	has_many :insumos
-	has_many :pedidos
+	has_and_belongs_to_many :insumos
+	has_and_belongs_to_many :pedidos
   
   validates :cod_receta , uniqueness: true
   validates :nombre, presence: {:message => 'Se necesita nombre de la receta'}

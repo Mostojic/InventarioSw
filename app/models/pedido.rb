@@ -1,6 +1,6 @@
 class Pedido < ApplicationRecord
 
-	has_many :productos
+	has_and_belongs_to_many :productos
 
 	validates :cliente, presence: { message: "Debe ingresar nombre del cliente" }
 	

@@ -2,12 +2,10 @@
 
 one:
   nombre: MyString
-  cantidad: 1
   precio: 1
   u_medida: MyString
 
 two:
   nombre: MyString
-  cantidad: 1
   precio: 1
   u_medida: MyString
