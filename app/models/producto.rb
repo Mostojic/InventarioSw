@@ -1,4 +1,4 @@
-class Receta < ApplicationRecord
+class Producto < ApplicationRecord
 	has_many :insumos
 	has_many :pedidos
   
@@ -6,5 +6,4 @@ class Receta < ApplicationRecord
   validates :nombre, presence: {:message => 'Se necesita nombre de la receta'}
   validates :nombre, uniqueness: {:message => 'La receta ingresada ya existe'}
   validates :precio_venta, numericality: true
-  
 end

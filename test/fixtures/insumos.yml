@@ -4,12 +4,10 @@ one:
   nombre: MyString
   cantidad: 1
   precio: 1
-  vencimiento: 2017-06-27
   u_medida: MyString
 
 two:
   nombre: MyString
   cantidad: 1
   precio: 1
-  vencimiento: 2017-06-27
   u_medida: MyString

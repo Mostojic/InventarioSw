@@ -1,0 +1,18 @@
+<%= form_for(@insumo) do |f| %>
+<h1>AGREGAR NUEVO INSUMO</h1>
+<div class="field">
+	<%= f.text_area :nombre, placeholder: "Nombre" %>
+</div>
+<div class="field">
+	<%= f.text_area :precio, placeholder: "Precio" %>
+</div>
+<div class="field">
+	<%= f.text_area :cantidad, placeholder: "Cantidad" %>
+</div>
+<div class="field">
+	<%= f.text_area :u_medida, placeholder: "Unidad de medida" %>
+</div>
+<div class="field">
+	<%= f.submit "Guardar" %>
+</div>
+<%end%>
