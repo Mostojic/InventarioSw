@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cliente: MyString
+  entregado: false
+  entrega: 2017-06-27
+  retiro: 2017-06-27 23:23:42
+  comentario: MyText
+  precio: 1
+  abonado: 1
+
+two:
+  cliente: MyString
+  entregado: false
+  entrega: 2017-06-27
+  retiro: 2017-06-27 23:23:42
+  comentario: MyText
+  precio: 1
+  abonado: 1
