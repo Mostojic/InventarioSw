@@ -1,4 +1,26 @@
-<% @insumos.each do |a| %>
-	<h1><%= a.nombre%> $<%= a.precio%> cada <%= a.u_medida%></h1>
+<html>
+<head>
+<title>Editar Insumos</title>
+</head>
+<body>
 
-	<%end%>
+<h1>Insumos Disponibles</h1>
+<table border="1">
+ <tr>
+  <td width="40%"><p align="center"><i><b>Insumo</b></i></td>
+  <td width="20%"><p align="center"><i><b>Precio</b></i></td>
+  <td width="20%"><p align="center"><i><b>Unidad</b></i></td>
+ </tr>
+
+ <% @insumos.each do |a| %>
+  <tr>
+   <td><%=a.nombre%></td>
+ <td><%= a.precio%></td>
+ <td><%=a.u_medida%></td>
+  </tr>
+ <% end %>
+</table>
+<p><%= link_to "Ingresar nuevo insumo", :action => "new" %></p>
+
+</body>
+</html>

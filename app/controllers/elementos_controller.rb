@@ -1,15 +1,16 @@
 class ElementosController < ApplicationController
 	
 	def index
-	@elemento =	Elemento.all
+	@elementos =	Elemento.all
 	end
 
-	#get
+	#get/elemento/id
 	def show
 		@elemento = Elemento.find(params[:insumo_id])
 	end
 
 	def new
-	@elemento = Elemento.new
+		@elemento = Elemento.new
 	end
 
+end
