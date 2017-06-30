@@ -1,5 +1,5 @@
 <h1>INSUMO CREADO</h1>
 <div>
-<%= @insumo.nombre %> $<%= @insumo.precio%> cada <%= @insumo.u_medida%>
+<%= @insumo.nombre %> $<%= @insumo.precio%> cada <%= @insumo.medida.nombre%>
 </div>
  <td><%= link_to "Volver", :action => "index" %></td>

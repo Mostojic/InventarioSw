@@ -1,15 +1,21 @@
-<%= form_for(@insumo) do |f| %>
-<h1>AGREGAR NUEVO INSUMO</h1>
+<%= form_for(@elemento) do |f| %>
+<h1>AGREGAR INSUMOS AL INVENTARIO</h1>
+
 <div class="field">
-	<%= f.text_area :nombre, placeholder: "Nombre" %>
+	<div>Insumo:</div>
+    <%= f.collection_select :insumo_id, Insumo.all, :id, :nombre %>
+  </div>
+<div class="field">
+	<div>Cantidad:</div>
+	<%= f.text_area :cantidad, placeholder: "0.0" %>
 </div>
 <div class="field">
-	<%= f.text_area :precio, placeholder: "Precio" %>
-</div>
-<div class="field">
-	<%= f.text_area :u_medida, placeholder: "Unidad de medida" %>
+	<div>Vecha de vencimiento:</div>
+	<%= f.text_area :vencimiento, placeholder: "AAAA/MM/DD" %>
 </div>
 <div class="field">
 	<%= f.submit "Guardar" %>
 </div>
 <%end%>
+
+ <td><%= link_to "volver", :action => "index" %></td>

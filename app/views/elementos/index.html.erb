@@ -1,4 +1,27 @@
-<% @elementos.each do |a| %>
-	<h1><%= a.cantiad%> <%= a.vencimiento %> cada <%= a.insumo_id%></h1>
+<html>
+<head>
+<title>Agregar insumos </title>
+</head>
+<body>
 
-	<%end%>
+<h1>Insumos disponibles en inventario</h1>
+<table border="1">
+ <tr>
+  <td width="40%"><p align="center"><i><b>Insumo</b></i></td>
+  <td width="20%"><p align="center"><i><b>Disponible</b></i></td>
+  <td width="20%"><p align="center"><i><b>Unidad</b></i></td>
+ </tr>
+
+ <% @insumos.each do |a| %>
+  <tr>
+   <td><%=a.nombre%></td>
+ <td><%= Elemento.where(insumo_id: [a.id]).sum("cantidad")%></td>
+ <td><%=a.medida.nombre%></td>
+  </tr>
+ <% end %>
+</table>
+<p><%= link_to "Agregar insumos al inventario", :action => "new" %></p>
+
+</body>
+</html>
+

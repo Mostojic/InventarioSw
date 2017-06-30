@@ -7,9 +7,12 @@
 	<%= f.text_area :precio, placeholder: "Precio" %>
 </div>
 <div class="field">
-	<%= f.text_area :u_medida, placeholder: "Unidad de medida" %>
-</div>
+	<div>Unidad de medida:</div>
+    <%= f.collection_select :medida_id, Medida.all, :id, :nombre %>
+  </div>
 <div class="field">
 	<%= f.submit "Guardar" %>
 </div>
 <%end%>
+
+ <td><%= link_to "Volver", :action => "index" %></td>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170630160758) do
+ActiveRecord::Schema.define(version: 20170630212244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,9 +28,10 @@ ActiveRecord::Schema.define(version: 20170630160758) do
   create_table "insumos", force: :cascade do |t|
     t.string "nombre"
     t.integer "precio"
-    t.string "u_medida"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "medida_id"
+    t.index ["medida_id"], name: "index_insumos_on_medida_id"
   end
 
   create_table "insumos_productos", id: false, force: :cascade do |t|
@@ -69,4 +70,5 @@ ActiveRecord::Schema.define(version: 20170630160758) do
   end
 
   add_foreign_key "elementos", "insumos"
+  add_foreign_key "insumos", "medidas"
 end

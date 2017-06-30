@@ -3,7 +3,6 @@ class CreateInsumos < ActiveRecord::Migration[5.1]
     create_table :insumos do |t|
       t.string :nombre
       t.integer :precio
-      t.string :u_medida
 
       t.timestamps
     end

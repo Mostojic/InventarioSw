@@ -1,5 +1,5 @@
-<h1>INSUMO CREADO</h1>
+<h1>Se han agregado</h1>
 <div>
-<%= @insumo.nombre %> $<%= @insumo.precio%> cada <%= @insumo.u_medida%>
+<%= @elemento.cantidad %> <%= @elemento.insumo.medida.nombre%> de <%= @elemento.insumo.nombre%> que vencen en <%= @elemento.vencimiento%>
 </div>
-<td><%= link_to "Volver", :action => "index"<td>
+ <td><%= link_to "Volver", :action => "new" %></td>
