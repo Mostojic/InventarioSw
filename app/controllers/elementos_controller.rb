@@ -16,8 +16,12 @@ class ElementosController < ApplicationController
 	def create
 		@elemento = Elemento.new(cantidad: params[:elemento][:cantidad],
 					vencimiento: params[:elemento][:vencimiento],insumo_id: params[:elemento][:insumo_id])
-		@elemento.save
-		redirect_to @elemento
+		if @elemento.save
+			redirect_to @elemento
+		else
+			render :new
+		end 
+
 	end
 
 end

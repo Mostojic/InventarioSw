@@ -1,4 +1,4 @@
-<%= form_for(@producto) do |f| %>
+<%= form_for([@hoja,@producto]) do |f| %>
 <h1>AGREGAR NUEVA RECETA</h1>
 <div class="field">
 	<%= f.text_area :nombre, placeholder: "Nombre" %>

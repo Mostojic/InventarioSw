@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170630212244) do
+ActiveRecord::Schema.define(version: 20170701041839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 20170630212244) do
     t.datetime "updated_at", null: false
     t.bigint "insumo_id"
     t.index ["insumo_id"], name: "index_elementos_on_insumo_id"
+  end
+
+  create_table "hojas", force: :cascade do |t|
+    t.integer "porcion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "insumo_id"
+    t.bigint "producto_id"
+    t.index ["insumo_id"], name: "index_hojas_on_insumo_id"
+    t.index ["producto_id"], name: "index_hojas_on_producto_id"
   end
 
   create_table "insumos", force: :cascade do |t|
@@ -70,5 +80,7 @@ ActiveRecord::Schema.define(version: 20170630212244) do
   end
 
   add_foreign_key "elementos", "insumos"
+  add_foreign_key "hojas", "insumos"
+  add_foreign_key "hojas", "productos"
   add_foreign_key "insumos", "medidas"
 end

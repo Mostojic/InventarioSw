@@ -1,6 +1,8 @@
 <%= form_for(@elemento) do |f| %>
 <h1>AGREGAR INSUMOS AL INVENTARIO</h1>
-
+<% @elemento.errors.full_messages.each do |message|%>
+	<div><%=message%></div>
+<%end%>
 <div class="field">
 	<div>Insumo:</div>
     <%= f.collection_select :insumo_id, Insumo.all, :id, :nombre %>

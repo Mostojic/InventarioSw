@@ -1,4 +1,27 @@
-<% @productos.each do |a| %>
-	<h1><%= a.nombre%></h1>
+<html>
+<head>
+<title>Recetas </title>
+</head>
+<body>
 
-	<%end%>
+<h1>Productos disponibles</h1>
+<table border="1">
+ <tr>
+  <td width="40%"><p align="center"><i><b>Recetas</b></i></td>
+  <td width="20%"><p align="center"><i><b>Precio</b></i></td>
+ </tr>
+
+ <% @productos.each do |a| %>
+  <tr>
+   <td><%=a.nombre%></td>
+   <td><% %></td>
+   <td><%= link_to "Editar receta", :action => "show", :id => a.id %></td>
+   <td><%= link_to 'Eliminar', a, method: :delete%></td>	
+  </tr>
+ <% end %>
+</table>
+<p><%= link_to "Agregar nuevo producto", :action => "new" %></p>
+
+</body>
+</html>
+

@@ -1,3 +1,4 @@
+
 <html>
 <head>
 <title>Editar Insumos</title>
@@ -10,6 +11,7 @@
   <td width="40%"><p align="center"><i><b>Insumo</b></i></td>
   <td width="20%"><p align="center"><i><b>Precio</b></i></td>
   <td width="20%"><p align="center"><i><b>Unidad</b></i></td>
+  <td width="20%"><p align="center"><i><b> </b></i></td>
  </tr>
 
  <% @insumos.each do |a| %>
@@ -17,6 +19,7 @@
    <td><%=a.nombre%></td>
  <td><%= a.precio%></td>
  <td><%=a.medida.nombre%></td>
+ <td><%= link_to "Eliminar", a, method: :delete %></td>
   </tr>
  <% end %>
 </table>

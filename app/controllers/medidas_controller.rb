@@ -14,7 +14,11 @@ class MedidasController < ApplicationController
 
 	def create
 		@medida = Medida.new(nombre: params[:medida][:nombre])
-		@medida.save
-		redirect_to @medida
+		if @medida.save
+			redirect_to @medida
+		else
+			render :new
+		end 
+
 	end
 end

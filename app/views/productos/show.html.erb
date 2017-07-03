@@ -1,4 +1,41 @@
-<h1>RECETA CREADA</h1>
-<div>
-<%= @producto.nombre%>
+<h1><%= @producto.nombre%></h1>
+<table border="1">
+ <tr>
+  <td width="40%"><p align="center"><i><b>Insumo</b></i></td>
+  <td width="25%"><p align="center"><i><b>Cantidad</b></i></td>
+  <td width="20%"><p align="center"><i><b>Unidad</b></i></td>
+ </tr>
+
+ <% @hojas.each do |a| %>
+  
+<% if a.producto_id === @producto.id then%>
+	<tr>
+   <td><%=a.insumo.nombre%></td>
+   <td><%=a.porcion %></td>
+   <td><%=a.insumo.medida.nombre %></td>
+    <td><%= link_to 'Eliminar', [a.producto, a], method: :delete%></td>	
+   </tr>
+   <% else %>
+   <% end %>
+ <% end %>
+</table>
+
+
+<%= form_for([@producto,@hoja]) do |f| %>
+<h1>Agregar porcion a receta</h1>
+
+<div class="field">
+	<div>Insumo:</div>
+    <%= f.collection_select :insumo_id, Insumo.all, :id, :nombre %>
+  </div>
+
+<div class="field">
+	<div>porcion:</div>
+
+	<%= f.text_area :porcion, placeholder: "0" %>
 </div>
+<div class="field">
+	<%= f.submit "Guardar" %>
+</div>
+<%end%>
+ <td><%= link_to "volver", :action => "index" %></td>
