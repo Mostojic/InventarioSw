@@ -1,7 +1,13 @@
-<%= form_for([@hoja,@producto]) do |f| %>
+<%= form_for(@producto) do |f| %>
 <h1>AGREGAR NUEVA RECETA</h1>
+<% @producto.errors.full_messages.each do |message|%>
+	<div><%=message%></div>
+	<%end%>
 <div class="field">
 	<%= f.text_area :nombre, placeholder: "Nombre" %>
+</div>
+<div class="field">
+	<%= f.text_area :precio, placeholder: "Precio del producto" %>
 </div>
 	<%= f.submit "Guardar" %>
 </div>

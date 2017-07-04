@@ -1,0 +1,40 @@
+<h1>Pedido Cliente: <%= @pedido.cliente%></h1>
+<table border="1">
+ <tr>
+  <td width="40%"><p align="center"><i><b>Insumo</b></i></td>
+  <td width="40%"><p align="center"><i><b>Cantidad</b></i></td>
+ </tr>
+
+ <% @items.each do |a| %>
+  
+<% if a.pedido_id === @pedido.id then%>
+	<tr>
+   <td><%=a.producto.nombre%></td>
+   <td><%=a.cantidad %></td>
+    <td><%= link_to 'Eliminar', [a.pedido, a], method: :delete%></td>	
+   </tr>
+   <% else %>
+   <% end %>
+ <% end %>
+</table>
+
+
+<%= form_for([@pedido,@item]) do |f| %>
+<h1>Agregar productos a pedido</h1>
+
+<div class="field">
+	<div>Producto:</div>
+    <%= f.collection_select :producto_id, Producto.all, :id, :nombre %>
+  </div>
+
+<div class="field">
+	<div>Cantidad:</div>
+
+	<%= f.text_area :cantidad, placeholder: "0" %>
+</div>
+<div class="field">
+	<%= f.submit "Guardar" %>
+</div>
+<%end%>
+ <td><%= link_to "volver", :action => "index" %></td>
+

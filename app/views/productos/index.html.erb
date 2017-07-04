@@ -14,7 +14,7 @@
  <% @productos.each do |a| %>
   <tr>
    <td><%=a.nombre%></td>
-   <td><% %></td>
+   <td><%=a.precio%></td>
    <td><%= link_to "Editar receta", :action => "show", :id => a.id %></td>
    <td><%= link_to 'Eliminar', a, method: :delete%></td>	
   </tr>

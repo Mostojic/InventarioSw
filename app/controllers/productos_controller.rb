@@ -15,7 +15,8 @@ class ProductosController < ApplicationController
 	end
 
 	def create
-		@producto = Producto.new(nombre: params[:producto][:nombre])
+		@producto = Producto.new(nombre: params[:producto][:nombre], 
+								precio: params[:producto][:precio])
 		if @producto.save
 			redirect_to @producto
 		else
@@ -25,8 +26,7 @@ class ProductosController < ApplicationController
 	end
 
 	def destroy 
-		@producto = Producto.find(params[:id])
-		hojas = Hoja.all	
+		@producto = Producto.find(params[:id])	
 		@producto.delete
 		redirect_to @producto
 	end

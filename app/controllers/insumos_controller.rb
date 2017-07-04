@@ -13,8 +13,10 @@ class InsumosController < ApplicationController
 	end
 
 	def create
-		@insumo = Insumo.new(nombre: params[:insumo][:nombre],precio: params[:insumo][:precio],
-					nombre: params[:insumo][:nombre],medida_id: params[:insumo][:medida_id])
+		@insumo = Insumo.new(nombre: params[:insumo][:nombre],
+			precio: params[:insumo][:precio],
+			nombre: params[:insumo][:nombre],
+			medida_id: params[:insumo][:medida_id])
 		if @insumo.save
 			redirect_to @insumo		
 		else
@@ -24,7 +26,7 @@ class InsumosController < ApplicationController
 
 	def destroy 
 		@insumo = Insumo.find(params[:id])
-		@insumo.destroy
+		@insumo.delete
 		redirect_to insumos_path
 	end
 

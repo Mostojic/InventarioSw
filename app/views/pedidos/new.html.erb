@@ -1,0 +1,28 @@
+<%= form_for(@pedido) do |f| %>
+<h1>AGREGAR NUEVO PEDIDO</h1>
+<% @pedido.errors.full_messages.each do |message|%>
+	<div><%=message%></div>
+	<%end%>
+
+<div class="field">
+	<%= f.text_area :cliente, placeholder: "Nombre cliente" %>
+</div>
+
+<div class="field">
+	<%= f.text_area :entrega, placeholder: "AAAA-MM-DD" %>
+</div>
+
+<div class="field">
+	<%= f.text_area :abonado, placeholder: "Cantidad abonada" %>
+</div>
+
+<div class="field">
+	<%= f.text_area :comentario, placeholder: "Comentario" %>
+</div>
+
+<div class="field">
+	<%= f.submit "Guardar" %>
+</div>
+<%end%>
+
+ <td><%= link_to "Volver", :action => "index" %></td>

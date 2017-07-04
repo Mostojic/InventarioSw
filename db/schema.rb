@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170701041839) do
+ActiveRecord::Schema.define(version: 20170703210500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20170701041839) do
   end
 
   create_table "hojas", force: :cascade do |t|
-    t.integer "porcion"
+    t.float "porcion"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "insumo_id"
@@ -44,9 +44,14 @@ ActiveRecord::Schema.define(version: 20170701041839) do
     t.index ["medida_id"], name: "index_insumos_on_medida_id"
   end
 
-  create_table "insumos_productos", id: false, force: :cascade do |t|
-    t.integer "insumo_id"
-    t.integer "producto_id"
+  create_table "items", force: :cascade do |t|
+    t.integer "cantidad"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "pedido_id"
+    t.bigint "producto_id"
+    t.index ["pedido_id"], name: "index_items_on_pedido_id"
+    t.index ["producto_id"], name: "index_items_on_producto_id"
   end
 
   create_table "medidas", force: :cascade do |t|
@@ -74,13 +79,10 @@ ActiveRecord::Schema.define(version: 20170701041839) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "productos_pedidos", id: false, force: :cascade do |t|
-    t.integer "producto_id"
-    t.integer "pedido_id"
-  end
-
   add_foreign_key "elementos", "insumos"
   add_foreign_key "hojas", "insumos"
   add_foreign_key "hojas", "productos"
   add_foreign_key "insumos", "medidas"
+  add_foreign_key "items", "pedidos"
+  add_foreign_key "items", "productos"
 end

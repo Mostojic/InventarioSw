@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>Pedidos</title>
+</head>
+<body>
+
+<h1>Pedidos pendientes</h1>
+<table border="1">
+ <tr>
+  <td width="25%"><p align="center"><i><b>Cliente</b></i></td>
+  <td width="10%"><p align="center"><i><b>Costo total</b></i></td>
+  <td width="10%"><p align="center"><i><b>Abonado</b></i></td>
+  <td width="20%"><p align="center"><i><b>Fecha entrega</b></i></td>
+
+ </tr>
+
+ <% @pedidos.each do |a| %>
+ <%precio = 0%>
+  <tr>
+   <td><%=a.cliente%></td>
+   <% items = Item.where(pedido_id: [a.id])%>
+   <% items.each do |b| %>
+   <% precio = precio + Producto.where(id: [b.producto_id]).sum("precio")*b.cantidad%>
+   	<%end%>
+   <td><%=precio%></td>	
+   <td><%=a.abonado%></td>
+   <td><%=a.entrega%></td>	
+   <td><%= link_to 'cancelar', a, method: :delete%></td>	
+  </tr>
+ <%end%>
+</table>
+<p><%= link_to "Agregar nuevo pedido", :action => "new" %></p>
+
+</body>
+</html>
