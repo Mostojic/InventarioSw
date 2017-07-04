@@ -1,5 +1,5 @@
 <h1>Pedido Cliente: <%= @pedido.cliente%></h1>
-<table border="1">
+<table border="5">
  <tr>
   <td width="40%"><p align="center"><i><b>Insumo</b></i></td>
   <td width="40%"><p align="center"><i><b>Cantidad</b></i></td>
@@ -33,9 +33,10 @@
 	<%= f.text_area :cantidad, placeholder: "0" %>
 </div>
 <div class="field">
-	<%= f.submit "Guardar" %>
+	<%= f.submit "Agregar" %>
 </div>
 <%end%>
 <div><%Pedido.update(@pedido.id, :entregado => 'false')%></div>
- <td><%= link_to "Finalizar", :action => "edit" %></td>
+<p></p>
+ <td><%= link_to "REGISTRAR PEDIDO", :action => "edit" %></td>
 

@@ -1,5 +1,5 @@
 <%= form_for(@pedido) do |f| %>
-<h1>AGREGAR NUEVO PEDIDO</h1>
+<h1>Registrar nuevo pedido</h1>
 <% @pedido.errors.full_messages.each do |message|%>
 	<div><%=message%></div>
 	<%end%>
@@ -28,4 +28,5 @@
 </div>
 <%end%>
 
- <td><%= link_to "Volver", :action => "index" %></td>
+<P></P>
+ <td><%= link_to "REGRESAR A PEDIDOS", :action => "index" %></td>

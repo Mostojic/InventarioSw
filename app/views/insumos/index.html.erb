@@ -6,7 +6,7 @@
 <body>
 
 <h1>Insumos Disponibles</h1>
-<table border="1">
+<table border="5">
  <tr>
   <td width="40%"><p align="center"><i><b>Insumo</b></i></td>
   <td width="20%"><p align="center"><i><b>Precio</b></i></td>
@@ -23,7 +23,7 @@
   </tr>
  <% end %>
 </table>
-<p><%= link_to "Ingresar nuevo insumo", :action => "new" %></p>
+<p><input type="button" value="Ingresar nuevo insumo" onClick="location.href='insumos/new'" /></p>
 
 </body>
 </html>

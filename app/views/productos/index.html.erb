@@ -5,7 +5,7 @@
 <body>
 
 <h1>Productos disponibles</h1>
-<table border="1">
+<table border="5">
  <tr>
   <td width="40%"><p align="center"><i><b>Recetas</b></i></td>
   <td width="20%"><p align="center"><i><b>Precio</b></i></td>
@@ -15,13 +15,15 @@
   <tr>
    <td><%=a.nombre%></td>
    <td><%=a.precio%></td>
-   <td><%= link_to "Editar receta", :action => "show", :id => a.id %></td>
+   <td><input type="button" value="Editar receta" onClick="location.href='productos/<%=a.id%>'" /></td>
    <td><%= link_to 'Eliminar', a, method: :delete%></td>	
   </tr>
  <% end %>
 </table>
-<p><%= link_to "Agregar nuevo producto", :action => "new" %></p>
-
+<p>
+	
+</p>
+<input type="button" value="Producto Nuevo" onClick="location.href='productos/new'" />
 </body>
 </html>
 

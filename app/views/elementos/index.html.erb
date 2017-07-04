@@ -4,8 +4,8 @@
 </head>
 <body>
 
-<h1>Insumos disponibles en inventario</h1>
-<table border="1">
+<h1>Insumos en inventario</h1>
+<table border="5">
  <tr>
   <td width="40%"><p align="center"><i><b>Insumo</b></i></td>
   <td width="20%"><p align="center"><i><b>Disponible</b></i></td>
@@ -20,7 +20,7 @@
   </tr>
  <% end %>
 </table>
-<p><%= link_to "Agregar insumos al inventario", :action => "new" %></p>
+<p><input type="button" value="Agregar insumos al inventario" onClick="location.href='elementos/new'" /></p>
 
 </body>
 </html>

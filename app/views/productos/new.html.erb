@@ -1,5 +1,5 @@
 <%= form_for(@producto) do |f| %>
-<h1>AGREGAR NUEVA RECETA</h1>
+<h1>Ingresar nueva receta</h1>
 <% @producto.errors.full_messages.each do |message|%>
 	<div><%=message%></div>
 	<%end%>
@@ -12,3 +12,4 @@
 	<%= f.submit "Guardar" %>
 </div>
 <%end%>
+<p><td><%= link_to "REGRESAR A PRODUCTOS", :action => "index" %></td></p>

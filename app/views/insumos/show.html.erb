@@ -1,5 +1,17 @@
-<h1>INSUMO CREADO</h1>
+<h1>HA INGRESADO UN NUEVO INSUMO</h1>
 <div>
-<%= @insumo.nombre %> $<%= @insumo.precio%> cada <%= @insumo.medida.nombre%>
+<table border="5">
+ <tr>
+  <td width="40%"><p align="center"><i><b>Nombre</b></i></td>
+  <td width="20%"><p align="center"><i><b>Precio</b></i></td>
+  <td width="20%"><p align="center"><i><b>Unidadde medida</b></i></td>
+</tr>
+<td><%=@insumo.nombre %></td>
+<td><%= @insumo.precio%></td>
+<td><%= @insumo.medida.nombre%></td>
 </div>
- <td><%= link_to "Volver", :action => "index" %></td>
+</table>
+<P>
+	
+</P>
+ <td><%= link_to "REGRESAR A INSUMOS", :action => "index" %></td>

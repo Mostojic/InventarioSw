@@ -1,4 +1,15 @@
-<% @medidas.each do |a| %>
-	<h1><%= a.nombre%></h1>
 
-	<%end%>
+<table border="5">
+ <tr>
+  <td width="70%"><p align="center"><i><b>Unidades de medidas disponibles</b></i></td>
+  
+   </tr>
+
+<% @medidas.each do |a| %>
+  <tr>
+ <td><%=a.nombre%></td>
+  </tr>
+ <% end %>
+</table>
+
+<p><input type="button" value="Ingresar nueva unidad de medida" onClick="location.href='medidas/new'" />

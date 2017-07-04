@@ -5,10 +5,10 @@
 <body>
 
 <h1>Pedidos pendientes</h1>
-<table border="1">
+<table border="5">
  <tr>
   <td width="25%"><p align="center"><i><b>Cliente</b></i></td>
-  <td width="10%"><p align="center"><i><b>Costo total</b></i></td>
+  <td width="15%"><p align="center"><i><b>Costo total</b></i></td>
   <td width="10%"><p align="center"><i><b>Abonado</b></i></td>
   <td width="20%"><p align="center"><i><b>Fecha entrega</b></i></td>
 
@@ -27,12 +27,12 @@
    <td><%=precio%></td>	
    <td><%=a.abonado%></td>
    <td><%=a.entrega%></td>	
-   <td><%= link_to 'cancelar', a, method: :delete%></td>	
+   <td><%= link_to 'Entregar ', a, method: :delete%></td>	
   </tr>
  <%end%>
  <%end%>
 </table>
-<p><%= link_to "Agregar nuevo pedido", :action => "new" %></p>
+<p><input type="button" value="Ingresar nuevo pedido" onClick="location.href='pedidos/new'" />
 
 </body>
 </html>

@@ -1,5 +1,5 @@
 <h1><%= @producto.nombre%></h1>
-<table border="1">
+<table border="5">
  <tr>
   <td width="40%"><p align="center"><i><b>Insumo</b></i></td>
   <td width="25%"><p align="center"><i><b>Cantidad</b></i></td>
@@ -32,11 +32,19 @@
 <div class="field">
 	<div>porcion:</div>
 
-	<%= f.text_area :porcion, placeholder: "0" %>
+	<%= f.text_area :porcion, placeholder: "0.0" %>
 </div>
 <div class="field">
-	<%= f.submit "Guardar" %>
+<p>
+  
+</p>
+	<%= f.submit "Agregar" %>
 </div>
 <%end%>
- <td><%= link_to "Finalizar", :action => "index" %></td>
+<form>
+ <input type="button" value="Volver a productos" onClick="history.back()" />                           
+
+                            
+</form>
+ 
 

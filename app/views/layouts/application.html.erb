@@ -2,13 +2,42 @@
 <html>
   <head>
     <title>Inventario</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet"> 
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
+
+  <header>
+  	<nav class="be-red white large-padding	">  		
+  		<ul class="no-list row center-xs">
+  		<li class="col-md">
+  			<%=link_to "Miluveg", controller: "welcome", action: "index"%>
+  		</li>
+  		<li class="col-md">
+  			<%=link_to "Insumos", controller: "insumos", action: "index"%>
+  		</li>
+  		<li class="col-md">
+  			<%=link_to "Productos", controller: "productos", action: "index"%>
+  		</li>
+  		<li class="col-md">
+  			<%=link_to "Inventario", controller: "elementos", action: "index"%>
+  		</li>
+  		<li class="col-md">
+  			<%=link_to "Pedidos", controller: "pedidos", action: "index"%>
+  		</li>
+  		<li class="col-md">
+  			<%=link_to "Unidades", controller: "medidas", action: "index"%>
+  		</li>
+  		</ul>
+  	</nav>
+
+  </header>
+  <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+
     <%= yield %>
   </body>
 </html>

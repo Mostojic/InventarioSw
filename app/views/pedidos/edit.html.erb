@@ -63,7 +63,7 @@
 
 	<h2>Pedido ingresado exitosamente<%=%></h2>
 	<h3>Se han descontado los siguientes insumos del inventrario:</h3>
-	<table border="1">
+	<table border="5">
  	<tr>
   	<td width="40%"><p align="center"><i><b>Insumo</b></i></td>
   	<td width="20%"><p align="center"><i><b>cantidad descontada</b></i></td>
@@ -84,7 +84,7 @@
 
 	<h2>Pedido no ingresado. Falta de insumos<%=%></h2>
 	<h3>Se necesitan los siguientes insumos en inventrario:</h3>
-	<table border="1">
+	<table border="5">
  	<tr>
   	<td width="40%"><p align="center"><i><b>Insumo</b></i></td>
   	<td width="20%"><p align="center"><i><b>cantidad necesaria</b></i></td>
@@ -114,5 +114,5 @@
 <%end%>
 
 
-<p><%= link_to "Volver", :action => "index" %></p>
+<p> <td><%= link_to "REGRESAR A PEDIDOS", :action => "index" %></td></p>
 	

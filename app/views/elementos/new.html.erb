@@ -1,5 +1,5 @@
 <%= form_for(@elemento) do |f| %>
-<h1>AGREGAR INSUMOS AL INVENTARIO</h1>
+<h1>Agregar insumosal inventario</h1>
 <% @elemento.errors.full_messages.each do |message|%>
 	<div><%=message%></div>
 <%end%>
@@ -19,5 +19,9 @@
 	<%= f.submit "Guardar" %>
 </div>
 <%end%>
+<p>
+	
 
- <td><%= link_to "volver", :action => "index" %></td>
+</p>
+ <td><%= link_to "REGRESAR A INVENTARIO" , :action => "index" %></td>
+
