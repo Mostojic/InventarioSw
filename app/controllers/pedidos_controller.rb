@@ -4,6 +4,10 @@ class PedidosController < ApplicationController
 	@pedidos =	Pedido.all
 	end
 
+	def edit
+		@pedido = Pedido.find(params[:id])
+	end
+
 	def show
 		@pedido = Pedido.find(params[:id])
 		@item = Item.new

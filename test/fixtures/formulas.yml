@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  porcion: 1.5
+  insumo_id: 1
+
+two:
+  porcion: 1.5
+  insumo_id: 1

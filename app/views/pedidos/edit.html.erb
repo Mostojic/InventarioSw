@@ -1,0 +1,118 @@
+<%"contar todos los elementos del pedido"%>
+<% items = Item.where(pedido_id: [@pedido.id])%>
+<% items.each do |a|%>
+	<% hojas = Hoja.where(producto_id: [a.producto_id])%>
+	<% hojas.each do |b|%>
+		<% formulas = Formula.all%>
+		<% if Formula.find_by(insumo_id: b.insumo_id) then %>
+			<% formulas.each do |c|%>
+				<%if c.insumo_id === b.insumo_id %>
+					<% d=0 %>
+					<%d = b.porcion*a.cantidad + c.porcion%>
+					<%Formula.update(c.id, :porcion => d)%>
+				<%end%>
+			<%end%>
+
+			<%else%>
+			<% Formula.create(porcion: b.porcion*a.cantidad, insumo_id: b.insumo_id)%>
+			
+		<%end%>
+	<%end%>
+
+<%end%>
+
+<%"comprobarsi hay elementos suficientes elementos del pedido"%>
+
+<%elemento = Elemento.all%>
+<%formula = Formula.all%>
+<% alcanza = 1%>
+<%formula.each do |a|%>
+	<%if a.porcion <= Elemento.where(insumo_id: [a.insumo_id]).sum("cantidad") then%>
+	<%else%>
+		<% alcanza=0 %>
+	<%end%>
+<%end%>
+
+<%if alcanza > 0 then%>
+	
+	<%"descontar elementos a usar"%>
+
+	<% formulas = Formula.all%>
+	<%formulas.each do |a|%>
+		<%elementos = Elemento.where(insumo_id: [a.insumo_id])%>
+		<% ele = elementos.order('id DESC')%>
+		<%n = a.porcion%>
+		<% ele.each  do |b|%>
+			<%if n > 0 then%>
+				<%if b.cantidad > n then%>
+					<%e = Elemento.find_by(id: b.id)%>
+					<%en = e.cantidad%>
+					<% en = en - n%>
+					<div><%Elemento.update(b.id, :cantidad => en)%></div>
+					<%n=0%>
+				<%else%>
+					<%e = Elemento.find_by(id: b.id)%>
+					<%en = e.cantidad%>
+					<% n = n - en%>
+					<%e.delete%>
+				<%end%>
+			<%end%>
+		<%end%>
+	<%end%>
+
+
+	<h2>Pedido ingresado exitosamente<%=%></h2>
+	<h3>Se han descontado los siguientes insumos del inventrario:</h3>
+	<table border="1">
+ 	<tr>
+  	<td width="40%"><p align="center"><i><b>Insumo</b></i></td>
+  	<td width="20%"><p align="center"><i><b>cantidad descontada</b></i></td>
+ 	</tr>
+	<% formu = Formula.all%>
+	<% formu.each do |a|%>
+  		<tr>
+		<% n = Insumo.find_by(id: a.insumo_id)%>
+  		<tr>
+  		<td><%=n.nombre%></td>
+   		 		<td><%= a.porcion%></td>
+  		</tr>
+		<%a.delete%>
+ 	<% end %>
+	</table>
+
+<%else%>
+
+	<h2>Pedido no ingresado. Falta de insumos<%=%></h2>
+	<h3>Se necesitan los siguientes insumos en inventrario:</h3>
+	<table border="1">
+ 	<tr>
+  	<td width="40%"><p align="center"><i><b>Insumo</b></i></td>
+  	<td width="20%"><p align="center"><i><b>cantidad necesaria</b></i></td>
+  	<td width="20%"><p align="center"><i><b>cantidad existente</b></i></td>
+ 	</tr>
+	<% formu = Formula.all%>
+	<% formu.each do |a|%>
+  		<% n = Insumo.find_by(id: a.insumo_id)%>
+  		<tr>
+  		<td><%=n.nombre%></td>
+ 		<td><%= a.porcion%></td>
+ 		<td><%= Elemento.where(insumo_id: [a.insumo_id]).sum("cantidad")%></td>
+  		</tr>
+		<%a.delete%>
+ 	<% end %>
+	</table>
+
+	<%"eliminar pedido"%>
+
+	<%items = Item.all%>
+	<%items.each do |a|%>
+		<%if a.pedido_id == @pedido.id%>
+		<%a.delete%>
+		<%end%>
+	<%end%>
+	<%n=@pedido.delete%>
+<%end%>
+
+
+<p><%= link_to "Volver", :action => "index" %></p>
+	

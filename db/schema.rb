@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170703210500) do
+ActiveRecord::Schema.define(version: 20170704035020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,13 @@ ActiveRecord::Schema.define(version: 20170703210500) do
     t.datetime "updated_at", null: false
     t.bigint "insumo_id"
     t.index ["insumo_id"], name: "index_elementos_on_insumo_id"
+  end
+
+  create_table "formulas", force: :cascade do |t|
+    t.float "porcion"
+    t.integer "insumo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "hojas", force: :cascade do |t|

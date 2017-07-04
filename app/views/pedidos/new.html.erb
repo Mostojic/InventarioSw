@@ -3,19 +3,22 @@
 <% @pedido.errors.full_messages.each do |message|%>
 	<div><%=message%></div>
 	<%end%>
-
+<div>Nombre cliente:</div>
 <div class="field">
 	<%= f.text_area :cliente, placeholder: "Nombre cliente" %>
 </div>
 
+<div>Fecha de entrega:</div>
 <div class="field">
 	<%= f.text_area :entrega, placeholder: "AAAA-MM-DD" %>
 </div>
 
+<div>Cantidad abonada:</div>
 <div class="field">
 	<%= f.text_area :abonado, placeholder: "Cantidad abonada" %>
 </div>
 
+<div>Comentario:</div>
 <div class="field">
 	<%= f.text_area :comentario, placeholder: "Comentario" %>
 </div>

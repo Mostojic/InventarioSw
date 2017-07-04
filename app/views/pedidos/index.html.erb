@@ -14,8 +14,10 @@
 
  </tr>
 
+ 
  <% @pedidos.each do |a| %>
  <%precio = 0%>
+ <% if a.entregado === false then%>
   <tr>
    <td><%=a.cliente%></td>
    <% items = Item.where(pedido_id: [a.id])%>
@@ -27,6 +29,7 @@
    <td><%=a.entrega%></td>	
    <td><%= link_to 'cancelar', a, method: :delete%></td>	
   </tr>
+ <%end%>
  <%end%>
 </table>
 <p><%= link_to "Agregar nuevo pedido", :action => "new" %></p>

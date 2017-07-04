@@ -36,5 +36,6 @@
 	<%= f.submit "Guardar" %>
 </div>
 <%end%>
- <td><%= link_to "volver", :action => "index" %></td>
+<div><%Pedido.update(@pedido.id, :entregado => 'false')%></div>
+ <td><%= link_to "Finalizar", :action => "edit" %></td>
 
