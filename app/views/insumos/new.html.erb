@@ -5,10 +5,10 @@
 	<div><%=message%></div>
 <%end%>
 <div class="field">
-	<%= f.text_area :nombre, placeholder: "Nombre" %>
+	<%= f.text_field :nombre, placeholder: "Nombre" %>
 </div>
 <div class="field">
-	<%= f.text_area :precio, placeholder: "Precio" %>
+	<%= f.text_field :precio, placeholder: "Precio" %>
 </div>
 <div class="field">
 	<div>Unidad de medida:</div>
@@ -21,4 +21,3 @@
 <P>
 	
 </P>
- <td><%= link_to "REGRESAR A INSUMOS", :action => "index" %></td>

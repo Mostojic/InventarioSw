@@ -5,13 +5,13 @@
 <body>
 
 <h1>Pedidos pendientes</h1>
-<table border="5">
+<table class="table table-striped table-hover" >
  <tr>
-  <td width="25%"><p align="center"><i><b>Cliente</b></i></td>
-  <td width="15%"><p align="center"><i><b>Costo total</b></i></td>
-  <td width="10%"><p align="center"><i><b>Abonado</b></i></td>
-  <td width="20%"><p align="center"><i><b>Fecha entrega</b></i></td>
-
+  <td ><p><i><b>Cliente</b></i></td>
+  <td ><p><i><b>Costo total</b></i></td>
+  <td ><p><i><b>Abonado</b></i></td>
+  <td ><p><i><b>Fecha entrega</b></i></td>
+  <td ><p><i><b></b></i></td>
  </tr>
 
  
@@ -27,7 +27,9 @@
    <td><%=precio%></td>	
    <td><%=a.abonado%></td>
    <td><%=a.entrega%></td>	
-   <td><%= link_to 'Entregar ', a, method: :delete%></td>	
+   <td><button type="button" class="btn btn-primary" onClick="location.href='pedidos/new'" />Entregar</button></td>
+   <td><%= link_to 'Entregar ', a, method: :delete%></td> 
+   
   </tr>
  <%end%>
  <%end%>

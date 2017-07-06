@@ -6,12 +6,12 @@
 <body>
 
 <h1>Insumos Disponibles</h1>
-<table border="5">
+<table class="table table-striped table-hover   " >
  <tr>
-  <td width="40%"><p align="center"><i><b>Insumo</b></i></td>
-  <td width="20%"><p align="center"><i><b>Precio</b></i></td>
-  <td width="20%"><p align="center"><i><b>Unidad</b></i></td>
-  <td width="20%"><p align="center"><i><b> </b></i></td>
+  <td><p><i><b>Insumo</b></i></td>
+  <td><p><i><b>Precio</b></i></td>
+  <td><p><i><b>Unidad</b></i></td>
+  <td><p><i><b> </b></i></td>
  </tr>
 
  <% @insumos.each do |a| %>
@@ -19,11 +19,12 @@
    <td><%=a.nombre%></td>
  <td><%= a.precio%></td>
  <td><%=a.medida.nombre%></td>
- <td><%= link_to "Eliminar", a, method: :delete %></td>
+ <td><%= button_to "Eliminar", a, method: :delete %></td>
   </tr>
  <% end %>
 </table>
-<p><input type="button" value="Ingresar nuevo insumo" onClick="location.href='insumos/new'" /></p>
+
+<p><button type="button"  onClick="location.href='insumos/new'" />Ingresar nuevo insumo</button></p>
 
 </body>
 </html>

@@ -1,9 +1,10 @@
 <h1><%= @producto.nombre%></h1>
-<table border="5">
+<table class="table table-striped table-hover" >
  <tr>
-  <td width="40%"><p align="center"><i><b>Insumo</b></i></td>
-  <td width="25%"><p align="center"><i><b>Cantidad</b></i></td>
-  <td width="20%"><p align="center"><i><b>Unidad</b></i></td>
+  <td><p><i><b>Insumo</b></i></td>
+  <td><p><i><b>Cantidad</b></i></td>
+  <td><p><i><b>Unidad</b></i></td>
+  <td><p><i><b> </b></i></td>
  </tr>
 
  <% @hojas.each do |a| %>
@@ -13,7 +14,7 @@
    <td><%=a.insumo.nombre%></td>
    <td><%=a.porcion %></td>
    <td><%=a.insumo.medida.nombre %></td>
-    <td><%= link_to 'Eliminar', [a.producto, a], method: :delete%></td>	
+    <td><%= button_to 'Eliminar', [a.producto, a], method: :delete%></td>	
    </tr>
    <% else %>
    <% end %>
@@ -32,7 +33,7 @@
 <div class="field">
 	<div>porcion:</div>
 
-	<%= f.text_area :porcion, placeholder: "0.0" %>
+	<%= f.text_field :porcion, placeholder: "0.0" %>
 </div>
 <div class="field">
 <p>
@@ -41,10 +42,3 @@
 	<%= f.submit "Agregar" %>
 </div>
 <%end%>
-<form>
- <input type="button" value="Volver a productos" onClick="history.back()" />                           
-
-                            
-</form>
- 
-

@@ -4,12 +4,11 @@
 	<div><%=message%></div>
 	<%end%>
 <div class="field">
-	<%= f.text_area :nombre, placeholder: "Nombre" %>
+	<%= f.text_field :nombre, placeholder: "Nombre" %>
 </div>
 <div class="field">
-	<%= f.text_area :precio, placeholder: "Precio del producto" %>
+	<%= f.text_field :precio, placeholder: "Precio del producto" %>
 </div>
 	<%= f.submit "Guardar" %>
 </div>
 <%end%>
-<p><td><%= link_to "REGRESAR A PRODUCTOS", :action => "index" %></td></p>

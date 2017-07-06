@@ -9,11 +9,11 @@
   </div>
 <div class="field">
 	<div>Cantidad:</div>
-	<%= f.text_area :cantidad, placeholder: "0.0" %>
+	<%= f.text_field :cantidad, placeholder: "0.0" %>
 </div>
 <div class="field">
 	<div>Vecha de vencimiento:</div>
-	<%= f.text_area :vencimiento, placeholder: "AAAA/MM/DD" %>
+	<%= f.text_field :vencimiento, placeholder: "AAAA/MM/DD" %>
 </div>
 <div class="field">
 	<%= f.submit "Guardar" %>
@@ -23,5 +23,5 @@
 	
 
 </p>
- <td><%= link_to "REGRESAR A INVENTARIO" , :action => "index" %></td>
+
 

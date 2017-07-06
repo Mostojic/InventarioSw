@@ -2,4 +2,5 @@
 <div>
 <%= @elemento.cantidad %> <%= @elemento.insumo.medida.nombre%> de <%= @elemento.insumo.nombre%> que vencen en <%= @elemento.vencimiento%>
 </div>
- <td><%= link_to "Volver", :action => "new" %></td>
+<p></p>
+<input type="button" value="Agregar otro insumo al inventario" onClick="history.back()" />
