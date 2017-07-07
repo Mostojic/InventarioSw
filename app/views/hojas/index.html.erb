@@ -1,25 +1,2 @@
-<html>
-<head>
-<title>Recetas </title>
-</head>
-<body>
 
-<h1>Recetas de productos</h1>
-<table border="5">
- <tr>
-  <td width="40%"><p align="center"><i><b>Recetas</b></i></td>
-  <td width="20%"><p align="center"><i><b>Disponible</b></i></td>
- </tr>
-
- <% @productos.each do |a| %>
-  <tr>
-   <td><%=a.nombre%></td>
-   <td><%= link_to "Editar", :action => "new", :id => a.id %></td>
-  </tr>
- <% end %>
-</table>
-<p><%= link_to "agregar receta", :action => "new" %></p>
-
-</body>
-</html>
 
