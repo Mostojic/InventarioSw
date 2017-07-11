@@ -1,4 +1,5 @@
 <h1>Pedido Cliente: <%= @pedido.cliente%></h1>
+<h1>Pedido fecha: <%= @pedido.entrega%></h1>
 <table class="table table-striped table-hover table-condensed" >
  <tr>
   <td><p><i><b>Insumo</b></i></td>
@@ -24,7 +25,9 @@
 
 <div class="field">
 	<div>Producto:</div>
-    <%= f.collection_select :producto_id, Producto.all, :id, :nombre %>
+  <%productos=Producto.all%>
+  <%productos = productos.order('nombre')%>
+    <%= f.collection_select :producto_id, productos, :id, :nombre %>
   </div>
 
 <div class="field">

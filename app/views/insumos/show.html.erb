@@ -1,17 +1,22 @@
 <h1>Ha ingresado un nuevo insumo</h1>
-<div>
-<table class="table table-striped table-hover " >
- <tr>
-  <td><p><i><b>Nombre</b></i></td>
-  <td><p><i><b>Precio</b></i></td>
-  <td><p><i><b>Unidadde medida</b></i></td>
-</tr>
-<td><%=@insumo.nombre %></td>
-<td><%= @insumo.precio%></td>
-<td><%= @insumo.medida.nombre%></td>
-</div>
-</table>
-<P>
-	
-</P>
+
+<div class="container">
+	      <div class="col-md-3 col-md-offset-2">
+	        <table class="table table-striped table-hover table-condensed   " >
+	          <thead>
+	            <tr>
+	              <th><div class="size-165">Insumo</div></th>
+	              <th><div class="size-165">Precio</div></th>
+	              <th><div class="size-165">Unidad</div></th>
+	            </tr>                  
+	          </thead>
+	            <tr>
+	              <td><%=@insumo.nombre%></td>
+	              <td><%=@insumo.precio%></td>
+	              <td><%=@insumo.medida.nombre%></td>
+	            </tr>
+	        </table>  
+	      </div>
+	    </div>
+	    
  <input type="button" value="Agregar otro insumo" onClick="history.back()" />

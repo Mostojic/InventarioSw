@@ -1,5 +1,138 @@
-<h1/>MILUVEG<h1>
+<html>
+<head>
+<title>Escritorio</title>
+<style type="text/css">
+	.derecha{
+		float: right;
+	}
+	.izq{
+		float: left;
+	}
+</style>
+</head>
 
-<h2>Pedidos pendientes</h2>
+<body>
+
+
+<div>
+
+<span class="izq">
+	<h2>Pedidos de la semana</h2>
+
+	        <table class="table table-striped table-hover table-condensed table-bordered" >
+
+
+	          <thead>
+	            <tr>
+	              <th><div class="size-200">Nombre cliente</div></th>
+	              <th><div class="size-100">Pendiente</div></th>
+	              <th><div class="size-100">Fecha entrega</div></th>
+	              <th><div class="size-100">Hora entrega</div></th>
+	              <th><div class="size-100"></div></th>
+	            </tr>                  
+	          </thead>
+	          <% @pedidos.each do |a| %>
+	          	<%fecha = a.entrega%>
+	          	<%fecha = fecha-7%>
+	          	<%if fecha<Date.today%>
+		            <tr>
+		              <td><%=a.cliente%></td>
+		              <td><%=a.precio%></td>
+		              <td><%=a.entrega%></td>
+		              <td><%=a.retiro%></td>
+		              <td><input type="button" value="Detalles pedido" onClick="location.href='productos/<%=a.id%>'" /></td>
+		            </tr>
+		        <%end%>
+	          <% end %>
+	        </table>  
+</span>
+
+
+
+<%salir=0%>
+<%fec=Date.today%>
+<%fec=fec+7%>
+<%@elementos.each do |a|%>
+	<%if !a.vencimiento.blank?%>
+		<%if a.vencimiento< Date.today+7 and salir==0%>
+			<%salir=1%>
+			<span class="derecha">
+					<h3 class="be-alert">¡¡ .Atencion Vencimiento Insumos. !!</h3>
+				      <div class="col-md-2 col-md-offset-1">
+				        <table class="table table-striped table-hover table-condensed table-bordered" >
+				          <thead>				          	
+							<tr>
+								<th><div class="size-100">Insumo</div></th>
+							    <th><div class="size-100">Vence</div></th>
+							</tr>
+						  </thead>
+				          	<%contador=0%>
+				          	<%@elementos.each do |b|%>
+				          		<%if !b.vencimiento.blank?%>				          			
+									<%if b.vencimiento< Date.today+7 and contador<5%>
+										<%contador=contador+1%>
+								        <tr>
+								        <td><%=b.insumo.nombre%></td>
+								        <td><%=b.vencimiento%></td>
+								        </tr>
+								    <%end%>
+								<%end%>
+						  <%end%>
+				        </table>  
+				      </div>
+				
+			</span>
+		<%end%>
+	<%end%>
+<%end%>
+
+<%salir=0%>
+<% @insumos.each do |a| %>
+<%if Elemento.where(insumo_id: [a.id]).sum("cantidad")<10 and salir==0%>
+	<%salir=1%>
+	<span class="derecha">
+			<h3 class="be-alert">¡¡ . Atencion Stock Insumos . !!</h3>
+		      <div class="col-md-2 col-md-offset-1">
+		        <table class="table table-striped table-hover table-condensed table-bordered" >
+		          <thead>
+		            <tr>
+		              <th><div class="size-100">Insumo</div></th>
+		              <th><div class="size-100">Cantidad</div></th>
+		              <th><div>U</div></th>
+		            </tr>
+		          </thead>
+		          	<%contador=0%>
+		          	<% @insumos.each do |b| %>
+		          		<%cant=Elemento.where(insumo_id: [b.id]).sum("cantidad")%>
+		          		<%if cant<10 and contador<5%>
+							<tr>
+								<td><%=b.nombre%></td>
+								<td><%=cant%></td>
+								<td><%=b.medida.nombre%></td>
+							</tr>
+							<%contador=contador+1%>
+				   		<% end %>
+				   <% end %>
+		          
+		        </table>  
+		      </div>
+		
+	</span>
+	<%end%>
+<%end%>
+
+
+
+
+</div>
+	
+</body>
+</html>
+
+
+
+
+
+
 
 

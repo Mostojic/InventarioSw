@@ -3,6 +3,6 @@ class Elemento < ApplicationRecord
 	
    	validates :cantidad, numericality: {:message => ': Solo debe ingresar números'}
    	validates :cantidad, presence: {:message => ': Ingrese cantidad que desea ingresar	'}
-   	
 
+   	
 end

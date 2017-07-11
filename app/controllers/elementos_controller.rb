@@ -1,7 +1,7 @@
 class ElementosController < ApplicationController
 	
 	def index
-	@insumos = Insumo.all
+	@insumos = Insumo.paginate(page: params[:page],per_page:11)
 	end
 
 	#get/elemento/id
@@ -14,8 +14,8 @@ class ElementosController < ApplicationController
 	end
 
 	def create
-		@elemento = Elemento.new(cantidad: params[:elemento][:cantidad],
-					vencimiento: params[:elemento][:vencimiento],insumo_id: params[:elemento][:insumo_id])
+		@elemento = Elemento.new(insumo_id: params[:elemento][:insumo_id],cantidad: params[:elemento][:cantidad],
+					vencimiento: params[:elemento][:vencimiento])
 		if @elemento.save
 			redirect_to @elemento
 		else

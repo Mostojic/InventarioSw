@@ -1,23 +1,25 @@
 <%= form_for(@elemento) do |f| %>
-<h1>Agregar insumosal inventario</h1>
-<% @elemento.errors.full_messages.each do |message|%>
-	<div><%=message%></div>
-<%end%>
-<div class="field">
-	<div>Insumo:</div>
-    <%= f.collection_select :insumo_id, Insumo.all, :id, :nombre %>
-  </div>
-<div class="field">
-	<div>Cantidad:</div>
-	<%= f.text_field :cantidad, placeholder: "0.0" %>
-</div>
-<div class="field">
-	<div>Vecha de vencimiento:</div>
-	<%= f.text_field :vencimiento, placeholder: "AAAA/MM/DD" %>
-</div>
-<div class="field">
-	<%= f.submit "Guardar" %>
-</div>
+	<h1>Agregar insumosal inventario</h1>
+	<% @elemento.errors.full_messages.each do |message|%>
+		<div><%=message%></div>
+	<%end%>
+	<div class="field">
+		<div>Insumo:</div>
+		<%insumos=Insumo.all%>
+		<%insumos = insumos.order('nombre')%>
+    	<%= f.collection_select :insumo_id, insumos, :id, :nombre %>
+  	</div>
+	<div class="field">
+		<div>Cantidad:</div>
+		<%= f.text_field :cantidad, placeholder: "0.0" %>
+	</div>
+	<div class="field">	
+		<div>Fecha Vencimiento:</div>
+		<%= f.text_field :vencimiento %>
+	</div>
+	<div class="field">
+		<%= f.submit "Guardar" %>
+	</div>
 <%end%>
 <p>
 	

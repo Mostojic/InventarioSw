@@ -1,18 +1,13 @@
 <%= form_for(@pedido) do |f| %>
-<h1>Registrar nuevo pedido</h1>
+<h1>Para confirmar pedido ingrese cantidad abonada por cliente</h1>
 <% @pedido.errors.full_messages.each do |message|%>
 	<div class="letter-red"><%=message%></div>
 	<p></p>
 	<%end%>
-<div>Nombre cliente:</div>
+<div>Cantidad abonada:</div>
 <div class="field">
-	<%= f.text_field :cliente, placeholder: "Nombre cliente" %>
+	<%= f.text_field :abonado, {:value => @abonado} %>
 </div>
-
-<p></p>
-<div>Fecha de entrega:</div>
-<div class="field">
-<%=f.text_field :entrega, placeholder: "AAA-MM-DD"%></div>
 
 <p></p>
 <div>Comentario:</div>
@@ -20,12 +15,11 @@
 	<%= f.text_area :comentario, placeholder: "Comentario" %>
 </div>
 
-<p></p>
+<p>
+	
+</p>
 <div class="field">
+
 	<%= f.submit "Guardar" %>
 </div>
 <%end%>
-
-<P></P>
- <td><%= link_to "REGRESAR A PEDIDOS", :action => "index" %></td>
- 

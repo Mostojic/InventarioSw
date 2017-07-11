@@ -3,24 +3,31 @@
 <title>Agregar insumos </title>
 </head>
 <body>
+	<h1>Insumos en inventario</h1>
+	    <div class="container">
+	      <div class="col-md-3 col-md-offset-2">
+	        <table class="table table-striped table-hover table-condensed   " >
+	          <thead>
+	            <tr>
+	              <th><div class="size-220">Insumo</div></th>
+	              <th><div class="size-220">Disponible</div></th>
+	              <th><div class="size-220">Unidad</div></th>
+	            </tr>                  
+	          </thead>
+	          <% @insumos.each do |a| %>
+	            <tr>
+	              <td><%=a.nombre%></td>
+	              <td><%=Elemento.where(insumo_id: [a.id]).sum("cantidad")%></td>
+	              <td><%=a.medida.nombre%></td>
+	            </tr>
+	          <% end %>
+	        </table>  
+	      </div>
+	    </div>
+	    
 
-<h1>Insumos en inventario</h1>
-<table class="table table-striped table-hover table-condensed" >
- <tr>
-  <td><p><i><b>Insumo</b></i></td>
-  <td><p><i><b>Disponible</b></i></td>
-  <td><p><i><b>Unidad</b></i></td>
- </tr>
-
- <% @insumos.each do |a| %>
-  <tr>
-   <td><%=a.nombre%></td>
- <td><%= Elemento.where(insumo_id: [a.id]).sum("cantidad")%></td>
- <td><%=a.medida.nombre%></td>
-  </tr>
- <% end %>
-</table>
-<p><input type="button" value="Agregar insumos al inventario" onClick="location.href='elementos/new'" /></p>
+	    <%=will_paginate @insumos%>
+		<p><input type="button" value="Agregar insumos al inventario" onClick="location.href='elementos/new'" /></p>
 
 </body>
 </html>

@@ -2,7 +2,7 @@
 <h1>Ingresar nuevo insumo</h1>
 
 <% @insumo.errors.full_messages.each do |message|%>
-	<div><%=message%></div>
+	<div class="be-re"><%=message%></div>
 <%end%>
 <div class="field">
 	<%= f.text_field :nombre, placeholder: "Nombre" %>
