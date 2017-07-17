@@ -1,27 +1,59 @@
-<h1>Pedido Cliente: <%= @pedido.cliente%></h1>
-<h1>Pedido fecha: <%= @pedido.entrega%></h1>
-<table class="table table-striped table-hover table-condensed" >
- <tr>
-  <td><p><i><b>Insumo</b></i></td>
-  <td><p><i><b>Cantidad</b></i></td>
- </tr>
+<html>
+<head>
+<title>Agregar a pedido</title>
+<style type="text/css">
+  .derecha{
+    float: right;
+  }
+  .izq{
+    float: left;
+  }
+</style>
+</head>
 
- <% @items.each do |a| %>
-  
-<% if a.pedido_id === @pedido.id then%>
-	<tr>
-   <td><%=a.producto.nombre%></td>
-   <td><%=a.cantidad %></td>
-    <td><%= link_to 'Eliminar', [a.pedido, a], method: :delete%></td>	
-   </tr>
-   <% else %>
-   <% end %>
- <% end %>
-</table>
+<body>
+<h1>Cliente: <%= @pedido.cliente%></h1>
+<h1>Fecha entrega: <%= @pedido.entrega%></h1>
 
 
+<div>
+<span class="izq">
+
+          <table class="table table-striped table-hover table-condensed   " >
+            <thead>
+              <tr>
+                <th><div class="size-220">Producto</div></th>
+                <th><div class="size-100">Cantidad</div></th>
+                <th><div class="size-100">Precio</div></th>
+                <th><div class="size-100  "></div></th>
+              </tr>                  
+            </thead>
+            <% @items.each do |a| %>
+              <% if a.pedido_id === @pedido.id then%>
+                <tr>
+                  <td><%=a.producto.nombre%></td>
+                  <td><%=a.cantidad %></td>
+                  <td><%=a.producto.precio*a.cantidad%></td>
+                  <td><%= button_to 'Eliminar', [a.pedido, a], method: :delete%></td> 
+                </tr>
+                <% else %>
+                <% end %>
+              <% end %>
+              <th>Costo Total</th>
+              <td><%=%></td>
+              <%total=0%>
+              <%@items.each do |a|%>
+              <%if a.pedido_id==@pedido.id%>
+                <%total=total+a.cantidad*a.producto.precio%>
+              <%end%>
+            <%end%>
+            <th><%=total%></th>
+          </table>
+</span>
+
+<span class="derecha">
 <%= form_for([@pedido,@item]) do |f| %>
-<h1>Agregar productos a pedido</h1>
+<h1>Agregar productos a pedido .</h1>
 
 <div class="field">
 	<div>Producto:</div>
@@ -39,7 +71,8 @@
 	<%= f.submit "Agregar" %>
 </div>
 <%end%>
-<div><%Pedido.update(@pedido.id, :entregado => 'false')%></div>
 <p></p>
- <td><%= link_to "REGISTRAR PEDIDO", :action => "edit" %></td>
-
+ <u class="be-re"><td><%= link_to "FINALIZAR PEDIDO", :action => "edit" %></td></u>
+</span>
+</div>
+</body>

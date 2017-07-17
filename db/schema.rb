@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20170704191138) do
 
   create_table "pedidos", force: :cascade do |t|
     t.string "cliente"
-    t.boolean "entregado"
+    t.integer "estado"
     t.date "entrega"
     t.time "retiro"
     t.text "comentario"

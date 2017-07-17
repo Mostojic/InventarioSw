@@ -1,7 +1,7 @@
 class InsumosController < ApplicationController
 	
 	def index
-	@insumos = Insumo.paginate(page: params[:page],per_page:8)
+	@insumos = Insumo.paginate(page: params[:page],per_page:7)
 	end
 
 	def show
@@ -10,6 +10,7 @@ class InsumosController < ApplicationController
 
 	def new
 	@insumo = Insumo.new
+	
 	end
 
 	def create
@@ -26,8 +27,27 @@ class InsumosController < ApplicationController
 
 	def destroy 
 		@insumo = Insumo.find(params[:id])
-		@insumo.delete
-		redirect_to insumos_path
+		hojas = Hoja.all
+		produ=0
+		elem=0
+    	hojas.each do |a|
+      		if @insumo.id == a.insumo_id
+        		produ=1
+        	end
+    	end
+    	elementos = Elemento.all
+    	elementos.each do |a|
+      		if @insumo.id == a.insumo_id
+        		elem=1
+        	end
+    	end
+    	if produ==0 and elem==0
+    		@insumo.delete
+			redirect_to insumos_path
+		else
+			redirect_to insumos_path
+			
+		end
 	end
 
 end

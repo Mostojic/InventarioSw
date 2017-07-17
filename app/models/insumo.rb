@@ -5,16 +5,17 @@ class Insumo < ApplicationRecord
 	has_and_belongs_to_many :productos
   
  	validates :nombre, presence: {:message => ': Se necesita nombre de producto'}
-  	validates :nombre , uniqueness: {:message => ': El producto ingresado ya existe'}
-   	validates :precio, presence: {:message => ': Ingrese precio del producto'}
-   	validates :precio, numericality: {:message => ': Solo debe ingresar números'}
-   	/
-	validates :fecha_vencimiento_valida
-  	def fecha_vencimiento_valida
-     	if fecha_venc.blank? and fecha_venc < Date.today
-       	errors.add(:fecha_venc,"Fecha ingresada no es válida")
-    	end
-  	end 
+  validates :nombre, uniqueness: {:message => ': El producto ingresado ya existe'}
+  validates :nombre, length: {maximum: 20, :message => ": El nombre no puede exceder los 20 caracteres"}
+  validates :precio, presence: {:message => ': Ingrese precio del producto'}
+  validates :precio, numericality: {:message => ': Solo debe ingresar números'}
+  validates :precio, length: {maximum: 6, :message => ": El precio no puede exceder los 6 digitos"}
+  validate :positivo
 
-  	/
+  def positivo
+    if !precio.blank? and precio<1
+      errors.add(:precio, ": Debe ingresar precio superior a $0")
+    end
+  end
+  
 end

@@ -18,7 +18,8 @@
               <th><div class="size-165">     </div></th>
             </tr>                  
           </thead>
-          <% @productos.each do |a| %>
+          <%productos = @productos.order('nombre')%>
+          <% productos.each do |a| %>
             <tr>
               <td><%=a.nombre%></td>
               <td><%=a.precio%></td>
@@ -27,12 +28,13 @@
             </tr>
           <% end %>
         </table>  
+        <%=will_paginate @productos%>
+        <p><input type="button" value="Ingresar nuevo producto" onClick="location.href='productos/new'" /></p>
       </div>
     </div>
     
 
-    <%=will_paginate @productos%>
-    <input type="button" value="Ingresar nuevo producto" onClick="location.href='productos/new'" />
+    
     
   </body>
 </html>

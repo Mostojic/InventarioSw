@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<h1>Insumos Disponibles</h1>
+<h1 >Insumos Existentes</h1>
 
 	    <div class="container">
 	      <div class="col-md-3 col-md-offset-2">
@@ -18,7 +18,8 @@
 	              <th><div class="size-165"></div></th>
 	            </tr>                  
 	          </thead>
-	          <% @insumos.each do |a| %>
+	          <%insumos = @insumos.order('nombre')%>
+	          <% insumos.each do |a| %>
 	            <tr>
 	              <td><%=a.nombre%></td>
 	              <td><%=a.precio%></td>
@@ -27,12 +28,15 @@
 	            </tr>
 	          <% end %>
 	        </table>  
-	      </div>
-	    </div>
-	    
 
-	    <%=will_paginate @insumos%>
-<p><button type="button"  onClick="location.href='insumos/new'" />Ingresar nuevo insumo</button></p>
+		    <aside>
+		    <%=will_paginate @insumos%>
+			<button type="button"  onClick="location.href='insumos/new'" />Ingresar nuevo insumo</button>
+		    </aside>	
+	      </div>
+
+	    </div>
+
 
 </body>
 </html>

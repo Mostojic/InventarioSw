@@ -1,0 +1,27 @@
+<h1><%= @producto.nombre%></h1>
+<%total=0.0%>
+<%hojas=Hoja.all%>
+            <%hojas.each do |a|%>
+              <%if a.producto_id==@producto.id%>
+                <%total=total+a.porcion*a.insumo.precio%>
+              <%end%>
+            <%end%>
+
+<p><h3>Costo total: <%=total%></h3></p>
+<p><h3>Precio sugerido: <%=total*2%></h3></p>
+
+<%= form_for(@producto) do |f| %>
+<% @producto.errors.full_messages.each do |message|%>
+	<div class="be-re"><%=message%></div>
+	<%end%>
+	<th>Ingresar Precio Final: </th>
+<div class="field">
+	<%= f.text_field :precio%>
+
+</div>
+<p></p>
+	<%= f.submit "Guardar" %>
+</div>
+
+<%end%>
+

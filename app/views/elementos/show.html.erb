@@ -1,6 +1,45 @@
-<h1>Se han agregado</h1>
-<div>
-<%= @elemento.cantidad %> <%= @elemento.insumo.medida.nombre%> de <%= @elemento.insumo.nombre%> que vencen en <%= @elemento.vencimiento%>
-</div>
-<p></p>
-<input type="button" value="Agregar otro insumo al inventario" onClick="history.back()" />
+<html>
+<head>
+<title>Agregar insumos </title>
+</head>
+<h1>Piezas de <%=@elemento.insumo.nombre%></h1>
+<body>
+	    <div class="container">
+	      <div class="col-md-4 col-md-offset-2">
+	        <table class="table table-striped table-hover table-condensed   " >
+	          <thead>
+	            <tr>
+	              <th><div class="size-100">Insumo</div></th>
+	              <th><div class="size-100">Cantidad</div></th>
+	              <th><div class="size-100">Vencen</div></th>
+	              <th><div class="size-100"></div></th>
+
+	            </tr>                  
+	          </thead>
+	          <%elementos=Elemento.where(insumo_id: [@elemento.insumo_id])%>
+	          <%elementos=elementos.order(vencimiento: :desc)%>
+	          <% elementos.each do |a| %>
+	        		<tr>
+		            <td><%=a.insumo.nombre%></td>
+		            <td><%=a.cantidad%></td>
+		            <td><%=a.vencimiento%></td>
+		            <td><%= button_to "Eliminar", a, method: :delete %></td>
+		            </tr>
+	          <% end %>
+	        </table>  
+	        
+	      </div>
+	    </div>
+
+
+	    
+	    
+
+	    
+
+</body>
+</html>
+
+
+
+ <u class="be-re"><th><%= link_to "Agregar Insumos al inventario", :action => "new" %></th></u>

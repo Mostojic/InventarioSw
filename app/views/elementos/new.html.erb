@@ -1,7 +1,7 @@
 <%= form_for(@elemento) do |f| %>
 	<h1>Agregar insumosal inventario</h1>
 	<% @elemento.errors.full_messages.each do |message|%>
-		<div><%=message%></div>
+		<div class="be-re"><%=message%></div>
 	<%end%>
 	<div class="field">
 		<div>Insumo:</div>
@@ -15,7 +15,7 @@
 	</div>
 	<div class="field">	
 		<div>Fecha Vencimiento:</div>
-		<%= f.text_field :vencimiento %>
+		<%= f.text_field :vencimiento, placeholder:"AAAA-MM-DD" %>
 	</div>
 	<div class="field">
 		<%= f.submit "Guardar" %>

@@ -1,14 +1,14 @@
 <%= form_for(@producto) do |f| %>
 <h1>Ingresar nueva receta</h1>
 <% @producto.errors.full_messages.each do |message|%>
-	<div><%=message%></div>
+	<div class="be-re"><%=message%></div>
 	<%end%>
 <div class="field">
 	<%= f.text_field :nombre, placeholder: "Nombre" %>
+
 </div>
-<div class="field">
-	<%= f.text_field :precio, placeholder: "Precio del producto" %>
-</div>
+<p></p>
 	<%= f.submit "Guardar" %>
 </div>
+
 <%end%>

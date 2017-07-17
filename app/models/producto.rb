@@ -4,7 +4,15 @@ class Producto < ApplicationRecord
 
 	validates :nombre, presence: {:message => ': Se necesita nombre del producto'}
 	validates :nombre, uniqueness: {:message => ': Producto ingresado ya existe'}
-	validates :precio, presence: {:message => ': Debe ingresar precio de venta'}
-	validates :precio, numericality: {:message => ': Solo debe ingresar números'}
- 
+	validates :nombre, length: {maximum: 40, :message => ": no puede exceder los 40 caracteres"}
+ 	validates :precio, length: {maximum: 6, :message => ": no puede exceder los 6 digitos"}
+ 	validate :positivo
+
+  def positivo
+    if !precio.blank? and precio<1
+      errors.add(:precio, ": Debe ingresar precio superior a $0")
+    end
+  end
+  
+
 end

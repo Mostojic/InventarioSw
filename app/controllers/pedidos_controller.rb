@@ -1,7 +1,7 @@
 class PedidosController < ApplicationController
 	
 	def index
-	@pedidos =	Pedido.paginate(page: params[:page],per_page:8)
+	@pedidos =	Pedido.paginate(page: params[:page],per_page:7)
 	end
 
 	def edit

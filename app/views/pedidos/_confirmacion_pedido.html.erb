@@ -1,5 +1,5 @@
 <%= form_for(@pedido) do |f| %>
-<h1>Para confirmar pedido ingrese cantidad abonada por cliente</h1>
+<h2>Pedido en espera. Para registrar pedido ingrese cantidad abonada</h2>
 <% @pedido.errors.full_messages.each do |message|%>
 	<div class="letter-red"><%=message%></div>
 	<p></p>
@@ -7,13 +7,16 @@
 <div>Cantidad abonada:</div>
 <div class="field">
 	<%= f.text_field :abonado, {:value => @abonado} %>
+	<aside>
+		<div>Comentario:</div>
+		<div class="field">
+		<%= f.text_area :comentario, placeholder: "Comentario" %>
+		</div>
+		</aside>
 </div>
 
-<p></p>
-<div>Comentario:</div>
-<div class="field">
-	<%= f.text_area :comentario, placeholder: "Comentario" %>
-</div>
+
+
 
 <p>
 	
@@ -23,3 +26,5 @@
 	<%= f.submit "Guardar" %>
 </div>
 <%end%>
+<p></p>
+<u class="be-re"><td><%= link_to "DEJAR PEDIDO EN ESPERA", :action => "index" %></td></u>

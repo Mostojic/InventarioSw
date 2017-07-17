@@ -1,7 +1,7 @@
 class ElementosController < ApplicationController
 	
 	def index
-	@insumos = Insumo.paginate(page: params[:page],per_page:11)
+	@insumos = Insumo.paginate(page: params[:page],per_page:8)
 	end
 
 	#get/elemento/id
@@ -22,6 +22,12 @@ class ElementosController < ApplicationController
 			render :new
 		end 
 
+	end
+
+	def destroy 
+		@elemento = Elemento.find(params[:id])
+		@elemento.destroy
+		redirect_to @elemento
 	end
 
 end

@@ -2,8 +2,8 @@ class Pedido < ApplicationRecord
 	has_many :items
 
 	validates :cliente, presence: { message: ": Debe ingresar nombre del cliente" }
-	
-	validates :entrega, presence: { message: ": Debe ingresar fecha de entrega" }
+	validates :cliente, length: {maximum: 40, :message => ": Nombre no puede exeder los 40 caracteres"}
+	validates :entrega, presence: { message: ": Debe ingresar fecha de entrega correctamente" }
 	
 	validate :fecha_esta_en_pasado, :fecha_es_domingo
 	
