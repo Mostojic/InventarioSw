@@ -8,6 +8,7 @@ one:
   comentario: MyText
   precio: 1
   abonado: 1
+  mostrar: 1
 
 two:
   cliente: MyString
@@ -17,3 +18,4 @@ two:
   comentario: MyText
   precio: 1
   abonado: 1
+  mostrar: 1

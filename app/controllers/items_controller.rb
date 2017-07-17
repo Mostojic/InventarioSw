@@ -3,7 +3,8 @@ class ItemsController < ApplicationController
 	before_action :set_pedido
 	
 	def index
-	@pedido =	Pedido.all
+	
+
 	end
 
 	def new

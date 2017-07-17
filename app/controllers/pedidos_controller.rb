@@ -1,7 +1,9 @@
 class PedidosController < ApplicationController
 	
 	def index
-	@pedidos =	Pedido.paginate(page: params[:page],per_page:7)
+	@pedidos_pendiente =	Pedido.where(estado: [1]).paginate(page: params[:page],per_page:2)
+	@pedidos_espera =	Pedido.where(estado: [0]).paginate(page: params[:page],per_page:2)
+	@pedidos_entregado =	Pedido.where(estado: [2]).paginate(page: params[:page],per_page:2)
 	end
 
 	def edit
@@ -49,8 +51,16 @@ class PedidosController < ApplicationController
 
 	def destroy 
 		@pedido = Pedido.find(params[:id])
+		items=Item.all
+		items.each do |a|
+			if a.pedido_id==@pedido.id
+				a.delete
+			end
+		end
 		@pedido.delete
 		redirect_to @pedido
 	end
+
+
 
 end

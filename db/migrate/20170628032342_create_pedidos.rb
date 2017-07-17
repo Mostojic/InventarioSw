@@ -8,6 +8,7 @@ class CreatePedidos < ActiveRecord::Migration[5.1]
       t.text :comentario
       t.integer :precio
       t.integer :abonado
+      t.integer :mostrar
 
       t.timestamps
     end

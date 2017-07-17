@@ -15,6 +15,7 @@
 <%if @pedido.abonado==nil%>
 
 <h1>Finalizar pedido</h1>
+<%Pedido.update(@pedido.id, :estado => 0)%>
 <% precio=0 %>
 <% items = Item.where(pedido_id: [@pedido.id])%>
    <% items.each do |b| %>
@@ -55,19 +56,6 @@
               <%end%>
             <%end%>
             <th><%=total%></th>
-            </tr>
-            <tr>
-            <th>Estado pedido</th>
-            <td><%=%></td>
-            <%if @pedido.estado.blank?%>
-            	<th>Espera</th>
-            <%end%>
-            <%if @pedido.estado==0%>
-            	<th>Registrado</th>
-            <%end%>
-            <%if !@pedido.estado.blank? and @pedido.estado==1%>
-            	<th>Entregado</th>
-            <%end%>
             </tr>
             
             
@@ -174,6 +162,7 @@
 		<%else%>
 
 			<h2>Pedido en espera. Falta de insumos<%=%></h2>
+			<%Pedido.update(@pedido.id, :estado => 0)%>
 			<h3>Se necesitan los siguientes insumos en inventrario:</h3>
 			<div class="container">
 	      <div class="col-md-3 col-md-offset-2">
