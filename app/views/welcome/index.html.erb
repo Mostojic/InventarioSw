@@ -17,7 +17,7 @@
 <div>
 
 <span class="izq">
-	<h2>Pedidos de la semana</h2>
+	<h2>Proximos pedidos</h2>
 
 	        <table class="table table-striped table-hover table-condensed " >
 
@@ -27,23 +27,44 @@
 	              <th><div class="size-200">Nombre cliente</div></th>
 	              <th><div class="size-100">Pendiente</div></th>
 	              <th><div class="size-100">Fecha entrega</div></th>
-	              <th><div class="size-100">Hora entrega</div></th>
-	              <th><div class="size-100"></div></th>
+	              <th><div class="size-200">Productos</div></th>
 	            </tr>                  
 	          </thead>
 	          <% @pedidos.each do |a| %>
 	          	<%fecha = a.entrega%>
 	          	<%fecha = fecha-7%>
-	          	<%if fecha<Date.today%>
+	          	<%if fecha<Date.today and a.estado==1%>
 		            <tr>
 		              <td><%=a.cliente%></td>
 		              <td><%=a.precio%></td>
 		              <td><%=a.entrega%></td>
-		              <td><%=a.retiro%></td>
-		              <td><input type="button" value="Detalles pedido" onClick="location.href='productos/<%=a.id%>'" /></td>
+		              <%c=0%>
+		              <%@items.each do |b|%>
+
+		              	<%if b.pedido_id==a.id and c>0%>
+		              		<tr>
+		              		<td><%=%></td>
+		              		<td><%=%></td>
+		              		<td><%=%></td>		          
+		              		<td><%=b.cantidad%> <%=b.producto.nombre%></td>
+		              		</tr>
+		              	<%end%>
+		              	<%if b.pedido_id==a.id and c==0%>
+		              	<%c=1%>
+		              	<td><%=b.cantidad%> <%=b.producto.nombre%></td>
+		              	<%end%>
+		              <%end%>
 		            </tr>
+
 		        <%end%>
 	          <% end %>
+	          <tr>
+	          	<td class="be-re"><u><%=link_to "VER TODOS", controller: "listas", action: "new"%></u></td>
+	          	<td></td>
+	          	<td></td>
+	          	<td></td>
+
+	          </tr>
 	        </table>  
 </span>
 

@@ -11,7 +11,7 @@
               </tr>                  
             </thead>
             <% @items.each do |a| %>
-              <% if a.pedido_id === @pedido.id then%>
+              <% if a.pedido_id == @pedido.id then%>
                 <tr>
                   <td><%=a.producto.nombre%></td>
                   <td><%=a.cantidad %></td>
@@ -30,4 +30,11 @@
             <%end%>
             <th><%=total%></th>
           </table>
+          <b>Comentario: </b><%=@pedido.comentario%>
 </div>
+
+
+<p>
+  
+</p>
+<input type="button" value="Volver" onClick="history.back()" />

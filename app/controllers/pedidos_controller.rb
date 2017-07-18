@@ -1,8 +1,8 @@
 class PedidosController < ApplicationController
 	
 	def index
-	@pedidos_pendiente =	Pedido.where(estado: [1]).paginate(page: params[:page],per_page:2)
-	@pedidos_espera =	Pedido.where(estado: [0]).paginate(page: params[:page],per_page:2)
+	@pedidos_pendiente =	Pedido.where(estado: [1]).order('entrega')
+	@pedidos_espera =	Pedido.where(estado: [0]).order('entrega')
 	@pedidos_entregado =	Pedido.where(estado: [2]).paginate(page: params[:page],per_page:2)
 	end
 

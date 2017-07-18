@@ -19,7 +19,7 @@
                 <td><%=a.precio%></td>
                 <td><%=a.entrega%></td>
                 <td><button type="button"  onClick="location.href='pedidos/<%= a.id%>/edit'" />Confirmar</button></td>
-                <td><%= button_to 'Eliminar',a, method: :delete%></td> 
+                <td><%= button_to 'Cancelar',a, method: :delete%></td> 
                 
               </tr>
             

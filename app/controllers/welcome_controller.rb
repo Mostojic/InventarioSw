@@ -3,5 +3,6 @@ class WelcomeController < ApplicationController
   	@pedidos = Pedido.all
   	@insumos = Insumo.all
   	@elementos = Elemento.all
+  	@items=Item.all
   end
 end

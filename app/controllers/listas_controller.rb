@@ -8,15 +8,13 @@ class ListasController < ApplicationController
 	end
 	
 	def index
-		pedido=Pedido.last
-		Pedido.update(pedido.id, :mostrar => 0)
-		redirect_to pedidos_path
+		@pedidos =	Pedido.where(estado: [2]).order('entrega').paginate(page: params[:page],per_page:15)
 	end
 	
 	def edit
 		@pedido = Pedido.find(params[:id])
 		pedido=Pedido.last
-		Pedido.update(pedido.id, :mostrar => 2)
+		Pedido.update(pedido.id, :mostrar => 0)
 		redirect_to pedidos_path
 	end
 	

@@ -5,7 +5,7 @@
 <body>
 
 
-<%if Pedido.find_by mostrar: 0 or Pedido.find_by mostrar: 1 or Pedido.find_by mostrar: 2%>
+<%if Pedido.find_by mostrar: 0 or Pedido.find_by mostrar: 1%>
 
   <%if Pedido.find_by mostrar: 1%>
     <%p=Pedido.find_by mostrar: 1%>
@@ -19,19 +19,17 @@
     <%= render :partial => "mostrar_espera.html" %>
   <%end%>
 
-  <%if Pedido.find_by mostrar: 2%>
-    <%p=Pedido.find_by mostrar: 2%> 
-    <%Pedido.update(p.id, :mostrar => 3)%>
-    <%= render :partial => "mostrar_historico.html" %>
-  <%end%>
 <%else%>
   <p><input type="button" value="Ingresar nuevo pedido" onClick="location.href='pedidos/new'" />
-  <p class="white"><u><%=link_to "PEDIDOS PENDIENTES", controller: "listas", action: "new"%></u></p>
-  <p class="white"><u><%=link_to "PEDIDOS EN ESPERA", controller: "listas", action: "index"%></u></p>
+  <p class="be-re"><u><%=link_to "PEDIDOS PENDIENTES", controller: "listas", action: "new"%></u></p>
   <%if Pedido.last%>  
-    <%pe = Pedido.last%>
-  <p class="white"><u><%=link_to "PEDIDOS EN ENTREGADOS", controller: "listas", action: "edit", id: pe.id%></u></p>
+  <%pe=Pedido.last%>
+  <p class="be-re"><u><%=link_to "PEDIDOS EN ESPERA", controller: "listas", action: "edit", id: pe.id%></u></p>
   <%end%>
+  <p class="be-re"><u><%=link_to "PEDIDOS EN ENTREGADOS", controller: "listas", action: "index"%></u></p>
 <%end%>
+
   </body>
+
+
   </html>

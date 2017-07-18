@@ -3,9 +3,11 @@
 <% @medida.errors.full_messages.each do |message|%>
 	<div class="be-re"><%=message%></div>
 <%end%>
+
 <div class="field">
 	<%= f.text_field :nombre, placeholder: "Nombre" %>
-</div>
+</div></br>
+
 	<%= f.submit "Guardar" %>
-</div>
+</div></br>
 <%end%>

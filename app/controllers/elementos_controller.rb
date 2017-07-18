@@ -1,7 +1,7 @@
 class ElementosController < ApplicationController
 	
 	def index
-	@insumos = Insumo.paginate(page: params[:page],per_page:8)
+	@insumos = Insumo.paginate(page: params[:page],per_page:7)
 	end
 
 	#get/elemento/id

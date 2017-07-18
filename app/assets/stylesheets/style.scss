@@ -1,12 +1,13 @@
  
 
 	html,body{
-	margin: 5px;
+	margin: 8px;
 	font-family: 'Open Sans', sans-serif;
-
-	
 }
 
+#rt-footer {
+background: none repeat scroll 0% 0% rgb(0, 0, 90);
+}
 a,a:visited{
 	color: inherit !important;
 	text-decoration: none;
@@ -32,7 +33,7 @@ color: #913D9F;
 }
 
 .large-padding{
-	padding: 20px 8px;
+	padding: 15px 5px;
 }
 
 .size-330{

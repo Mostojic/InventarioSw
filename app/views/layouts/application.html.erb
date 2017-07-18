@@ -8,45 +8,93 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 <style type="text/css">
-body{
-background-image: url(imagen.jpg);
-background-position : center;
-background-repeat : no-repeat;
-background-attachment : fixed;
+
+* {
+   margin:0;
+   padding:0
 }
+html,
+body,
+#wrap {
+   height: 100%;
+}
+body > #wrap {
+   height: auto;
+   min-height: 100%;
+}
+#content {
+   padding-bottom: 50px; /* Mis altura que el footer */
+} 
+#footer {
+   position: relative;
+   margin-top: -170px; /* Misma altura que el footer en negativo */
+   height: 150px; /* Altura del footer */
+   clear: both;
+   background: #4FFFC6;
+
+            text-align: center;
+
+            color: #913D9F;
+   
+}
+
+
+
+        
 </style> 
     
-  </head>
-  <body>
+<div id="wrap">
+   <div id="header">
+    <nav class="be-red white large-padding  ">      
+      <ul class="no-list row center-xs">
+      <li class="col-md">
+      
+
+        <%=link_to image_tag('logo.png'), controller: "welcome", action: "index"%>
+      </li>
+      <li class="col-md">
+        <%=link_to "Insumos", controller: "insumos", action: "index"%>
+      </li>
+      <li class="col-md">
+        <%=link_to "Productos", controller: "productos", action: "index"%>
+      </li>
+      <li class="col-md">
+        <%=link_to "Inventario", controller: "elementos", action: "index"%>
+      </li>
+      <li class="col-md">
+        <%=link_to "Pedidos", controller: "pedidos", action: "index"%>
+      </li>
+      <li class="col-md">
+        <%=link_to "Unidades", controller: "medidas", action: "index"%>
+      </li>
+      </ul>
+    </nav>
+
+   </div>
+   <div id="content">
+      <body>
 
   <header>
-  	<nav class="be-red white large-padding	">  		
-  		<ul class="no-list row center-xs">
-  		<li class="col-md">
-  			<%=link_to "Miluveg", controller: "welcome", action: "index"%>
-  		</li>
-  		<li class="col-md">
-  			<%=link_to "Insumos", controller: "insumos", action: "index"%>
-  		</li>
-  		<li class="col-md">
-  			<%=link_to "Productos", controller: "productos", action: "index"%>
-  		</li>
-  		<li class="col-md">
-  			<%=link_to "Inventario", controller: "elementos", action: "index"%>
-  		</li>
-  		<li class="col-md">
-  			<%=link_to "Pedidos", controller: "pedidos", action: "index"%>
-  		</li>
-  		<li class="col-md">
-  			<%=link_to "Unidades", controller: "medidas", action: "index"%>
-  		</li>
-  		</ul>
-  	</nav>
-
+    
   </header>
   <p class="notice"><%= notice %></p>
        <p class="alert"><%= alert %></p>
 
     <%= yield %>
+  
+  
   </body>
+   </div>
+</div>
+
+<div id="footer">
+<footer>  
+</br>
+<h1> <%="M   I   L   Ú   V   E   G"%></h1>
+ <h4>- R E P O S T E R Í A   V E G A N A -</h4>
+ </footer>
+</div>
+
+  
+
 </html>

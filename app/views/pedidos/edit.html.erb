@@ -1,7 +1,8 @@
 
 <%"comprobar tiene productos"%>
 <%if !Item.find_by pedido_id: @pedido.id%>
-<h1>Pedido sin productos. Pedido ha sido cancelado</h1>
+<h1>Pedido sin productos. Para continuar por favor ingrese algun producto</h1>
+<input type="button" value="VOLVER" onClick="history.back()" />
 <%else%>
 
 <%"entregar pedido"%>

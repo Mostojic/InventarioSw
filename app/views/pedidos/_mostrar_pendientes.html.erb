@@ -7,8 +7,9 @@
             <tr>
               <th><div class="size-330">Cliente</div></th>
               <th><div class="size-165">Costo total</div></th>
-              <th><div class="size-165">Abonado</div></th>
+              <th><div class="size-100">Abonado</div></th>
               <th><div class="size-165">Fecha entrega</div></th>
+              <th><div class="size-165"></div></th>
               <th><div class="size-165"></div></th>
             </tr>                  
           </thead>
@@ -20,13 +21,14 @@
               <td><%=a.precio%></td>
               <td><%=a.abonado%></td>
               <td><%=a.entrega%></td>
-              <td><button type="button"  onClick="location.href='pedidos/<%= a.id%>/edit'" />Confirmar</button></td>
+              <td><button type="button"  onClick="location.href='listas/<%= a.id%>'" />Detalles</button></td>
+              <td><button type="button"  onClick="location.href='pedidos/<%= a.id%>/edit'" />Entregar
+              </button></td>
               
             </tr>
           
           <%end%>
         </table>
-        <%=will_paginate @pedidos_pendiente%>
         </div>
       </div>
 <%else%>
