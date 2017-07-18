@@ -1,38 +1,74 @@
-<%= form_for(@pedido) do |f| %>
-<h2>Pedido en espera. Para registrar pedido ingrese cantidad abonada</h2>
-<% @pedido.errors.full_messages.each do |message|%>
-	<div class="letter-red"><%=message%></div>
-	<p></p>
+<%if !@pedido.abonado.blank? and @pedido.precio > @pedido.abonado and @pedido.abonado>0%>
+	<%= render :partial => "finalizar_pedido.html" %>
+<%else%>
+
+	<h1>Finalizar pedido</h1>
+	<div class="container">
+		<div class="col-md-3 col-md-offset-2">
+	   	    <table class="table table-striped table-hover table-condensed   " >
+	            <thead>
+	              <tr>
+	                <th><div class="size-220">Producto</div></th>
+	                <th><div class="size-100">Cantidad</div></th>
+	                <th><div class="size-100">Precio</div></th>
+	               </tr>                  
+	            </thead>
+	            <%items=Item.all%>
+	            <% items.each do |a| %>
+	            	<% if a.pedido_id == @pedido.id then%>
+	                	<tr>
+	                  		<td><%=a.producto.nombre%></td>
+			                <td><%=a.cantidad %></td>
+			                <td><%=a.producto.precio*a.cantidad%></td>
+		                </tr>
+	                <% end %>
+	            <% end %>
+	            <tr>
+		            <th>Costo Total</th>
+		            <td><%=%></td>
+		            <%total=0%>
+		            <%items.each do |a|%>
+		            	<%if a.pedido_id==@pedido.id%>
+		                	<%total=total+a.cantidad*a.producto.precio%>
+		              	<%end%>
+		            <%end%>
+		            <th><%=total%></th>
+	           	</tr>
+	        </table>
+	    </div>
+	</div>
+
+	<%= form_for(@pedido) do |f| %>
+		<h2>Pedido en espera. Para registrar pedido ingrese cantidad abonada</h2>
+		<%if !@pedido.abonado.blank? and @pedido.precio < @pedido.abonado%>
+		<div class="letter-red"><%="Cantidad abonada no puede superar el costo total del pedido"%></div>
 	<%end%>
-<div>Cantidad abonada:</div>
-<div class="field">
-	<%= f.text_field :abonado, {:value => @abonado} %>
-	<aside>
+		<% @pedido.errors.full_messages.each do |message|%>
+			<div class="letter-red"><%=message%></div>
+				<p></p>
+		<%end%>
+		<div>Cantidad abonada:</div>
+		<div class="field">
+			<%= f.text_field :abonado, placeholder: "000000" %>
+		</div>
 		<div>Comentario:</div>
 		<div class="field">
-		<%= f.text_area :comentario, placeholder: "Comentario" %>
+			<%= f.text_area :comentario, placeholder: "Comentario" %>
 		</div>
-		</aside>
-</div>
-
-
-
-
-<p>
-	
-</p>
-<div class="field">
-
-	<%= f.submit "Guardar" %>
-</div>
+		<p>
+		</p>
+		<div class="field">
+			<%= f.submit "Guardar" %>
+		</div>
+	<%end%>
+	<p></p>
+	<u class="be-re"><td><%= link_to "DEJAR PEDIDO EN ESPERA", :action => "index" %></td></u>
+	</br>
+	</br>
+	</br>
+	</br>
+	</br>
+	</br>
+	</br>
+	</br>
 <%end%>
-<p></p>
-<u class="be-re"><td><%= link_to "DEJAR PEDIDO EN ESPERA", :action => "index" %></td></u>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>

@@ -1,0 +1,74 @@
+<%Pedido.update(@pedido.id, :estado => 0)%>
+
+<%"contar todos los elementos del pedido"%>
+<% items = Item.where(pedido_id: [@pedido.id])%>
+<% items.each do |a|%>
+	<% hojas = Hoja.where(producto_id: [a.producto_id])%>
+	<% hojas.each do |b|%>
+		<% formulas = Formula.all%>
+		<% if Formula.find_by(insumo_id: b.insumo_id)%>
+			<% formulas.each do |c|%>
+				<%if c.insumo_id === b.insumo_id %>
+					<% d=0 %>
+					<%d = b.porcion*a.cantidad + c.porcion%>
+					<%Formula.update(c.id, :porcion => d)%>
+				<%end%>
+			<%end%>
+		<%else%>
+			<% Formula.create(porcion: b.porcion*a.cantidad, insumo_id: b.insumo_id)%>			
+		<%end%>
+	<%end%>
+<%end%>
+
+<%"comprobarsi hay elementos suficientes elementos del pedido"%>
+<%elemento = Elemento.all%>
+<%formula = Formula.all%>
+<% alcanza = 1%>
+<%formula.each do |a|%>
+	<%if a.porcion <= Elemento.where(insumo_id: [a.insumo_id]).sum("cantidad") then%>
+	<%else%>
+		<% alcanza=0 %>
+	<%end%>
+<%end%>
+
+<%if alcanza > 0 then%>
+	<% formu = Formula.all%>
+	<% formu.each do |a|%>
+		<%a.delete%>
+	<%end%>
+	<%= render :partial => "confirmacion_pedido.html" %>
+<%else%>
+	<h2>Pedido en espera. Falta de insumos<%=%></h2>
+	<h3>Se necesitan los siguientes insumos en inventrario:</h3>
+	<div class="container">
+	    <div class="col-md-3 col-md-offset-2">
+	        <table class="table table-striped table-hover table-condensed   " >
+	          	<thead>
+	            	<tr>
+	              		<th><div class="size-165">Insumo</div></th>
+	              		<th><div class="size-165">Cantidad necesaria</div></th>
+	              		<th><div class="size-165">Cantidad existente</div></th>
+		  			</tr>
+		  	  	</thead>
+		  	  	<% formu = Formula.all%>
+			  	<% formu.each do |a|%>
+		  			<% n = Insumo.find_by(id: a.insumo_id)%>
+		  			<tr>
+				  		<td><%=n.nombre%></td>
+				 		<td><%= a.porcion%></td>
+				 		<td><%= Elemento.where(insumo_id: [a.insumo_id]).sum("cantidad")%></td>
+					</tr>
+					<%a.delete%>
+		 	   	<% end %>
+			</table>
+ 		</div>
+	</div>
+	<u class="be-re"><%= link_to "REGRESAR A PEDIDOS", :action => "index" %></u>
+
+<%end%>
+
+</br>
+</br>
+</br>
+</br>
+

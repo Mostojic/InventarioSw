@@ -1,200 +1,39 @@
+<%"comprobar estado pedido"%>
 
-<%"comprobar tiene productos"%>
-<%if !Item.find_by pedido_id: @pedido.id%>
-<h1>Pedido sin productos. Para continuar por favor ingrese algun producto</h1>
-<input type="button" value="VOLVER" onClick="history.back()" />
-<%else%>
-
-<%"entregar pedido"%>
+<%"estado pendiente"%>
 <%if !@pedido.estado.blank? and @pedido.estado==1%>
+	
+	<%"entregar pedido"%>
 	<%Pedido.update(@pedido.id, :estado => 2)%>
 	<h1>Pedido a nombre de <%=@pedido.cliente%> ha sido entregado</h1>
-<%else%>
 
+<%"pedido nuevo"%>
+<%elsif @pedido.estado.blank?%>
 
+<%"comprobar tiene productos"%>
+	<%if !Item.find_by pedido_id: @pedido.id%>
 
-<%if @pedido.abonado==nil%>
+	<%"no tiene productos"%>
+	<h1>Pedido sin productos. Para continuar por favor ingrese algun producto</h1>
+	<input type="button" value="VOLVER" onClick="history.back()" />
 
-<h1>Finalizar pedido</h1>
-<%Pedido.update(@pedido.id, :estado => 0)%>
-<% precio=0 %>
-<% items = Item.where(pedido_id: [@pedido.id])%>
-   <% items.each do |b| %>
-   <% precio = precio + Producto.where(id: [b.producto_id]).sum("precio")*b.cantidad%>
-   	<%end%>
-   	<%Pedido.update(@pedido.id, :precio => precio)%>
-   	<div class="container">
-	      <div class="col-md-3 col-md-offset-2">
-
-   	          <table class="table table-striped table-hover table-condensed   " >
-            <thead>
-              <tr>
-                <th><div class="size-220">Producto</div></th>
-                <th><div class="size-100">Cantidad</div></th>
-                <th><div class="size-100">Precio</div></th>
-                
-              </tr>                  
-            </thead>
-
-            <% items.each do |a| %>
-              <% if a.pedido_id === @pedido.id then%>
-                <tr>
-                  <td><%=a.producto.nombre%></td>
-                  <td><%=a.cantidad %></td>
-                  <td><%=a.producto.precio*a.cantidad%></td>
-                
-                </tr>
-                <% else %>
-                <% end %>
-              <% end %>
-              <tr>
-              <th>Costo Total</th>
-              <td><%=%></td>
-              <%total=0%>
-              <%items.each do |a|%>
-              <%if a.pedido_id==@pedido.id%>
-                <%total=total+a.cantidad*a.producto.precio%>
-              <%end%>
-            <%end%>
-            <th><%=total%></th>
-            </tr>
-            
-            
-
-              
-          </table>
-          </div>
-          </div>
-<%= render :partial => "confirmacion_pedido.html" %>
-<%else%>
-	<%if !@pedido.precio.blank? and !@pedido.abonado.blank? and @pedido.precio < @pedido.abonado%>
-		<div class="letter-red"><%="Cantidad abonada no puede superar el costo total del pedido"%></div>
-		<%= render :partial => "confirmacion_pedido.html" %>
-
+	<%"tiene productos"%>
 	<%else%>
-		<%"contar todos los elementos del pedido"%>
+
+		<%"setear precio"%>
+		<% precio=0 %>
 		<% items = Item.where(pedido_id: [@pedido.id])%>
-		<% items.each do |a|%>
-			<% hojas = Hoja.where(producto_id: [a.producto_id])%>
-			<% hojas.each do |b|%>
-				<% formulas = Formula.all%>
-				<% if Formula.find_by(insumo_id: b.insumo_id) then %>
-					<% formulas.each do |c|%>
-						<%if c.insumo_id === b.insumo_id %>
-							<% d=0 %>
-							<%d = b.porcion*a.cantidad + c.porcion%>
-							<%Formula.update(c.id, :porcion => d)%>
-						<%end%>
-					<%end%>
+   		<% items.each do |b| %>
+   			<% precio = precio + Producto.where(id: [b.producto_id]).sum("precio")*b.cantidad%>
+   		<%end%>
+   		<%Pedido.update(@pedido.id, :precio => precio)%>
 
-					<%else%>
-					<% Formula.create(porcion: b.porcion*a.cantidad, insumo_id: b.insumo_id)%>
-					
-				<%end%>
-			<%end%>
-
-		<%end%>
-
-		<%"comprobarsi hay elementos suficientes elementos del pedido"%>
-
-		<%elemento = Elemento.all%>
-		<%formula = Formula.all%>
-		<% alcanza = 1%>
-		<%formula.each do |a|%>
-			<%if a.porcion <= Elemento.where(insumo_id: [a.insumo_id]).sum("cantidad") then%>
-			<%else%>
-				<% alcanza=0 %>
-			<%end%>
-		<%end%>
-
-		<%if alcanza > 0 then%>
-			
-			<%"descontar elementos a usar"%>
-
-			<% formulas = Formula.all%>
-			<%formulas.each do |a|%>
-				<%elementos = Elemento.where(insumo_id: [a.insumo_id])%>
-				<% ele = elementos.order('id DESC')%>
-				<%n = a.porcion%>
-				<% ele.each  do |b|%>
-					<%if n > 0 then%>
-						<%if b.cantidad > n then%>
-							<%e = Elemento.find_by(id: b.id)%>
-							<%en = e.cantidad%>
-							<% en = en - n%>
-							<div><%Elemento.update(b.id, :cantidad => en)%></div>
-							<%n=0%>
-						<%else%>
-							<%e = Elemento.find_by(id: b.id)%>
-							<%en = e.cantidad%>
-							<% n = n - en%>
-							<%e.delete%>
-						<%end%>
-					<%end%>
-				<%end%>
-			<%end%>
-
-
-		<h2>Pedido ingresado exitosamente<%=%></h2>
-		<h3>Se han descontado los siguientes insumos del inventrario:</h3>
-		<%Pedido.update(@pedido.id, :estado => 1)%>
-		<div class="container">
-	      <div class="col-md-3 col-md-offset-2">
-	        <table class="table table-striped table-hover table-condensed   " >
-	          <thead>
-	            <tr>
-	              <th><div class="size-165">Insumo</div></th>
-	              <th><div class="size-165">Cantidad descontada</div></th>
-		  		</tr>
-		  	  </thead>
-				<% formu = Formula.all%>
-				<% formu.each do |a|%>
-				<tr>
-					<% n = Insumo.find_by(id: a.insumo_id)%>
-			  		<td><%=n.nombre%></td>
-			   		<td><%= a.porcion%></td>
-		  		</tr>
-				<%a.delete%>
-		 		<% end %>
-			</table>
-		  </div>
-		</div>
-
-		<%else%>
-
-			<h2>Pedido en espera. Falta de insumos<%=%></h2>
-			<%Pedido.update(@pedido.id, :estado => 0)%>
-			<h3>Se necesitan los siguientes insumos en inventrario:</h3>
-			<div class="container">
-	      <div class="col-md-3 col-md-offset-2">
-	        <table class="table table-striped table-hover table-condensed   " >
-	          <thead>
-	            <tr>
-	              <th><div class="size-165">Insumo</div></th>
-	              <th><div class="size-165">Cantidad necesaria</div></th>
-	              <th><div class="size-165">Cantidad existente</div></th>
-		  		</tr>
-		  	  </thead>
-		  	  <% formu = Formula.all%>
-			  <% formu.each do |a|%>
-		  		<% n = Insumo.find_by(id: a.insumo_id)%>
-		  		<tr>
-				  	<td><%=n.nombre%></td>
-				 	<td><%= a.porcion%></td>
-				 	<td><%= Elemento.where(insumo_id: [a.insumo_id]).sum("cantidad")%></td>
-				</tr>
-				<%a.delete%>
-		 	   <% end %>
-			</table>
-		  </div>
-		</div>
-
-			
-		<%end%>
-
-
-		<p> <td><%= link_to "REGRESAR A PEDIDOS", :action => "index" %></td></p>
-		<%end%>
+		<%= render :partial => "comprobar_elementos.html" %>
 	<%end%>
+
+<%"Pedido en espera"%>
+<%elsif !@pedido.estado.blank? and @pedido.estado==0%>
+	<%= render :partial => "comprobar_elementos.html" %>
 <%end%>
-<%end%>
+			
+			
