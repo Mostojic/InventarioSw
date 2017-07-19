@@ -1,4 +1,5 @@
 class MedidasController < ApplicationController
+	
 	before_action :validate_user	
 	def index
 	@medidas = Medida.all.order('nombre')

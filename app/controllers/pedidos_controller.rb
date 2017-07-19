@@ -1,4 +1,5 @@
 class PedidosController < ApplicationController
+	
 	before_action :validate_user	
 	def index
 	@pedidos_pendiente =	Pedido.where(estado: [1]).order('entrega')

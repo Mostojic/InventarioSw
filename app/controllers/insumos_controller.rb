@@ -1,4 +1,5 @@
 class InsumosController < ApplicationController
+	
 	before_action :validate_user	
 	def index
 	@insumos = Insumo.paginate(page: params[:page],per_page:7)

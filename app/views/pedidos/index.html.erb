@@ -20,8 +20,11 @@
   <%end%>
 
 <%else%>
-  <p><input type="button" value="Ingresar nuevo pedido" onClick="location.href='pedidos/new'" />
+<p><input type="button" value="Ingresar nuevo pedido" onClick="location.href='pedidos/new'" />
+  <%if Pedido.last%>  
+  <%pe=Pedido.last%>  
   <p class="be-re"><u><%=link_to "PEDIDOS PENDIENTES", controller: "listas", action: "new"%></u></p>
+  <%end%>
   <%if Pedido.last%>  
   <%pe=Pedido.last%>
   <p class="be-re"><u><%=link_to "PEDIDOS EN ESPERA", controller: "listas", action: "edit", id: pe.id%></u></p>

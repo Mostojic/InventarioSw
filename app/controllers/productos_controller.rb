@@ -1,4 +1,7 @@
 class ProductosController < ApplicationController
+	
+
+
 	before_action :validate_user	
 	def index
 	@productos = Producto.paginate(page: params[:page],per_page:7)

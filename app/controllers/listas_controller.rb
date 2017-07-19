@@ -1,4 +1,5 @@
 class ListasController < ApplicationController
+	
 	before_action :validate_user
 	
 	def new

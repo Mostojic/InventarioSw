@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+	
 	before_action :validate_user
 	before_action :set_pedido
 	

@@ -50,21 +50,29 @@ body > #wrap {
 
         <%=link_to image_tag('logo.png'),welcome_index_path%>
       </li>
+      <%if can? :create,Insumo%>
       <li class="col-md">
         <%=link_to "Insumos",insumos_path%>
       </li>
+      <%end%>
       <li class="col-md">
         <%=link_to "Productos", productos_path%>
       </li>
+      <%if can? :create,Elemento%>
       <li class="col-md">
         <%=link_to "Inventario", elementos_path%>
       </li>
+      <%end%>
+      <%if can? :create,Pedido%>
       <li class="col-md">
         <%=link_to "Pedidos", pedidos_path%>
       </li>
+      <%end%>
+      <%if can? :create,Medida%>
       <li class="col-md">
         <%=link_to "Medidas", medidas_path%>
       </li>
+      <%end%>
       <%if usuario_signed_in?%>
       <li class="col-md">
         <%=link_to "Salir",destroy_usuario_session_path, method: :delete%>

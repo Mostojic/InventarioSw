@@ -4,7 +4,7 @@ class Elemento < ApplicationRecord
    	validates :cantidad, numericality: {:message => ': Solo debe ingresar números'}
    	validates :cantidad, presence: {:message => ': Ingrese cantidad que desea agregar	'}
    	validates :vencimiento, presence: {:message => ': Ingrese Fecha vencimiento correctamente'}
-   	validates :cantidad, length: {maximum: 4, :message => ": cantidad no puede superar 4 caracteres"}
+   	validates :cantidad, length: {maximum: 6, :message => ": cantidad no puede superar 4 caracteres"}
    	validate :fecha_esta_en_pasado, :positivo
 	
 

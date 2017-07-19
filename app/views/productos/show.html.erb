@@ -40,7 +40,9 @@
                 <td><%=a.porcion%></td>
                 <td><%=a.insumo.medida.nombre%></td>
                 <td><%=a.porcion*a.insumo.precio%></td>
+                <%if can? :create,Producto%>         
                 <td><%= button_to 'Eliminar', [a.producto, a], method: :delete%></td> 
+                <%end%>
                 </tr>
               <%end%>
             <%end%>
@@ -56,7 +58,7 @@
             <th><%=total%></th>
             
           </table>  
-          
+ <%if can? :create,Hoja%>         
 </span>
 <span class="derecha">
 
@@ -85,5 +87,6 @@
 <u class="be-re"><%= link_to "FINALIZAR RECETA", :action => "edit" %></u>
 <%end%>
 </span>
+<% end -%>
 </div>
 </body>

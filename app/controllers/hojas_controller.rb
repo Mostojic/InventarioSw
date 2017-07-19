@@ -1,9 +1,11 @@
 class HojasController < ApplicationController
+	
 	before_action :validate_user
 	before_action :set_producto
 	
 	def index
 	@productos =	Producto.all
+	
 	end
 
 	def new

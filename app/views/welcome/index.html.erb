@@ -10,7 +10,7 @@
 	}
 </style>
 </head>
-
+<%if can? :create,Pedido%>
 <body>
 
 
@@ -61,6 +61,7 @@
 
 		        <%end%>
 	          <% end %>
+	          <%if Pedido.last%>
 	          <tr>
 	          	<td class="be-re"><u><%=link_to "VER TODOS", controller: "listas", action: "new"%></u></td>
 	          	<td></td>
@@ -68,6 +69,7 @@
 	          	<td></td>
 
 	          </tr>
+	          <%end%>
 	        </table>  
 </span>
 
@@ -151,6 +153,12 @@
 </div>
 	
 </body>
+<%else%>
+<div class="row center-xs">
+<%=image_tag('Fondo_login.png')%>
+</div>
+<% end -%>
+
 </html>
 
 

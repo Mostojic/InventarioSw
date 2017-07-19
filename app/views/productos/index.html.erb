@@ -23,13 +23,23 @@
             <tr>
               <td><%=a.nombre%></td>
               <td><%=a.precio%></td>
-              <td><input type="button" value="Editar receta" onClick="location.href='productos/<%=a.id%>'" /></td>
+              <%if can? :create,Hoja%>         
+              <td><input type="button" value="Editar receta" onClick="
+              location.href='productos/<%=a.id%>'" /></td>
+              <%else%>
+              <td><input type="button" value="Ver receta" onClick="
+              location.href='productos/<%=a.id%>'" /></td>
+              <%end%>
+              <% if can? :destroy, Producto %>
               <td><%= button_to 'Eliminar', a, method: :delete%></td>  
+              <% end -%>
             </tr>
           <% end %>
         </table>  
         <%=will_paginate @productos%>
+        <% if can? :create, Producto %>
         <p><input type="button" value="Ingresar nuevo producto" onClick="location.href='productos/new'" /></p>
+        <% end -%>
       </div>
     </div>
     
