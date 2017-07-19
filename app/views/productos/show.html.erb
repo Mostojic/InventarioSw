@@ -46,6 +46,7 @@
                 </tr>
               <%end%>
             <%end%>
+            <%if can? :create,Producto%>     
             <th>Costo Total</th>
             <td><%=%></td>
             <td><%=%></td>
@@ -54,8 +55,19 @@
               <%if a.producto_id==@producto.id%>
                 <%total=total+a.porcion*a.insumo.precio%>
               <%end%>
-            <%end%>
+            
             <th><%=total%></th>
+            <%end%>
+            <%else%>     
+            <tr>
+              <th>Precio</th>
+              <td><%=%></td>
+              <td><%=%></td>
+              <th><%=@producto.precio%></th>
+            </tr>
+            <%end%>
+
+
             
           </table>  
  <%if can? :create,Hoja%>         
