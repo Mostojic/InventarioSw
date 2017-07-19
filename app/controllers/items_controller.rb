@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-
+	before_action :validate_user
 	before_action :set_pedido
 	
 	def index
@@ -38,4 +38,11 @@ class ItemsController < ApplicationController
 			@pedido = Pedido.find(params[:pedido_id])
 		end
 
+
+  		def validate_user
+  			if !usuario_signed_in?
+  				redirect_to new_usuario_session_path
+  			end
+  		end
+	
 end

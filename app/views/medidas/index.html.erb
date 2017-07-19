@@ -3,7 +3,7 @@
 <title>Medidas</title>
 </head>
 <body>
-<h1>Unidades de medidas disponibles</h1>
+<h1>Unidades de medida disponibles</h1>
 <p></p>
 <p></p>
 
@@ -19,7 +19,20 @@
 	          <% @medidas.each do |a| %>
 				<tr>
 					<td><%=a.nombre%></td>
-					<td><%= button_to 'Eliminar', a, method: :delete%></td>  
+					
+					<%insumos=Insumo.all%>
+					<%si_hay=0%>
+					<%insumos.each do |b|%>
+
+						<%if b.medida_id==a.id%>
+							<%si_hay=1%>
+						<%end%>
+					<%end%>
+					<%if si_hay==0%>
+						<td><%= button_to 'Eliminar', a, method: :delete%></td>  
+					<%else%>
+						<td><input type="button" value="Editar" onClick="location.href='medidas/<%=a.id%>/edit'" /></td>
+					<%end%>
 				</tr>
 				<% end %>
 	        </table>  

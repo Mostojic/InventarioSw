@@ -1,5 +1,5 @@
 class HojasController < ApplicationController
-
+	before_action :validate_user
 	before_action :set_producto
 	
 	def index
@@ -36,4 +36,10 @@ class HojasController < ApplicationController
 			@producto = Producto.find(params[:producto_id])
 		end
 
+  		def validate_user
+  			if !usuario_signed_in?
+  				redirect_to new_usuario_session_path
+  			end
+  		end
+	
 end

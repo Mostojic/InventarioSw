@@ -1,4 +1,4 @@
-<%if !@pedido.abonado.blank? and @pedido.precio > @pedido.abonado and @pedido.abonado>0%>
+<%if !@pedido.abonado.blank? and @pedido.precio >= @pedido.abonado and @pedido.abonado>0%>
 	<%= render :partial => "finalizar_pedido.html" %>
 <%else%>
 

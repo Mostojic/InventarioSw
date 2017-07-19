@@ -1,5 +1,5 @@
 class ElementosController < ApplicationController
-	
+	before_action :validate_user	
 	def index
 	@insumos = Insumo.paginate(page: params[:page],per_page:7)
 	end
@@ -30,4 +30,11 @@ class ElementosController < ApplicationController
 		redirect_to @elemento
 	end
 
+private
+  		def validate_user
+  			if !usuario_signed_in?
+  				redirect_to new_usuario_session_path
+  			end
+  		end
+	
 end

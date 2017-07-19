@@ -1,7 +1,7 @@
 class MedidasController < ApplicationController
-	
+	before_action :validate_user	
 	def index
-	@medidas = Medida.all
+	@medidas = Medida.all.order('nombre')
 	end
 
 	def show
@@ -39,4 +39,25 @@ class MedidasController < ApplicationController
 			
 		end
 	end
+
+
+	def edit
+		@medida = Medida.find(params[:id])
+	end
+
+	def update
+	   @nombre = params[:medida]["nombre"]
+	   @medida = Medida.find(params[:id])
+	   @medida.nombre = @nombre
+	   @medida.save()
+	      redirect_to medidas_path
+	   
+	end
+	private
+  		def validate_user
+  			if !usuario_signed_in?
+  				redirect_to new_usuario_session_path
+  			end
+  		end
+	
 end

@@ -25,7 +25,8 @@
 	          <thead>
 	            <tr>
 	              <th><div class="size-200">Nombre cliente</div></th>
-	              <th><div class="size-100">Pendiente</div></th>
+	              <th><div class="size-100">Abonado</div></th>
+	              <th><div class="size-100">Precio Total</div></th>
 	              <th><div class="size-100">Fecha entrega</div></th>
 	              <th><div class="size-200">Productos</div></th>
 	            </tr>                  
@@ -36,6 +37,7 @@
 	          	<%if fecha<Date.today and a.estado==1%>
 		            <tr>
 		              <td><%=a.cliente%></td>
+		              <td><%=a.abonado%></td>
 		              <td><%=a.precio%></td>
 		              <td><%=a.entrega%></td>
 		              <%c=0%>
@@ -45,6 +47,7 @@
 		              		<tr>
 		              		<td><%=%></td>
 		              		<td><%=%></td>
+		              		<td></td>
 		              		<td><%=%></td>		          
 		              		<td><%=b.cantidad%> <%=b.producto.nombre%></td>
 		              		</tr>
@@ -90,7 +93,7 @@
 				          	<%contador=0%>
 				          	<%@elementos.each do |b|%>
 				          		<%if !b.vencimiento.blank?%>				          			
-									<%if b.vencimiento< Date.today+7 and contador<5%>
+									<%if b.vencimiento< Date.today+7 and contador<4%>
 										<%contador=contador+1%>
 								        <tr>
 								        <td><%=b.insumo.nombre%></td>
@@ -125,7 +128,7 @@
 		          	<%contador=0%>
 		          	<% @insumos.each do |b| %>
 		          		<%cant=Elemento.where(insumo_id: [b.id]).sum("cantidad")%>
-		          		<%if cant<10 and contador<5%>
+		          		<%if cant<10 and contador<4	%>
 							<tr>
 								<td><%=b.nombre%></td>
 								<td><%=cant%></td>

@@ -1,3 +1,4 @@
+ 
 <!DOCTYPE html>
 <html>
   <head>
@@ -37,12 +38,9 @@ body > #wrap {
             color: #913D9F;
    
 }
-
-
-
-        
 </style> 
-    
+<%if usuario_signed_in?%> 
+  
 <div id="wrap">
    <div id="header">
     <nav class="be-red white large-padding  ">      
@@ -50,42 +48,49 @@ body > #wrap {
       <li class="col-md">
       
 
-        <%=link_to image_tag('logo.png'), controller: "welcome", action: "index"%>
+        <%=link_to image_tag('logo.png'),welcome_index_path%>
       </li>
       <li class="col-md">
-        <%=link_to "Insumos", controller: "insumos", action: "index"%>
+        <%=link_to "Insumos",insumos_path%>
       </li>
       <li class="col-md">
-        <%=link_to "Productos", controller: "productos", action: "index"%>
+        <%=link_to "Productos", productos_path%>
       </li>
       <li class="col-md">
-        <%=link_to "Inventario", controller: "elementos", action: "index"%>
+        <%=link_to "Inventario", elementos_path%>
       </li>
       <li class="col-md">
-        <%=link_to "Pedidos", controller: "pedidos", action: "index"%>
+        <%=link_to "Pedidos", pedidos_path%>
       </li>
       <li class="col-md">
-        <%=link_to "Unidades", controller: "medidas", action: "index"%>
+        <%=link_to "Medidas", medidas_path%>
       </li>
+      <%if usuario_signed_in?%>
+      <li class="col-md">
+        <%=link_to "Salir",destroy_usuario_session_path, method: :delete%>
+      </li>
+      <%end%>
       </ul>
     </nav>
 
    </div>
    <div id="content">
       <body>
+       
 
   <header>
     
   </header>
-  <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
+<%end%>
+  
 
     <%= yield %>
-  
-  
+<%if usuario_signed_in?%>   
+
   </body>
    </div>
 </div>
+
 
 <div id="footer">
 <footer>  
@@ -94,7 +99,7 @@ body > #wrap {
  <h4>- R E P O S T E R Í A   V E G A N A -</h4>
  </footer>
 </div>
-
+<%end%>
   
 
 </html>

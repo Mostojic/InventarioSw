@@ -1,5 +1,5 @@
 class InsumosController < ApplicationController
-	
+	before_action :validate_user	
 	def index
 	@insumos = Insumo.paginate(page: params[:page],per_page:7)
 	end
@@ -50,4 +50,25 @@ class InsumosController < ApplicationController
 		end
 	end
 
+	def edit
+		@insumo = Insumo.find(params[:id])
+	end
+
+	def update
+	   @nombre = params[:insumo]["nombre"]
+	   @precio = params[:insumo]["precio"]
+	   @insumo = Insumo.find(params[:id])
+	   @insumo.nombre = @nombre
+	   @insumo.precio = @precio
+	   @insumo.save()
+	      redirect_to insumos_path
+	   
+	end
+	private
+  		def validate_user
+  			if !usuario_signed_in?
+  				redirect_to new_usuario_session_path
+  			end
+  		end
+	
 end

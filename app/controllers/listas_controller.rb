@@ -1,5 +1,5 @@
 class ListasController < ApplicationController
-
+	before_action :validate_user
 	
 	def new
 		pedido=Pedido.last
@@ -23,4 +23,11 @@ class ListasController < ApplicationController
 		@item = Item.new
 		@items = Item.all
 	end
+	private
+  		def validate_user
+  			if !usuario_signed_in?
+  				redirect_to new_usuario_session_path
+  			end
+  		end
+	
 end

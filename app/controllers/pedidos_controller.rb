@@ -1,5 +1,5 @@
 class PedidosController < ApplicationController
-	
+	before_action :validate_user	
 	def index
 	@pedidos_pendiente =	Pedido.where(estado: [1]).order('entrega')
 	@pedidos_espera =	Pedido.where(estado: [0]).order('entrega')
@@ -62,5 +62,11 @@ class PedidosController < ApplicationController
 	end
 
 
-
+private
+  		def validate_user
+  			if !usuario_signed_in?
+  				redirect_to new_usuario_session_path
+  			end
+  		end
+	
 end

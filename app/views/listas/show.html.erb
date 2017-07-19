@@ -29,12 +29,25 @@
               <%end%>
             <%end%>
             <th><%=total%></th>
+            <tr>
+              <%if @pedido.estado==1%>
+                <th>Abonado</th>
+                <td><%=%></td>
+                <th><%=@pedido.abonado%></th>
+              <%end%>
+            </tr>
+            <tr>
+              <td><%=%></td>
+              <td><%=%></td>
+              <td><%= button_to 'Cancelar pedido',@pedido, method: :delete%></td> 
+            </tr>
           </table>
           <b>Comentario: </b><%=@pedido.comentario%>
 </div>
 
 
-<p>
-  
+<p>  
 </p>
-<input type="button" value="Volver" onClick="history.back()" />
+<input type="button" value="Volver" onClick="history.back()" /></br></br></br></br></br></br>
+</br>
+</br>

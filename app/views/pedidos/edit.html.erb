@@ -6,6 +6,7 @@
 	<%"entregar pedido"%>
 	<%Pedido.update(@pedido.id, :estado => 2)%>
 	<h1>Pedido a nombre de <%=@pedido.cliente%> ha sido entregado</h1>
+	<u class="be-re"> <%= link_to "REGRESAR A PEDIDOS", :action => "index" %></u>
 
 <%"pedido nuevo"%>
 <%elsif @pedido.estado.blank?%>

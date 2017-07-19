@@ -1,0 +1,13 @@
+<%= form_for(@medida) do |f| %>
+<h1>Editar unidad de medida</h1>
+<% @medida.errors.full_messages.each do |message|%>
+	<div class="be-re"><%=message%></div>
+<%end%>
+
+<div class="field">
+	<%= f.text_field :nombre, placeholder: "Nombre" %>
+</div></br>
+
+	<%= f.submit "Guardar" %>
+</div></br>
+<%end%>
