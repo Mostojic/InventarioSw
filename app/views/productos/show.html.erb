@@ -47,18 +47,19 @@
               <%end%>
             <%end%>
             <%if can? :create,Producto%>     
-            <th>Costo Total</th>
-            <td><%=%></td>
-            <td><%=%></td>
-            <%total=0.0%>
-            <%@hojas.each do |a|%>
-              <%if a.producto_id==@producto.id%>
-                <%total=total+a.porcion*a.insumo.precio%>
+              <th>Costo Total</th>
+              <td><%=%></td>
+              <td><%=%></td>
+              <%total=0.0%>
+              <%@hojas.each do |b|%>
+                <%if b.producto_id==@producto.id%>
+                  <%total=total+b.porcion*b.insumo.precio%>
+                <%end%>
               <%end%>
-            
-            <th><%=total%></th>
-            <%end%>
-            <%else%>     
+              <td><%=%></td>
+              <th><%=total%></th>
+            <%end%>     
+            <%if cannot? :create,Producto%>     
             <tr>
               <th>Precio</th>
               <td><%=%></td>

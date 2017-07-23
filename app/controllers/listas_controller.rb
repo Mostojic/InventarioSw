@@ -10,6 +10,7 @@ class ListasController < ApplicationController
 	
 	def index
 		@pedidos =	Pedido.where(estado: [2]).order('entrega').paginate(page: params[:page],per_page:15)
+		@items=Item.all
 	end
 	
 	def edit

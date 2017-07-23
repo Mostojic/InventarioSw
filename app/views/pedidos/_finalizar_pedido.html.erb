@@ -6,7 +6,7 @@
 		<% formulas = Formula.all%>
 		<% if Formula.find_by(insumo_id: b.insumo_id)%>
 			<% formulas.each do |c|%>
-				<%if c.insumo_id === b.insumo_id %>
+				<%if c.insumo_id == b.insumo_id %>
 					<% d=0 %>
 					<%d = b.porcion*a.cantidad + c.porcion%>
 					<%Formula.update(c.id, :porcion => d)%>
@@ -26,7 +26,7 @@
 	<% ele = elementos.order('id DESC')%>
 	<%n = a.porcion%>
 	<% ele.each  do |b|%>
-		<%if n > 0 then%>
+		<%if n > 0 %>
 			<%if b.cantidad > n then%>
 				<%e = Elemento.find_by(id: b.id)%>
 				<%en = e.cantidad%>

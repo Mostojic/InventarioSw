@@ -8,7 +8,7 @@
 		<% formulas = Formula.all%>
 		<% if Formula.find_by(insumo_id: b.insumo_id)%>
 			<% formulas.each do |c|%>
-				<%if c.insumo_id === b.insumo_id %>
+				<%if c.insumo_id == b.insumo_id %>
 					<% d=0 %>
 					<%d = b.porcion*a.cantidad + c.porcion%>
 					<%Formula.update(c.id, :porcion => d)%>

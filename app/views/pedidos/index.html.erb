@@ -4,6 +4,10 @@
 </head>
 <body>
 
+<%if Pedido.find_by estado: 3%>
+<%pe=Pedido.find_by estado: 3%>
+    <%Pedido.update(pe.id, :estado => 1)%>
+<%end%>
 
 <%if Pedido.find_by mostrar: 0 or Pedido.find_by mostrar: 1%>
 
@@ -20,6 +24,7 @@
   <%end%>
 
 <%else%>
+</br>
 <p><input type="button" value="Ingresar nuevo pedido" onClick="location.href='pedidos/new'" />
   <%if Pedido.last%>  
   <%pe=Pedido.last%>  

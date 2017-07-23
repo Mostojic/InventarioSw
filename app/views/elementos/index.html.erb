@@ -12,7 +12,9 @@
 	              <th><div class="size-220">Insumo</div></th>
 	              <th><div class="size-100">Disponible</div></th>
 	              <th><div class="size-100">Unidad</div></th>
+	              <th><div class="size-100">1° En vencer</div></th>
 	              <th><div class="size-100"></div></th>
+	              
 	            </tr>                  
 	          </thead>
 	          <%insumo=@insumos.order("nombre")%>
@@ -20,9 +22,22 @@
 	            <tr>
 	              <%if Elemento.find_by insumo_id: a.id%>
 		              <td><%=a.nombre%></td>
-		              <td><%=Elemento.where(insumo_id: [a.id]).sum("cantidad")%></td>
+		              <%canti=Elemento.where(insumo_id: [a.id]).sum("cantidad")%>
+		              <%if canti < 10%>
+		              <td class="be-alert"><%=canti%></td>
+		              <%else%>
+		              <td><%=canti%></td>
+		              <%end%>
 		              <td><%=a.medida.nombre%></td>
 		              <%elemento=Elemento.find_by insumo_id: a.id%>
+		              <%ele=Elemento.where(insumo_id: [a.id])%>
+		              <%ele=ele.order('vencimiento desc')%>
+		              <%dat = ele.last.vencimiento%>
+		              <%if  dat-7 < Date.today%>
+		              <td class="be-alert"><%=ele.last.vencimiento%></td>
+		              <%else%>
+		              <td><%=ele.last.vencimiento%></td>
+		              	<% end -%>
 		              <td><input type="button" value="Detalles" onClick="location.href='elementos/<%=elemento.id%>'" /></td>
 		            </tr>
 	            <%end%>

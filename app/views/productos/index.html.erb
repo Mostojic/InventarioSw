@@ -31,7 +31,18 @@
               location.href='productos/<%=a.id%>'" /></td>
               <%end%>
               <% if can? :destroy, Producto %>
-              <td><%= button_to 'Eliminar', a, method: :delete%></td>  
+                <%items=Item.all%>
+                <%si_hay=0%>
+                <%items.each do |b|%>
+                  <%if b.producto_id==a.id%>
+                    <%si_hay=1%>
+                  <%end%>
+                <%end%>
+                <%if si_hay==0%>
+                  <td><%= button_to 'Eliminar', a, method: :delete%></td>  
+                <%else%>
+                  <td><%=%></td>
+                <%end%>
               <% end -%>
             </tr>
           <% end %>

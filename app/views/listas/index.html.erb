@@ -8,7 +8,7 @@
               <th><div class="size-330">Cliente</div></th>
               <th><div class="size-165">Costo total</div></th>
               <th><div class="size-165">Fecha entrega</div></th>
-              <th><div class="size-165"></div></th>
+              <th><div class="size-200">Productos</div></th>
             </tr>                  
           </thead>
           
@@ -18,7 +18,21 @@
               <td><%=a.cliente%></td>
               <td><%=a.precio%></td>
               <td><%=a.entrega%></td>
-              <td><button type="button"  onClick="location.href='listas/<%= a.id%>'" />Detalles</button></td>
+              <%c=0%>
+                      <%@items.each do |b|%>
+                        <%if b.pedido_id==a.id and c>0%>
+                          <tr>
+                            <td><%=%></td>
+                            <td></td>
+                            <td><%=%></td>             
+                            <td><%=b.cantidad%> <%=b.producto.nombre%></td>
+                          </tr>
+                        <%end%>
+                        <%if b.pedido_id==a.id and c==0%>
+                          <%c=1%>
+                          <td><%=b.cantidad%> <%=b.producto.nombre%></td>
+                        <%end%>
+                      <%end%>
               
             </tr>
           

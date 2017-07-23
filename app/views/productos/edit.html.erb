@@ -1,5 +1,5 @@
 <%if !Hoja.find_by producto_id: @producto.id%>
-<h1>Receta sin elementos. Para continuar por favor ingrese algun elemnto</h1>
+<h1>Receta sin elementos. Para continuar por favor ingrese algun elemento</h1>
 <input type="button" value="VOLVER" onClick="history.back()" />
 <%else%>
 <h1><%= @producto.nombre%></h1>

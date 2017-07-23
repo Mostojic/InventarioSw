@@ -1,12 +1,38 @@
 <%"comprobar estado pedido"%>
 
 <%"estado pendiente"%>
-<%if !@pedido.estado.blank? and @pedido.estado==1%>
-	
+<%if !@pedido.estado.blank?%>
+	<%if @pedido.estado==1%>
+		<%if @pedido.entrega == Date.today%>
+			<%"entregar pedido"%>
+			<%Pedido.update(@pedido.id, :estado => 2)%>
+			<h1>Pedido a nombre de <%=@pedido.cliente%> ha sido entregado</h1>
+			<u class="be-re"> <%= link_to "REGRESAR A PEDIDOS", :action => "index" %></u>
+		<%else%>
+			<%Pedido.update(@pedido.id, :estado => 3)%>
+			<h2>Fecha pedido no corresponde a la fecha de hoy!</h2>
+			<h2>Desea entregar de todas formas?</h2>
+			</br>
+			</br>
+			<u class="be-re"> <%= link_to "--SI--", controller: "pedidos", action: "edit", id: @pedido.id %></u>
+			</br>
+			</br>
+			<u class="be-re"> <%= link_to "--NO--", :action => "index" %></u>
+		<%end%>
+
+	<%"Pedido en espera"%>
+	<%elsif @pedido.estado==0%>
+		<%= render :partial => "comprobar_elementos.html" %>
+	<%elsif @pedido.estado==3%>
 	<%"entregar pedido"%>
-	<%Pedido.update(@pedido.id, :estado => 2)%>
-	<h1>Pedido a nombre de <%=@pedido.cliente%> ha sido entregado</h1>
-	<u class="be-re"> <%= link_to "REGRESAR A PEDIDOS", :action => "index" %></u>
+			<%Pedido.update(@pedido.id, :estado => 2)%>
+			<h1>Pedido a nombre de <%=@pedido.cliente%> ha sido entregado</h1>
+			<u class="be-re"> <%= link_to "REGRESAR A PEDIDOS", :action => "index" %></u>	
+
+	<%end%>
+
+
+
 
 <%"pedido nuevo"%>
 <%elsif @pedido.estado.blank?%>
@@ -14,11 +40,11 @@
 <%"comprobar tiene productos"%>
 	<%if !Item.find_by pedido_id: @pedido.id%>
 
-	<%"no tiene productos"%>
-	<h1>Pedido sin productos. Para continuar por favor ingrese algun producto</h1>
-	<input type="button" value="VOLVER" onClick="history.back()" />
+		<%"no tiene productos"%>
+		<h1>Pedido sin productos. Para continuar por favor ingrese algun producto</h1>
+		<input type="button" value="VOLVER" onClick="history.back()" />
 
-	<%"tiene productos"%>
+		<%"tiene productos"%>
 	<%else%>
 
 		<%"setear precio"%>
@@ -31,10 +57,8 @@
 
 		<%= render :partial => "comprobar_elementos.html" %>
 	<%end%>
-
-<%"Pedido en espera"%>
-<%elsif !@pedido.estado.blank? and @pedido.estado==0%>
-	<%= render :partial => "comprobar_elementos.html" %>
 <%end%>
+
+
 			
 			

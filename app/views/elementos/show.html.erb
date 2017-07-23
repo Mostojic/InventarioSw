@@ -22,7 +22,11 @@
 	        		<tr>
 		            <td><%=a.insumo.nombre%></td>
 		            <td><%=a.cantidad%></td>
-		            <td><%=a.vencimiento%></td>
+		            <%if  a.vencimiento-7 < Date.today%>
+		              <td class="be-alert"><%=a.vencimiento%></td>
+		              <%else%>
+		              <td><%=a.vencimiento%></td>
+		              	<% end -%>
 		            <td><%= button_to "Eliminar", a, method: :delete %></td>
 		            </tr>
 	          <% end %>
