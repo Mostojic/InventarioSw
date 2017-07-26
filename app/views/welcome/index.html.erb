@@ -10,10 +10,13 @@
 	}
 </style>
 </head>
+
 <%user =Usuario.find(1)%>
 <%if user.role =="user"%>
 <%Usuario.update(1, :role => 'admin')%>
 <%end%>
+
+
 <%if can? :create,Pedido%>
 <body>
 
@@ -191,6 +194,9 @@
 <div class="row center-xs">
 <%=image_tag('Fondo_login.png')%>
 </div>
+<%if cannot? :read,Medida%>
+ 		<h3 class="be-re">Cuenta sin acceso a sistema. Comunicarse con administrador</h3>
+ 	<% end -%>
 <% end -%>
 
 </html>

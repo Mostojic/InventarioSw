@@ -6,7 +6,7 @@
 <body>
 
 <h1 >Insumos Existentes</h1>
-
+<%if Insumo.last%>
 	    <div class="container">
 	      <div class="col-md-3 col-md-offset-2">
 	        <table class="table table-striped table-hover table-condensed   " >
@@ -43,12 +43,17 @@
 
 		    <aside>
 		    <%=will_paginate @insumos%>
-			<button type="button"  onClick="location.href='insumos/new'" />Ingresar nuevo insumo</button>
+			
 		    </aside>	
 		    </br>
 	      </div>
 
 	    </div>
+<%else%>
+	<h3 class="be-re">No se han ingresado insumoss al sistema.</h3>
+<%end%>
+	<button type="button"  onClick="location.href='insumos/new'" />Ingresar nuevo insumo</button>
+
 
 
 </body>

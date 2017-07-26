@@ -4,6 +4,7 @@
 </head>
 <body>
 	<h1>Insumos en inventario</h1>
+	<%if Insumo.last%>
 	    <div class="container">
 	      <div class="col-md-4 col-md-offset-2">
 	        <table class="table table-striped table-hover table-condensed   " >
@@ -17,16 +18,15 @@
 	              
 	            </tr>                  
 	          </thead>
-	          <%insumo=@insumos.order("nombre")%>
-	          <% insumo.each do |a| %>
+	          <% @insumos.each do |a| %>
 	            <tr>
 	              <%if Elemento.find_by insumo_id: a.id%>
 		              <td><%=a.nombre%></td>
 		              <%canti=Elemento.where(insumo_id: [a.id]).sum("cantidad")%>
 		              <%if canti < 10%>
-		              <td class="be-alert"><%=canti%></td>
+		              	<td class="be-alert"><%=canti%></td>
 		              <%else%>
-		              <td><%=canti%></td>
+		              	<td><%=canti%></td>
 		              <%end%>
 		              <td><%=a.medida.nombre%></td>
 		              <%elemento=Elemento.find_by insumo_id: a.id%>
@@ -34,20 +34,29 @@
 		              <%ele=ele.order('vencimiento desc')%>
 		              <%dat = ele.last.vencimiento%>
 		              <%if  dat-7 < Date.today%>
-		              <td class="be-alert"><%=ele.last.vencimiento%></td>
-		              <%else%>
-		              <td><%=ele.last.vencimiento%></td>
-		              	<% end -%>
+		              	<td class="be-alert"><%=ele.last.vencimiento%></td>
+		          	  <%else%>
+		              	<td><%=ele.last.vencimiento%></td>
+		              <% end -%>
 		              <td><input type="button" value="Detalles" onClick="location.href='elementos/<%=elemento.id%>'" /></td>
-		            </tr>
-	            <%end%>
+	              <%else%>
+	              	<td><%=a.nombre%></td>
+	              	<td class="be-alert"><%="0.0"%></td>
+	              	<td><%=a.medida.nombre%></td>
+	              	<td><%="-"%></td>
+	              	<td><%="-"%></td>
+	              <%end%>
+
+	             </tr>
 	          <% end %>
 	        </table>  
-	        <%=will_paginate @insumos%>
-			<p><input type="button" value="Agregar insumos al inventario" onClick="location.href='elementos/new'" /></p>
+	        
 	      </div>
 	    </div>
-	    
+	<%else%>
+		<h3 class="be-re">No se han ingresado insumos al sistema. Conmuníquese con administrador</h3>
+	<%end%>
+	    <p><input type="button" value="Ingresar elementos al inventario" onClick="location.href='elementos/new'" /></p>
 
 	    
 

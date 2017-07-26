@@ -50,14 +50,22 @@ body > #wrap {
 
         <%=link_to image_tag('logo.png'),welcome_index_path%>
       </li>
+      <%if can? :read,Usuario%>
+      <li class="col-md">
+        <%=link_to "Usuarios",usuarios_path%>
+      </li>
+      <%end%>
+
       <%if can? :create,Insumo%>
       <li class="col-md">
         <%=link_to "Insumos",insumos_path%>
       </li>
       <%end%>
+      <%if can? :read,Producto%>
       <li class="col-md">
         <%=link_to "Productos", productos_path%>
       </li>
+      <%end%>
       <%if can? :create,Elemento%>
       <li class="col-md">
         <%=link_to "Inventario", elementos_path%>

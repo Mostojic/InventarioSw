@@ -1,14 +1,18 @@
-<%= form_for(@producto) do |f| %>
-<h1>Ingresar nueva receta</h1>
-<% @producto.errors.full_messages.each do |message|%>
-	<div class="be-re"><%=message%></div>
+<%if Insumo.last%>
+	<%= form_for(@producto) do |f| %>
+	<h1>Ingresar nueva receta</h1>
+	<% @producto.errors.full_messages.each do |message|%>
+		<div class="be-re"><%=message%></div>
+		<%end%>
+	<div class="field">
+		<%= f.text_field :nombre, placeholder: "Nombre" %>
+
+	</div>
+	<p></p>
+		<%= f.submit "Guardar" %>
+	</div>
+
 	<%end%>
-<div class="field">
-	<%= f.text_field :nombre, placeholder: "Nombre" %>
-
-</div>
-<p></p>
-	<%= f.submit "Guardar" %>
-</div>
-
+<%else%>
+		<h3 class="be-re">Para crear producto debe crear algun insumo para la receta</h3>
 <%end%>

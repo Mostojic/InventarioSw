@@ -1,32 +1,35 @@
-<%= form_for(@pedido) do |f| %>
-<h1>Registrar nuevo pedido</h1>
-<% @pedido.errors.full_messages.each do |message|%>
-	<div class="letter-red"><%=message%></div>
+<%if Producto.last%>
+	<%= form_for(@pedido) do |f| %>
+	<h1>Registrar nuevo pedido</h1>
+	<% @pedido.errors.full_messages.each do |message|%>
+		<div class="letter-red"><%=message%></div>
+		<p></p>
+		<%end%>
+	<div>Nombre cliente:</div>
+	<div class="field">
+		<%= f.text_field :cliente, placeholder: "Nombre cliente" %>
+	</div>
+
 	<p></p>
+	<div>Fecha de entrega:</div>
+	<div class="field">
+	<%=f.text_field :entrega, placeholder: "AAAA-MM-DD"%></div>
+
+	<p></p>
+	<div>Comentario:</div>
+	<div class="field">
+		<%= f.text_area :comentario, placeholder: "Comentario" %>
+	</div>
+
+	<p></p>
+	<div class="field">
+		<%= f.submit "Guardar" %>
+	</div>
+	<P></P>
+	 <td><u class="be-re"><%= link_to "REGRESAR A PEDIDOS", :action => "index" %></u></td>
 	<%end%>
-<div>Nombre cliente:</div>
-<div class="field">
-	<%= f.text_field :cliente, placeholder: "Nombre cliente" %>
-</div>
-
-<p></p>
-<div>Fecha de entrega:</div>
-<div class="field">
-<%=f.text_field :entrega, placeholder: "AAAA-MM-DD"%></div>
-
-<p></p>
-<div>Comentario:</div>
-<div class="field">
-	<%= f.text_area :comentario, placeholder: "Comentario" %>
-</div>
-
-<p></p>
-<div class="field">
-	<%= f.submit "Guardar" %>
-</div>
-<P></P>
- <td><u class="be-re"><%= link_to "REGRESAR A PEDIDOS", :action => "index" %></u></td>
+<%else%>
+	<h3 class="be-re">No se han ingresado productos al sistema. Conmuníquese con administrador</h3>
 <%end%>
 
-
- 
+	 

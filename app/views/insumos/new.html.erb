@@ -1,28 +1,32 @@
-<%= form_for(@insumo) do |f| %>
-<h1>Ingresar nuevo insumo</h1>
+<%if Medida.last%>
+	<%= form_for(@insumo) do |f| %>
+	<h1>Ingresar nuevo insumo</h1>
 
-<% @insumo.errors.full_messages.each do |message|%>
-	<div class="be-re"><%=message%></div>
-<%end%>
-<div class="field">
-	<div>Nombre :</div>
-	<%= f.text_field :nombre, placeholder: "Nombre" %>
-	<p></p>
-</div>
-<div class="field">
-	<div>Precio :</div>
-	<%= f.text_field :precio, placeholder: "000000" %>
-	<p></p>
-</div>
-<div class="field">
-	<div>Unidad de medida:</div>
-    <%= f.collection_select :medida_id, Medida.all, :id, :nombre %>
-  </div>
+	<% @insumo.errors.full_messages.each do |message|%>
+		<div class="be-re"><%=message%></div>
+	<%end%>
+	<div class="field">
+		<div>Nombre :</div>
+		<%= f.text_field :nombre, placeholder: "Nombre" %>
+		<p></p>
+	</div>
+	<div class="field">
+		<div>Precio :</div>
+		<%= f.text_field :precio, placeholder: "000000" %>
+		<p></p>
+	</div>
+	<div class="field">
+		<div>Unidad de medida:</div>
+	    <%= f.collection_select :medida_id, Medida.all, :id, :nombre %>
+	  </div>
 
-<p></p>
-<div class="field">
-	<%= f.submit "Guardar" %>
-</div>
+	<p></p>
+	<div class="field">
+		<%= f.submit "Guardar" %>
+	</div>
+	<%end%>
+<%else%>
+	<h3 class="be-re">Para crear insumo debe crear alguna unidad de medida</h3>
 <%end%>
 <P>
 	

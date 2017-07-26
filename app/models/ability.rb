@@ -9,7 +9,8 @@ class Ability
    can :cru, Insumo
    can :cru, Producto
    can :cru, Hoja
- elsif usuario.role == "user"
+   can :cru, Usuario
+ elsif usuario.role == "usuario"
    alias_action :create, :read, :update, :edit, :delete, :destroy,:to => :cru
    can :cru, Item
    can :cru, Pedido

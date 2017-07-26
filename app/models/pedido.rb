@@ -6,7 +6,7 @@ class Pedido < ApplicationRecord
 	validates :entrega, presence: { message: ": Debe ingresar fecha de entrega correctamente" }
 	validates :abonado, length: {maximum: 7, :message => ": No puede superar las 7 cifras"}
 	validates :comentario, length: {maximum: 200, :message => ": No puede superar los 200 caracteres"}
-	validate :fecha_esta_en_pasado, :fecha_es_domingo, :positivo
+	validate :fecha_esta_en_pasado, :fecha_es_domingo, :positivo, :este_ano
 
   	def positivo
     	if !abonado.blank? and abonado<=0
@@ -26,6 +26,11 @@ class Pedido < ApplicationRecord
 		end
 	end
 
+	def este_ano
+    if !entrega.blank? and entrega > Date.today+365
+      errors.add(:entrega,": Fecha no puede superar 1 año en el futuro")
+    end
+  end  
 
 
 
