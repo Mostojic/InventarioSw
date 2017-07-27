@@ -20,6 +20,8 @@ class ProductosController < ApplicationController
 	def create
 		@producto = Producto.new(nombre: params[:producto][:nombre], 
 								precio: params[:producto][1])
+		@producto.nombre=@producto.nombre.strip
+		@producto.nombre=@producto.nombre.capitalize
 		if @producto.save
 			redirect_to @producto
 		else
@@ -57,11 +59,21 @@ class ProductosController < ApplicationController
 	   @precio = params[:producto]["precio"]
 	   @producto = Producto.find(params[:id])
 	   @producto.precio = @precio
-	   if @producto.save()
-	   		redirect_to productos_path
-	   	else
-	   		render :edit
-	   	end
+	   if @producto.precio.blank?
+	   	@producto.precio=0
+	   end
+	   if !@producto.precio.blank?
+	   		if @producto.precio==0
+	   			@producto.save()
+	   			render :edit
+	   		else 
+	   			if @producto.save()
+	   				redirect_to productos_path
+	   			else
+	   				render :edit
+	   			end
+			end
+		end
 	end
 private
   		def validate_user

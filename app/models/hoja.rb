@@ -12,6 +12,5 @@ class Hoja < ApplicationRecord
       		errors.add(:porcion, ": Debe ingresar porcion superior a 0")
     	end
   	end
-  
-
+    
 end

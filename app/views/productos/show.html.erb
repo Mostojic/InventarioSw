@@ -12,13 +12,26 @@
 </style>
 </head>
 
+
 <body>
 
 <h1><%= @producto.nombre%></h1>
+
+<%hoja=Hoja.last%>
+<%producto_actual = Hoja.where(producto_id: [@producto.id])%>
+<%producto_actual = producto_actual.where(insumo_id: [hoja.insumo.id])%>
+<%n = producto_actual.count%>
+<%if n>1%>
+  <div class="be-re">Ya ingresó <%=hoja.insumo.nombre%> a la receta</div>
+  <%hoja.delete%>
+<%end%>
+
+  <div class="be-re"></div>
+
 <div>
 
 
-<span class="izq">
+<span class="derecha">
 
 
           <table class="table table-striped table-hover table-condensed " >
@@ -33,7 +46,8 @@
                 <th><div class="size-100"></div></th>
               </tr>                  
             </thead>
-            <% @hojas.each do |a| %>
+            <%hojas=Hoja.all%>
+            <% hojas.each do |a| %>
               <% if a.producto_id == @producto.id then%>    
               <tr>
                 <td><%=a.insumo.nombre%></td>
@@ -51,7 +65,7 @@
               <td><%=%></td>
               <td><%=%></td>
               <%total=0.0%>
-              <%@hojas.each do |b|%>
+              <%hojas.each do |b|%>
                 <%if b.producto_id==@producto.id%>
                   <%total=total+b.porcion*b.insumo.precio%>
                 <%end%>
@@ -73,16 +87,16 @@
           </table>  
  <%if can? :create,Hoja%>         
 </span>
-<span class="derecha">
+<span class="izq">
 
 <%= form_for([@producto,@hoja]) do |f| %>
-<h1>Agregar porcion a receta .</h1>
+<h3>Agregar porcion a receta .</h3>
 
 <div class="field">
 <%insumos = Insumo.all%>
 <%insumos = insumos.order('nombre')%>
 	<div>Insumo:</div>
-    <%= f.collection_select :insumo_id, insumos, :id, :nombre %>
+    <%= f.collection_select :insumo_id, insumos, :id, :nombre%>
   </div>
 
 <div class="field">
@@ -99,7 +113,28 @@
 </br>
 <u class="be-re"><%= link_to "FINALIZAR RECETA", :action => "edit" %></u>
 <%end%>
+
+</br>
+</br>
+</br>
+<% if can? :destroy, Producto %>
+            <%items=Item.all%>
+            <%si_hay=0%>
+            <%items.each do |b|%>
+              <%if b.producto_id==@producto.id%>
+                <%si_hay=1%>
+              <%end%>
+            <%end%>
+            <%if si_hay==0%>
+              <td><%= button_to 'Eliminar producto', @producto, method: :delete%></td>  
+              </br>
+            <%end%>
+<%end%>
 </span>
 <% end -%>
 </div>
+
+
+
+
 </body>

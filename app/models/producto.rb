@@ -9,7 +9,7 @@ class Producto < ApplicationRecord
  	validate :positivo
 
   def positivo
-    if !precio.blank? and precio<1
+    if !precio.blank? and precio<0
       errors.add(:precio, ": Debe ingresar precio superior a $0")
     end
   end

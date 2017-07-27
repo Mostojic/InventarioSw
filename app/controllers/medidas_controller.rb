@@ -15,6 +15,8 @@ class MedidasController < ApplicationController
 
 	def create
 		@medida = Medida.new(nombre: params[:medida][:nombre])
+		@medida.nombre=@medida.nombre.strip
+		@medida.nombre=@medida.nombre.capitalize
 		if @medida.save
 			redirect_to @medida
 		else

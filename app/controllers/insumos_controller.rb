@@ -19,6 +19,8 @@ class InsumosController < ApplicationController
 			precio: params[:insumo][:precio],
 			nombre: params[:insumo][:nombre],
 			medida_id: params[:insumo][:medida_id])
+		@insumo.nombre=@insumo.nombre.strip
+		@insumo.nombre=@insumo.nombre.capitalize
 		if @insumo.save
 			redirect_to @insumo		
 		else

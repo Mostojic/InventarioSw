@@ -15,6 +15,9 @@
 <p><h3>Precio sugerido: <%=total*2%></h3></p>
 
 <%= form_for(@producto) do |f| %>
+<%if !@producto.precio.blank? and @producto.precio==0%>
+	<div class="be-re">Precio: Debe ingresar precio superior a 0</div>
+<%end%>
 <% @producto.errors.full_messages.each do |message|%>
 	<div class="be-re"><%=message%></div>
 	<%end%>
