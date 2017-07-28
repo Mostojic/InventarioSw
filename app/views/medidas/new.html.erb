@@ -1,13 +1,15 @@
-<%= form_for(@medida) do |f| %>
-<h1>Agregar nueva unidad demedida</h1>
-<% @medida.errors.full_messages.each do |message|%>
-	<div class="be-re"><%=message%></div>
-<%end%>
+<%if can? :create, Medida%>
+	<%= form_for(@medida) do |f| %>
+	<h1>Agregar nueva unidad demedida</h1>
+	<% @medida.errors.full_messages.each do |message|%>
+		<div class="be-re"><%=message%></div>
+	<%end%>
 
-<div class="field">
-	<%= f.text_field :nombre, placeholder: "Nombre" %>
-</div></br>
+	<div class="field">
+		<%= f.text_field :nombre, placeholder: "Nombre" %>
+	</div></br>
 
-	<%= f.submit "Guardar" %>
-</div></br>
+		<%= f.submit "Guardar" %>
+	</div></br>
+	<%end%>
 <%end%>

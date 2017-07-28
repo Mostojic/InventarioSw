@@ -24,8 +24,14 @@ class ItemsController < ApplicationController
 				pedido_id: params[:item][:pedido_id],
 				cantidad: params[:item][:cantidad])
 		@item.pedido = @pedido
-		@item.save
-		redirect_to @pedido
+		if !@item.cantidad.blank? and @item.cantidad> 100
+			@item.cantidad = 100
+			@item.save
+			redirect_to @pedido	
+		else
+			@item.save
+			redirect_to @pedido
+		end
 	end
 
 	def destroy 

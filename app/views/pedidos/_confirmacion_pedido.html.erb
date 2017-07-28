@@ -3,6 +3,8 @@
 <%else%>
 
 	<h1>Finalizar pedido</h1>
+	<h3>Cliente: <%= @pedido.cliente%></h3>
+	<h3>Fechaentrega: <%= @pedido.entrega%></h3>
 	<div class="container">
 		<div class="col-md-3 col-md-offset-2">
 	   	    <table class="table table-striped table-hover table-condensed   " >
@@ -42,6 +44,9 @@
 		<h2>Pedido en espera. Para registrar pedido ingrese cantidad abonada</h2>
 		<%if !@pedido.abonado.blank? and @pedido.precio < @pedido.abonado%>
 		<div class="letter-red"><%="Cantidad abonada no puede superar el costo total del pedido"%></div>
+	<%end%>
+		<%if !@pedido.abonado.blank? and @pedido.abonado ==0%>
+		<div class="letter-red"><%="INGRESE UN NUMERO ENTRE 1 Y 99"%></div>
 	<%end%>
 		<% @pedido.errors.full_messages.each do |message|%>
 			<div class="letter-red"><%=message%></div>

@@ -1,34 +1,40 @@
-<%if !Hoja.find_by producto_id: @producto.id%>
-<h1>Receta sin elementos. Para continuar por favor ingrese algun elemento</h1>
-<input type="button" value="VOLVER" onClick="history.back()" />
-<%else%>
-<h1><%= @producto.nombre%></h1>
-<%total=0.0%>
-<%hojas=Hoja.all%>
-            <%hojas.each do |a|%>
-              <%if a.producto_id==@producto.id%>
-                <%total=total+a.porcion*a.insumo.precio%>
-              <%end%>
-            <%end%>
+<%if can? :create, Medida%>
+	<%if !Hoja.find_by producto_id: @producto.id%>
+	<h1>Receta sin elementos. Para continuar por favor ingrese algun elemento</h1>
+	<input type="button" value="VOLVER" onClick="history.back()" />
+	<%else%>
+	<h1><%= @producto.nombre%></h1>
+	<%total=0.0%>
+	<%hojas=Hoja.all%>
+	            <%hojas.each do |a|%>
+	              <%if a.producto_id==@producto.id%>
+	                <%total=total+a.porcion*a.insumo.precio%>
+	              <%end%>
+	            <%end%>
 
-<p><h3>Costo total: <%=total%></h3></p>
-<p><h3>Precio sugerido: <%=total*2%></h3></p>
+	<%Producto.update(@producto.id, :costo => total)%>
+	<p><h3>Costo total: <%=total%></h3></p>
+	<p><h3>Precio sugerido: <%=total*2%></h3></p>
 
-<%= form_for(@producto) do |f| %>
-<%if !@producto.precio.blank? and @producto.precio==0%>
-	<div class="be-re">Precio: Debe ingresar precio superior a 0</div>
-<%end%>
-<% @producto.errors.full_messages.each do |message|%>
-	<div class="be-re"><%=message%></div>
+	<%= form_for(@producto) do |f| %>
+	<%if !@producto.precio.blank? and @producto.precio==0%>
+		<div class="be-re">Precio: DEBE INGRESAR NUMERO SUPERIOR A 0</div>
 	<%end%>
-	<th>Ingresar Precio Final: </th>
-<div class="field">
-	<%= f.text_field :precio%>
+	<%if !@producto.precio.blank? and @producto.precio==@producto.costo%>
+		<div class="be-re">Precio: DEBE SER IGUAL O SUPERIOR AL COSTO TOTAL</div>
+	<%end%>
+	<% @producto.errors.full_messages.each do |message|%>
+		<div class="be-re"><%=message%></div>
+		<%end%>
+		<th>Ingresar Precio Final: </th>
+	<div class="field">
+		<%= f.text_field :precio%>
 
-</div>
-<p></p>
-	<%= f.submit "Guardar" %>
-</div>
+	</div>
+	<p></p>
+		<%= f.submit "Guardar" %>
+	</div>
 
-<%end%>
+	<%end%>
+	<%end%>
 <%end%>

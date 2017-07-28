@@ -52,8 +52,11 @@ class MedidasController < ApplicationController
 	   @nombre = params[:medida]["nombre"]
 	   @medida = Medida.find(params[:id])
 	   @medida.nombre = @nombre
-	   @medida.save()
-	      redirect_to medidas_path
+	     if @medida.save
+			redirect_to medidas_path
+		else
+			render :edit
+		end 
 	   
 	end
 	private

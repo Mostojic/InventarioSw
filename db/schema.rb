@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 20170719074431) do
   create_table "productos", force: :cascade do |t|
     t.string "nombre"
     t.integer "precio"
+    t.integer "costo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

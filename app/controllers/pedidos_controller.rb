@@ -18,8 +18,17 @@ class PedidosController < ApplicationController
 	   @pedido = Pedido.find(params[:id])
 	   @pedido.abonado = @abonado
 	   @pedido.comentario = @comentario
-	   @pedido.save()
-	      render :edit
+	   if @pedido.abonado.blank?
+	   		@pedido.abonado=0
+	   		@pedido.save()
+	    	render :edit
+	    else
+	    	 @pedido.save()
+	    		render :edit
+	    	
+	    end
+
+
 	   
 	end
 
@@ -39,9 +48,9 @@ class PedidosController < ApplicationController
 	def create
 		@pedido = Pedido.new(cliente: params[:pedido][:cliente],
 			entrega: params[:pedido][:entrega],
-			comentario: params[:pedido][:comentario],
-			abonado: params[:pedido][0])
-
+			comentario: params[:pedido][:comentario])
+		@pedido.cliente=@pedido.cliente.strip
+	   	@pedido.cliente=@pedido.cliente.capitalize
 		if @pedido.save
 			redirect_to @pedido
 		else

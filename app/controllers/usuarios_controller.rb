@@ -20,6 +20,12 @@ class UsuariosController < ApplicationController
     redirect_to usuarios_path
   end
 
+  def destroy 
+    @usuario = Usuario.find(params[:id])
+    @usuario.destroy
+    redirect_to usuarios_path
+  end
+
   	private
   		def validate_user
   			if !usuario_signed_in?

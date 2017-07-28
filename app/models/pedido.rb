@@ -9,8 +9,8 @@ class Pedido < ApplicationRecord
 	validate :fecha_esta_en_pasado, :fecha_es_domingo, :positivo, :este_ano
 
   	def positivo
-    	if !abonado.blank? and abonado<=0
-      		errors.add(:abonado, ": Debe ingresar porcion superior a 0")
+    	if !abonado.blank? and abonado<0
+      		errors.add(:abonado, ": Debe ser superior a 0")
     	end
   	end
 

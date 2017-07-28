@@ -12,12 +12,57 @@
 </head>
 
 <body>
-<h1>Cliente: <%= @pedido.cliente%></h1>
-<h1>Fecha entrega: <%= @pedido.entrega%></h1>
+<h3>Cliente: <%= @pedido.cliente%></h3>
+<h3>Fechaentrega: <%= @pedido.entrega%></h3>
 
+<span class="izq">
+  <h1>Agregar productos a pedido .</h1>
+
+<%item=Item.last%>
+
+  <%if !item.cantidad.blank? and item.cantidad>0 and item.cantidad<100%>
+  <%else%>
+   <div class="be-re">DEBE INGRESAR NUMEROS ENTRE 0 Y 99</div>
+   <%item.delete%>
+   </br>
+  <%end%>
+  <%pedido_actual = Item.where(pedido_id: [@pedido.id])%>
+  <%pedido_actual = pedido_actual.where(producto_id: [item.producto.id])%>
+  <%n = pedido_actual.count%>
+  <%if n>1%>
+    <div class="be-re">YA AGREGÓ <%=item.producto.nombre.upcase%> AL PEDIDO</div>
+    <%item.delete%>
+    </br>
+  <%end%>
+
+
+<%= form_for([@pedido,@item]) do |f| %>
+
+
+<div class="field">
+  <div>Producto:</div>
+  <%productos=Producto.all%>
+  <%productos = productos.order('nombre')%>
+    <%= f.collection_select :producto_id, productos, :id, :nombre %>
+  </div>
+
+<div class="field">
+  <div>Cantidad:</div>
+
+  <%= f.text_field :cantidad, placeholder: "0" %>
+</div>
+<div class="field">
+  <%= f.submit "Agregar" %>
+</div>
+<%end%>
+<p></p>
+ <u class="be-re"><td><%= link_to "FINALIZAR PEDIDO", :action => "edit" %></td></u>
+ </br>
+ </br>
+</span>
 
 <div>
-<span class="izq">
+<span class="derecha">
 
           <table class="table table-striped table-hover table-condensed   " >
             <thead>
@@ -25,10 +70,11 @@
                 <th><div class="size-220">Producto</div></th>
                 <th><div class="size-100">Cantidad</div></th>
                 <th><div class="size-100">Precio</div></th>
-                <th><div class="size-100  "></div></th>
+                <th><div class="size-200  "></div></th>
               </tr>                  
             </thead>
-            <% @items.each do |a| %>
+            <%items=Item.all%>
+            <% items.each do |a| %>
               <% if a.pedido_id === @pedido.id then%>
                 <tr>
                   <td><%=a.producto.nombre%></td>
@@ -42,39 +88,16 @@
               <th>Costo Total</th>
               <td><%=%></td>
               <%total=0%>
-              <%@items.each do |a|%>
+              <%items.each do |a|%>
               <%if a.pedido_id==@pedido.id%>
                 <%total=total+a.cantidad*a.producto.precio%>
               <%end%>
             <%end%>
             <th><%=total%></th>
+            <th><%=%></th>
           </table>
 </span>
 
-<span class="derecha">
-<%= form_for([@pedido,@item]) do |f| %>
-<h1>Agregar productos a pedido .</h1>
 
-<div class="field">
-	<div>Producto:</div>
-  <%productos=Producto.all%>
-  <%productos = productos.order('nombre')%>
-    <%= f.collection_select :producto_id, productos, :id, :nombre %>
-  </div>
-
-<div class="field">
-	<div>Cantidad:</div>
-
-	<%= f.text_field :cantidad, placeholder: "0" %>
-</div>
-<div class="field">
-	<%= f.submit "Agregar" %>
-</div>
-<%end%>
-<p></p>
- <u class="be-re"><td><%= link_to "FINALIZAR PEDIDO", :action => "edit" %></td></u>
- </br>
- </br>
-</span>
 </div>
 </body>

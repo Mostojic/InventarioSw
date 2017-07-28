@@ -1,50 +1,52 @@
+<%if can? :read, Usuario%>
+	<html>
+	<head>
+	<title>Editar Insumos</title>
+	</head>
+	<body>
 
-<html>
-<head>
-<title>Editar Insumos</title>
-</head>
-<body>
+	<h1 >Usuarios</h1>
+	<%if Usuario.count>1%>
+		    <div class="container">
+		      <div class="col-md-3 col-md-offset-2">
+		        <table class="table table-striped table-hover table-condensed   " >
+		          <thead>
+		            <tr>
+		              <th><div class="size-165">Usuario</div></th>
+		              <th><div class="size-165">Estado</div></th>
+		              <th><div class="size-165"></div></th>
+		            </tr>                  
+		          </thead>
+		          
+		          <% @usuarios.each do |a| %>
+			          	<%if a.role != 'admin'%>
+				          	<tr>
+				            <td><%=a.email%></td>
+				            <%if a.role=='user'%>
+				            	<td><%="Sin acceso"%></td>
+				            <%else%>
+				            	<td><%="Con acceso como usuario"%></td>
+				            <%end%>
+				            <%if a.role =='user'%>
+				            	<td><input type="button" value="Permitir acceso" onClick="location.href='usuarios/<%=a.id%>'" /></td>
+				            <%else%>
+								<td><input type="button" value="Denegar acceso" onClick="location.href='usuarios/<%=a.id%>/edit'" /></td>
+							<%end%>
+							<td><%= button_to 'Eliminar usuario', a, method: :delete%></td> 
+				           </tr>
+				        <%end%>
+				    <%end%>
 
-<h1 >Usuarios</h1>
-<%if Usuario.count>1%>
-	    <div class="container">
-	      <div class="col-md-3 col-md-offset-2">
-	        <table class="table table-striped table-hover table-condensed   " >
-	          <thead>
-	            <tr>
-	              <th><div class="size-165">Usuario</div></th>
-	              <th><div class="size-165">Estado</div></th>
-	              <th><div class="size-165"></div></th>
-	            </tr>                  
-	          </thead>
-	          
-	          <% @usuarios.each do |a| %>
-		          	<%if a.role != 'admin'%>
-			          	<tr>
-			            <td><%=a.email%></td>
-			            <%if a.role=='user'%>
-			            	<td><%="Sin acceso"%></td>
-			            <%else%>
-			            	<td><%="Con acceso como usuario"%></td>
-			            <%end%>
-			            <%if a.role =='user'%>
-			            	<td><input type="button" value="Permitir acceso" onClick="location.href='usuarios/<%=a.id%>'" /></td>
-			            <%else%>
-							<td><input type="button" value="Denegar acceso" onClick="location.href='usuarios/<%=a.id%>/edit'" /></td>
-						<%end%>
-			           </tr>
-			        <%end%>
-			    <%end%>
+		        </table>  
+		        <%=will_paginate @usuarios%>
+			    </br>
+		      </div>
 
-	        </table>  
-	        <%=will_paginate @usuarios%>
-		    </br>
-	      </div>
+		    </div>
 
-	    </div>
-
-<%else%>
-<h3 class="be-re">No se han registrado nuevos usuarios al sistema.</h3>
+	<%else%>
+	<h3 class="be-re">No se han registrado nuevos usuarios al sistema.</h3>
+	<%end%>
+	</body>
+	</html>
 <%end%>
-</body>
-</html>

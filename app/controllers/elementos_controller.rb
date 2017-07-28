@@ -2,7 +2,7 @@ class ElementosController < ApplicationController
 	before_action :validate_user	
 	
 	def index
-	@insumos = Insumo.order("nombre").paginate(page: params[:page],per_page:7)
+	@insumos = Insumo.order("nombre").paginate(page: params[:page],per_page:10)
 	end
 
 	#get/elemento/id

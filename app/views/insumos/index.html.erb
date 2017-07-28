@@ -1,60 +1,75 @@
+<%if can? :create, Insumo%>
+	<html>
+	<head>
+	<title>Editar Insumos</title>
+	</head>
+	<body>
 
-<html>
-<head>
-<title>Editar Insumos</title>
-</head>
-<body>
-
-<h1 >Insumos Existentes</h1>
-<%if Insumo.last%>
-	    <div class="container">
-	      <div class="col-md-3 col-md-offset-2">
-	        <table class="table table-striped table-hover table-condensed   " >
-	          <thead>
-	            <tr>
-	              <th><div class="size-165">Insumo</div></th>
-	              <th><div class="size-165">Precio</div></th>
-	              <th><div class="size-165">Unidad</div></th>
-	              <th><div class="size-165"></div></th>
-	            </tr>                  
-	          </thead>
-	          <%insumos = @insumos.order('nombre')%>
-	          <% insumos.each do |a| %>
-	            <tr>
-	              <td><%=a.nombre%></td>
-	              <td><%=a.precio%></td>
-	              <td><%=a.medida.nombre%></td>
-	              	<%hojas=Hoja.all%>
-					<%si_hay=0%>
-					<%hojas.each do |b|%>
-						<%if b.insumo_id==a.id%>
-							<%si_hay=1%>
+	<h1 >Insumos Existentes</h1>
+	<%if Insumo.last%>
+		    <div class="container">
+		      <div class="col-md-3 col-md-offset-2">
+		        <table class="table table-striped table-hover table-condensed   " >
+		          <thead>
+		            <tr>
+		              <th><div class="size-165">Insumo</div></th>
+		              <th><div class="size-165">Precio</div></th>
+		              <th><div class="size-165">Unidad</div></th>
+		              <th><div class="size-165"></div></th>
+		            </tr>                  
+		          </thead>
+		          <%insumos = @insumos.order('nombre')%>
+		          <% insumos.each do |a| %>
+		            <tr>
+		              <td><%=a.nombre%></td>
+		              <td><%=a.precio%></td>
+		              <td><%=a.medida.nombre%></td>
+		              	<%hojas=Hoja.all%>
+		              	<%elementos=Elemento.all%>
+						<%si_hay=0%>
+						<%hojas.each do |b|%>
+							<%if b.insumo_id==a.id%>
+								<%si_hay=1%>
+							<%end%>
 						<%end%>
-					<%end%>
-					<%if si_hay==0%>
-						<td><%= button_to 'Eliminar', a, method: :delete%></td>  
-					<%else%>
-						<td><input type="button" value="Editar" onClick="location.href='insumos/<%=a.id%>/edit'" /></td>
-					<%end%>
-	              
-	            </tr>
-	          <% end %>
-	        </table>  
+						<%elementos.each do |b|%>
+							<%if b.insumo_id==a.id%>
+								<%si_hay=1%>
+							<%end%>
+						<%end%>
+						<%if si_hay==0%>
+							<td><%= button_to 'Eliminar', a, method: :delete%></td>  
+						<%else%>
+							<td><input type="button" value="Editar" onClick="location.href='insumos/<%=a.id%>/edit'" /></td>
+						<%end%>
+		              
+		            </tr>
+		          <% end %>
+		        </table>  
 
-		    <aside>
-		    <%=will_paginate @insumos%>
-			
-		    </aside>	
-		    </br>
-	      </div>
+			    <aside>
+			    <%=will_paginate @insumos%>
+				
+			    </aside>	
+			    </br>
+		      </div>
 
-	    </div>
-<%else%>
-	<h3 class="be-re">No se han ingresado insumoss al sistema.</h3>
+		    </div>
+	<%else%>
+		<h3 class="be-re">No se han ingresado insumoss al sistema.</h3>
+	<%end%>
+		<button type="button"  onClick="location.href='insumos/new'" />Ingresar nuevo insumo</button>
+		</br>
+		</br>
+		</br>
+		</br>
+		</br>
+		</br>
+		</br>
+		</br>
+
+
+
+	</body>
+	</html>
 <%end%>
-	<button type="button"  onClick="location.href='insumos/new'" />Ingresar nuevo insumo</button>
-
-
-
-</body>
-</html>

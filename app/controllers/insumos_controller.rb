@@ -63,8 +63,11 @@ class InsumosController < ApplicationController
 	   @insumo = Insumo.find(params[:id])
 	   @insumo.nombre = @nombre
 	   @insumo.precio = @precio
-	   @insumo.save()
-	      redirect_to insumos_path
+	   if @insumo.save
+			redirect_to insumos_path
+		else
+			render :edit
+		end 
 	   
 	end
 	private

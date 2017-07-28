@@ -3,7 +3,9 @@
 one:
   nombre: MyString
   precio: 1
+  costo: 1
 
 two:
   nombre: MyString
   precio: 1
+  costo: 1

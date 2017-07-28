@@ -1,26 +1,28 @@
-<%= form_for(@insumo) do |f| %>
-<h1>Editar insumo</h1>
+<%if can? :create, Insumo%>
+	<%= form_for(@insumo) do |f| %>
+	<h1>Editar insumo</h1>
 
-<% @insumo.errors.full_messages.each do |message|%>
-	<div class="be-re"><%=message%></div>
-<%end%>
-<div class="field">
-	<div>Nombre :</div>
-	<%= f.text_field :nombre, placeholder: "Nombre" %>
+	<% @insumo.errors.full_messages.each do |message|%>
+		<div class="be-re"><%=message%></div>
+	<%end%>
+	<div class="field">
+		<div>Nombre :</div>
+		<%= f.text_field :nombre, placeholder: "Nombre" %>
+		<p></p>
+	</div>
+	<div class="field">
+		<div>Precio :</div>
+		<%= f.text_field :precio, placeholder: "000000" %>
+		<p></p>
+	</div>
+
+
 	<p></p>
-</div>
-<div class="field">
-	<div>Precio :</div>
-	<%= f.text_field :precio, placeholder: "000000" %>
-	<p></p>
-</div>
-
-
-<p></p>
-<div class="field">
-	<%= f.submit "Guardar" %>
-</div>
+	<div class="field">
+		<%= f.submit "Guardar" %>
+	</div>
+	<%end%>
+	<P>
+		
+	</P>
 <%end%>
-<P>
-	
-</P>

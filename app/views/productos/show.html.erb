@@ -1,140 +1,218 @@
-
-<html>
-<head>
-<title>Escritorio</title>
-<style type="text/css">
-  .derecha{
-    float: right;
-  }
-  .izq{
-    float: left;
-  }
-</style>
-</head>
-
-
-<body>
-
-<h1><%= @producto.nombre%></h1>
-
-<%hoja=Hoja.last%>
-<%producto_actual = Hoja.where(producto_id: [@producto.id])%>
-<%producto_actual = producto_actual.where(insumo_id: [hoja.insumo.id])%>
-<%n = producto_actual.count%>
-<%if n>1%>
-  <div class="be-re">Ya ingresó <%=hoja.insumo.nombre%> a la receta</div>
-  <%hoja.delete%>
-<%end%>
-
-  <div class="be-re"></div>
-
-<div>
+<%if can? :read, Producto%>
+  <html>
+  <head>
+  <title>Escritorio</title>
+  <style type="text/css">
+    .derecha{
+      float: right;
+    }
+    .izq{
+      float: left;
+    }
+  </style>
+  </head>
 
 
-<span class="derecha">
+  <body>
+  <h1><%= @producto.nombre%></h1>
+  <%if can? :create,Producto%>         
+    
+
+    <%hoja=Hoja.last%>
+    <%if !hoja.porcion.blank? and hoja.porcion>0 and hoja.porcion<10%>
+    <%else%>
+     <div class="be-re">DEBE INGRESAR NUMEROS ENTRE 0 Y 10</div>
+     <%hoja.delete%>
+    <%end%>
+    <%producto_actual = Hoja.where(producto_id: [@producto.id])%>
+    <%producto_actual = producto_actual.where(insumo_id: [hoja.insumo.id])%>
+    <%n = producto_actual.count%>
+    <%if n>1%>
+      <div class="be-re">YA AGREGÓ <%=hoja.insumo.nombre.upcase%> A LA RECETA</div>
+      <%hoja.delete%>
+    <%end%>
 
 
-          <table class="table table-striped table-hover table-condensed " >
+      <div class="be-re"></div>
+
+    <div>
 
 
-            <thead>
-              <tr>
-                <th><div class="size-200">Insumo</div></th>
-                <th><div class="size-100">Cantidad</div></th>
-                <th><div class="size-100">Unidad</div></th>
-                <th><div class="size-100">Costo</div></th>
-                <th><div class="size-100"></div></th>
-              </tr>                  
-            </thead>
-            <%hojas=Hoja.all%>
-            <% hojas.each do |a| %>
-              <% if a.producto_id == @producto.id then%>    
-              <tr>
-                <td><%=a.insumo.nombre%></td>
-                <td><%=a.porcion%></td>
-                <td><%=a.insumo.medida.nombre%></td>
-                <td><%=a.porcion*a.insumo.precio%></td>
-                <%if can? :create,Producto%>         
-                <td><%= button_to 'Eliminar', [a.producto, a], method: :delete%></td> 
+    <span class="derecha">
+
+
+              <table class="table table-striped table-hover table-condensed " >
+
+
+                <thead>
+                  <tr>
+                    <th><div class="size-200">Insumo</div></th>
+                    <th><div class="size-100">Cantidad</div></th>
+                    <th><div class="size-100">Unidad</div></th>
+                    <th><div class="size-100">Costo</div></th>
+                    <th><div class="size-200"></div></th>
+                  </tr>                  
+                </thead>
+                <%hojas=Hoja.all%>
+                <% hojas.each do |a| %>
+                  <% if a.producto_id == @producto.id then%>    
+                  <tr>
+                    <td><%=a.insumo.nombre%></td>
+                    <td><%=a.porcion%></td>
+                    <td><%=a.insumo.medida.nombre%></td>
+                    <td><%=(a.porcion*a.insumo.precio*100).to_i  / 100.0%></td>
+                    <%if can? :create,Producto%>         
+                    <td><%= button_to 'Eliminar', [a.producto, a], method: :delete%></td> 
+                    <%end%>
+                    </tr>
+                  <%end%>
                 <%end%>
+                <%if can? :create,Producto%>     
+                  <th>Costo Total</th>
+                  <td><%=%></td>
+                  <td><%=%></td>
+                  <%total=0.0%>
+                  <%hojas.each do |b|%>
+                    <%if b.producto_id==@producto.id%>
+                      <%total=total+b.porcion*b.insumo.precio%>
+                    <%end%>
+                  <%end%>
+                  <td><%=%></td>
+                  <th><%=(total*100).to_i  / 100.0%></th>
+                <%end%>     
+                <%if cannot? :create,Producto%>     
+                <tr>
+                  <th>Precio</th>
+                  <td><%=%></td>
+                  <td><%=%></td>
+                  <th><%=@producto.precio%></th>
                 </tr>
-              <%end%>
-            <%end%>
-            <%if can? :create,Producto%>     
-              <th>Costo Total</th>
-              <td><%=%></td>
-              <td><%=%></td>
-              <%total=0.0%>
-              <%hojas.each do |b|%>
-                <%if b.producto_id==@producto.id%>
-                  <%total=total+b.porcion*b.insumo.precio%>
                 <%end%>
-              <%end%>
-              <td><%=%></td>
-              <th><%=total%></th>
-            <%end%>     
-            <%if cannot? :create,Producto%>     
-            <tr>
-              <th>Precio</th>
-              <td><%=%></td>
-              <td><%=%></td>
-              <th><%=@producto.precio%></th>
-            </tr>
-            <%end%>
 
 
-            
-          </table>  
- <%if can? :create,Hoja%>         
-</span>
-<span class="izq">
+                
+              </table>  
+              <% if can? :destroy, Producto %>
+                <%items=Item.all%>
+                <%si_hay=0%>
+                <%items.each do |b|%>
+                  <%if b.producto_id==@producto.id%>
+                    <%si_hay=1%>
+                  <%end%>
+                <%end%>
+                <%if si_hay==0%>
+                  <td><%= button_to 'Eliminar producto', @producto, method: :delete%></td>  
+                  </br>
+                <%end%>
+    <%end%>
+              </span>
+     <%if can? :create,Hoja%>         
 
-<%= form_for([@producto,@hoja]) do |f| %>
-<h3>Agregar porcion a receta .</h3>
+    <span class="izq">
 
-<div class="field">
-<%insumos = Insumo.all%>
-<%insumos = insumos.order('nombre')%>
-	<div>Insumo:</div>
-    <%= f.collection_select :insumo_id, insumos, :id, :nombre%>
-  </div>
+    <%= form_for([@producto,@hoja]) do |f| %>
+    <h3>Agregar porcion a receta .</h3>
 
-<div class="field">
-	<div>porcion:</div>
+    <div class="field">
+    <%insumos = Insumo.all%>
+    <%insumos = insumos.order('nombre')%>
+    	<div>Insumo:</div>
+        <%= f.collection_select :insumo_id, insumos, :id, :nombre%>
+      </div>
 
-	<%= f.text_field :porcion, placeholder: "0.0" %>
-</div>
-<div class="field">
-<p>
-  
-</p>
-	<%= f.submit "Agregar" %>
-</div>
-</br>
-<u class="be-re"><%= link_to "FINALIZAR RECETA", :action => "edit" %></u>
-<%end%>
+    <div class="field">
+    	<div>porcion:</div>
 
-</br>
-</br>
-</br>
-<% if can? :destroy, Producto %>
-            <%items=Item.all%>
-            <%si_hay=0%>
-            <%items.each do |b|%>
-              <%if b.producto_id==@producto.id%>
-                <%si_hay=1%>
-              <%end%>
-            <%end%>
-            <%if si_hay==0%>
-              <td><%= button_to 'Eliminar producto', @producto, method: :delete%></td>  
+    	<%= f.text_field :porcion, placeholder: "0.0" %>
+    </div>
+    <div class="field">
+    <p>
+      
+    </p>
+    	<%= f.submit "Agregar" %>
+    </div>
+    </br>
+    <u class="be-re"><%= link_to "FINALIZAR RECETA", :action => "edit" %></u>
+    <%end%>
+
+    </br>
+    </br>
+    </br>
+
+    </span>
+    <% end -%>
+    </div>
+
+
+
+  <%else%>
+  <span class="izq">
+
               </br>
-            <%end%>
+              </br>
+              <table class="table table-striped table-hover table-condensed " >
+
+
+                <thead>
+                  <tr>
+                    <th><div class="size-200">Insumo</div></th>
+                    <th><div class="size-100">Cantidad</div></th>
+                    <th><div class="size-100">Unidad</div></th>
+                    <th><div class="size-100">Costo</div></th>
+                    
+                  </tr>                  
+                </thead>
+                <%hojas=Hoja.all%>
+                <% hojas.each do |a| %>
+                  <% if a.producto_id == @producto.id then%>    
+                  <tr>
+                    <td><%=a.insumo.nombre%></td>
+                    <td><%=a.porcion%></td>
+                    <td><%=a.insumo.medida.nombre%></td>
+                    <td><%=(a.porcion*a.insumo.precio*100).to_i  / 100.0%></td>
+                    
+                    </tr>
+                  <%end%>
+                <%end%>
+                <%if can? :create,Producto%>     
+                  <th>Costo Total</th>
+                  <td><%=%></td>
+                  <td><%=%></td>
+                  <%total=0.0%>
+                  <%hojas.each do |b|%>
+                    <%if b.producto_id==@producto.id%>
+                      <%total=total+b.porcion*b.insumo.precio%>
+                    <%end%>
+                  <%end%>
+                  <td><%=%></td>
+                  <th><%=(total*100).to_i  / 100.0%></th>
+                <%end%>     
+                <%if cannot? :create,Producto%>     
+                <tr>
+                  <th>Precio</th>
+                  <td><%=%></td>
+                  <td><%=%></td>
+                  <th><%=@producto.precio%></th>
+                </tr>
+                <%end%>
+
+
+                
+              </table>  
+              <% if can? :destroy, Producto %>
+                <%items=Item.all%>
+                <%si_hay=0%>
+                <%items.each do |b|%>
+                  <%if b.producto_id==@producto.id%>
+                    <%si_hay=1%>
+                  <%end%>
+                <%end%>
+                <%if si_hay==0%>
+                  <td><%= button_to 'Eliminar producto', @producto, method: :delete%></td>  
+                  </br>
+                <%end%>
+    <%end%>
+              </span>
+  <%end%>
+  </body>
 <%end%>
-</span>
-<% end -%>
-</div>
-
-
-
-
-</body>

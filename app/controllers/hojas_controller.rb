@@ -23,8 +23,14 @@ class HojasController < ApplicationController
 		@hoja = Hoja.new(producto_id: params[:hoja][:producto_id],insumo_id: params[:hoja][:insumo_id],
 					porcion: params[:hoja][:porcion])
 		@hoja.producto = @producto
-		@hoja.save
-		redirect_to @producto
+		if !@hoja.porcion.blank? and @hoja.porcion> 10
+			@hoja.porcion = 10
+			@hoja.save
+			redirect_to @producto	
+		else
+			@hoja.save
+			redirect_to @producto
+		end
 	end
 
 	def destroy 

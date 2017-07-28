@@ -66,7 +66,11 @@ class ProductosController < ApplicationController
 	   		if @producto.precio==0
 	   			@producto.save()
 	   			render :edit
-	   		else 
+	   		elsif @producto.precio<@producto.costo and @producto.precio>0
+	   			 @producto.precio=@producto.costo
+	   			 @producto.save()
+	   			render :edit
+	   		else
 	   			if @producto.save()
 	   				redirect_to productos_path
 	   			else

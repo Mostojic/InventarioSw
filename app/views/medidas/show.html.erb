@@ -1,8 +1,10 @@
-<h1>Unidad demedida creada:</h1>
-<h2>
-<%= @medida.nombre%>
-</h2>
-<p></p>
+<%if can? :create, Medida%>
+	<h1>Unidad demedida creada:</h1>
+	<h2>
+	<%= @medida.nombre%>
+	</h2>
+	<p></p>
 
-<input type="button" value="Agregar otra unidad de medida" onClick="history.back()" />
+	<input type="button" value="Agregar otra unidad de medida" onClick="history.back()" />
 
+<%end%>
