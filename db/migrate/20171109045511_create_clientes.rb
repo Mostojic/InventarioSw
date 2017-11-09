@@ -2,6 +2,7 @@ class CreateClientes < ActiveRecord::Migration[5.1]
   def change
     create_table :clientes do |t|
       t.integer :rut
+      t.string :digito
       t.string :nombre
       t.date :cumple
       t.integer :compras

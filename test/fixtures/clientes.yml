@@ -2,6 +2,7 @@
 
 one:
   rut: 1
+  digito: MyString
   nombre: MyString
   cumple: 2017-11-09
   compras: 1
@@ -10,6 +11,7 @@ one:
 
 two:
   rut: 1
+  digito: MyString
   nombre: MyString
   cumple: 2017-11-09
   compras: 1

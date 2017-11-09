@@ -10,7 +10,7 @@ end
 
 	def create
 		@cliente = Cliente.new(rut: params[:cliente][:rut],
-			direccion: params[:cliente][:direccion],nombre: params[:cliente][:nombre])
+			digito: params[:cliente][:digito],nombre: params[:cliente][:nombre])
 		if @cliente.save
 			redirect_to @cliente
 		else

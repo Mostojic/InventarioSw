@@ -6,7 +6,7 @@ class Cliente < ApplicationRecord
   	suma=0
   	c=2
   	salir=0
-    if !rut.blank? and !direccion.blank?
+    if !rut.blank? and !digito.blank?
     	ruti=0
     	ruti=rut
     	while salir==0
@@ -24,13 +24,13 @@ class Cliente < ApplicationRecord
     	end
     	resto=suma%11
     	digi=11-resto
-    	if 	digi==11 and direccion !='0'
+    	if 	digi==11 and digito !='0'
     		errors.add(:rut, ": RUT INGRESADO NO ES VALIDO")
     	end
-    	if 	digi==10 and direccion !='k'
+    	if 	digi==10 and digito !='k'
     		errors.add(:rut, ": RUT INGRESADO NO ES VALIDO")
     	end
-    	if 	digi<10 and direccion.to_i !=digi
+    	if 	digi<10 and digito.to_i !=digi
     		errors.add(:rut, ": RUT INGRESADO NO ES VALIDO")
     	end
     end

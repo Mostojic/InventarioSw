@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20171109045511) do
 
   create_table "clientes", force: :cascade do |t|
     t.integer "rut"
+    t.string "digito"
     t.string "nombre"
     t.date "cumple"
     t.integer "compras"
