@@ -1,3 +1,4 @@
+
 <html>
 <head>
 <title>Escritorio</title>
@@ -10,6 +11,7 @@
 	}
 </style>
 </head>
+
 
 <%user =Usuario.find(1)%>
 <%if user.role =="user"%>
@@ -101,6 +103,7 @@
 	          <%if Pedido.last%>
 	          <tr>
 	          	<td class="be-re"><u><%=link_to "VER TODOS", controller: "listas", action: "new"%></u></td>
+	          	<td></td>
 	          	<td></td>
 	          	<td></td>
 	          	<td></td>

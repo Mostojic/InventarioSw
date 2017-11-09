@@ -27,7 +27,7 @@ class ElementosController < ApplicationController
 
 	def destroy 
 		@elemento = Elemento.find(params[:id])
-		@elemento.destroy
+		@elemento.delete
 		redirect_to @elemento
 	end
 

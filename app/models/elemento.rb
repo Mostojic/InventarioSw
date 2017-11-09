@@ -2,28 +2,28 @@ class Elemento < ApplicationRecord
 	belongs_to :insumo
 	
    	validates :cantidad, numericality: {:message => ': SOLO DEBE INGRESAR NUMEROS'}
-   	validates :cantidad, presence: {:message => ': Ingrese cantidad que desea agregar	'}
-   	validates :vencimiento, presence: {:message => ': Ingrese Fecha vencimiento correctamente'}
-   	validates :cantidad, length: {maximum: 6, :message => ": cantidad no puede superar las 4 cifras"}
+   	validates :cantidad, presence: {:message => ': INGRESE CANTIDAD QUE DESEA AGREGAR	'}
+   	validates :vencimiento, presence: {:message => ': INGRESE FECHA DE VENCIMIENTO CORRECTAMENTE'}
+   	validates :cantidad, length: {maximum: 5, :message => ": NO PUEDE SUPERAR LAS 4 CIFRAS"}
    	validate :fecha_esta_en_pasado, :positivo, :esta_decada
 	
 
 	def fecha_esta_en_pasado
 		if !vencimiento.blank? and vencimiento < Date.today
-			errors.add(:vencimiento,": Fecha vencimiento no puede estar en pasado")
+			errors.add(:vencimiento,": FECHA DE VENCIMIENTO NO PUEDE ESTAR EN PASADO")
 		end
 
 	end
 
 	def positivo
     if !cantidad.blank? and cantidad<=0
-      errors.add(:cantidad, ": Debe ingresar cantidad superior a 0")
+      errors.add(:cantidad, ": DEBE INGRESAR CANTIDAD SUPERIOR A 0")
     end
   end
   
   def esta_decada
     if !vencimiento.blank? and vencimiento > Date.today+1095
-      errors.add(:vencimiento,": Fecha no puede superar 3 años en el futuro")
+      errors.add(:vencimiento,": FECHA DE VENCIMIENTO NO PÚEDE SUPERAR 3 AÑOS EN EL FUTURO")
     end
   end  
 

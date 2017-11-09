@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :insumos 
   resources :medidas	
   resources :listas
+  resources :clientes
   resources :productos do
   	resources :hojas
   end

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rut: 1
+  nombre: MyString
+  cumple: 2017-11-09
+  compras: 1
+  direccion: MyString
+  telefono: 1
+
+two:
+  rut: 1
+  nombre: MyString
+  cumple: 2017-11-09
+  compras: 1
+  direccion: MyString
+  telefono: 1

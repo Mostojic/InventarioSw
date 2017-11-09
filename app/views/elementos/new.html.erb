@@ -1,6 +1,6 @@
 <%if can? :create, Elemento%>
 	<%= form_for(@elemento) do |f| %>
-		<h1>Agregar insumosal inventario</h1>
+		<h1>Agregar insumos al inventario</h1>
 		<% @elemento.errors.full_messages.each do |message|%>
 			<div class="be-re"><%=message%></div>
 		<%end%>

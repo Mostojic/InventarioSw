@@ -1,34 +1,34 @@
 class Pedido < ApplicationRecord
 	has_many :items
 
-	validates :cliente, presence: { message: ": Debe ingresar nombre del cliente" }
-	validates :cliente, length: {maximum: 40, :message => ": Nombre no puede exeder los 40 caracteres"}
-	validates :entrega, presence: { message: ": Debe ingresar fecha de entrega correctamente" }
-	validates :abonado, length: {maximum: 7, :message => ": No puede superar las 7 cifras"}
-	validates :comentario, length: {maximum: 200, :message => ": No puede superar los 200 caracteres"}
+	validates :cliente, presence: { message: ": DEBE INGRESAR NOMBRE DEL CLIENTE" }
+	validates :cliente, length: {maximum: 40, :message => ": NOMBRE NO PUEDE EXCEDER LOS 40 CARACTERES"}
+	validates :entrega, presence: { message: ": DEBE INGRESAR FECHA CORRECTAMENTE" }
+	validates :abonado, length: {maximum: 7, :message => ": NO PUEDE SUPERAR LAS 7 CIFRAS"}
+	validates :comentario, length: {maximum: 200, :message => ": NO PUEDE SUPERAR LOS 200 CARACTERES"}
 	validate :fecha_esta_en_pasado, :fecha_es_domingo, :positivo, :este_ano
 
   	def positivo
     	if !abonado.blank? and abonado<0
-      		errors.add(:abonado, ": Debe ser superior a 0")
+      		errors.add(:abonado, ": DEBE SER SUPERIOR A 0")
     	end
   	end
 
 	def fecha_esta_en_pasado
 		if !entrega.blank? and entrega < Date.today
-			errors.add(:entrega,": Fecha entrega no puede estar en pasado")
+			errors.add(:entrega,": FECHA DE ENTREGA NO PUEDE ESTAR EN PASADO")
 		end
 
 	end
 	def fecha_es_domingo
 		if !entrega.blank? and entrega.wday==0
-			errors.add(:entrega, ": Fecha de entrega no puede ser dia domingo")
+			errors.add(:entrega, ": FECHA DE ENTREGA NO PUEDE SER DOMINGO")
 		end
 	end
 
 	def este_ano
     if !entrega.blank? and entrega > Date.today+365
-      errors.add(:entrega,": Fecha no puede superar 1 año en el futuro")
+      errors.add(:entrega,": FECHA DE ENTREGA NO PUEDE SUPERAR UN AÑO EN EL FUTURO")
     end
   end  
 

@@ -17,22 +17,23 @@
 
 <span class="izq">
   <h1>Agregar productos a pedido .</h1>
+<%if Item.last%>
+  <%item=Item.last%>
 
-<%item=Item.last%>
-
-  <%if !item.cantidad.blank? and item.cantidad>0 and item.cantidad<100%>
-  <%else%>
-   <div class="be-re">DEBE INGRESAR NUMEROS ENTRE 0 Y 99</div>
-   <%item.delete%>
-   </br>
-  <%end%>
-  <%pedido_actual = Item.where(pedido_id: [@pedido.id])%>
-  <%pedido_actual = pedido_actual.where(producto_id: [item.producto.id])%>
-  <%n = pedido_actual.count%>
-  <%if n>1%>
-    <div class="be-re">YA AGREGÓ <%=item.producto.nombre.upcase%> AL PEDIDO</div>
-    <%item.delete%>
-    </br>
+    <%if !item.cantidad.blank? and item.cantidad>0 and item.cantidad<100%>
+    <%else%>
+     <div class="be-re">DEBE INGRESAR NUMEROS ENTRE 0 Y 99</div>
+     <%item.delete%>
+     </br>
+    <%end%>
+    <%pedido_actual = Item.where(pedido_id: [@pedido.id])%>
+    <%pedido_actual = pedido_actual.where(producto_id: [item.producto.id])%>
+    <%n = pedido_actual.count%>
+    <%if n>1%>
+      <div class="be-re">YA AGREGÓ <%=item.producto.nombre.upcase%> AL PEDIDO</div>
+      <%item.delete%>
+      </br>
+    <%end%>
   <%end%>
 
 

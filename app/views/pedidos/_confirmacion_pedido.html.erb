@@ -43,10 +43,10 @@
 	<%= form_for(@pedido) do |f| %>
 		<h2>Pedido en espera. Para registrar pedido ingrese cantidad abonada</h2>
 		<%if !@pedido.abonado.blank? and @pedido.precio < @pedido.abonado%>
-		<div class="letter-red"><%="Cantidad abonada no puede superar el costo total del pedido"%></div>
+		<div class="letter-red"><%="CANTIDAD ABONADA NO UEDE SUPERAR EL COSTO TOTALDELPEDIDO"%></div>
 	<%end%>
 		<%if !@pedido.abonado.blank? and @pedido.abonado ==0%>
-		<div class="letter-red"><%="INGRESE UN NUMERO ENTRE 1 Y 99"%></div>
+		<div class="letter-red"><%="CANTIDAD ABONADA: INGRESE UN NUMERO ENTRE 1 Y 99"%></div>
 	<%end%>
 		<% @pedido.errors.full_messages.each do |message|%>
 			<div class="letter-red"><%=message%></div>

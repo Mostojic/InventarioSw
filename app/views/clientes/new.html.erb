@@ -1,0 +1,18 @@
+	<%= form_for(@cliente) do |f| %>
+		<h1>Ingrese nuevo cliente</h1>
+		<% @cliente.errors.full_messages.each do |message|%>
+			<div class="be-re"><%=message%></div>
+		<%end%>
+
+
+	<div class="field">
+		<%= f.text_field :rut, placeholder: "rut" %>
+	</div></br>
+
+	<div class="field">
+		<%= f.text_field :nombre, placeholder: "Nombre" %>
+	</div></br>
+
+		<%= f.submit "Guardar" %>
+	</div></br>
+	<%end%>

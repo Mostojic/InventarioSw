@@ -1,3 +1,4 @@
+
 <%if can? :read, Producto%>
   <html>
     <head>
@@ -6,6 +7,14 @@
     <body>
       <h1> Productos disponibles</h1>
       <%if Producto.last%>
+      <%pru = Producto.all%>
+      <%pru.each do |c|%>
+
+        <%if !c.creado.blank? and c.creado > 0%>
+          <div class="be-re">PRODUCTO: <%=c.nombre.upcase%> INGRESADO SATISFACTORIAMENTE</div>
+          <%Producto.update(c.id, :creado => 0)%>
+        <%end%>
+      <%end%>
         <div class="container">
           <div class="col-md-4 col-md-offset-1">
             <table class="table table-striped table-hover table-condensed   " >

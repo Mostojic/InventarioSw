@@ -17,19 +17,20 @@
   <h1><%= @producto.nombre%></h1>
   <%if can? :create,Producto%>         
     
-
-    <%hoja=Hoja.last%>
-    <%if !hoja.porcion.blank? and hoja.porcion>0 and hoja.porcion<10%>
-    <%else%>
-     <div class="be-re">DEBE INGRESAR NUMEROS ENTRE 0 Y 10</div>
-     <%hoja.delete%>
-    <%end%>
-    <%producto_actual = Hoja.where(producto_id: [@producto.id])%>
-    <%producto_actual = producto_actual.where(insumo_id: [hoja.insumo.id])%>
-    <%n = producto_actual.count%>
-    <%if n>1%>
-      <div class="be-re">YA AGREGÓ <%=hoja.insumo.nombre.upcase%> A LA RECETA</div>
-      <%hoja.delete%>
+    <%if Hoja.last%>
+      <%hoja=Hoja.last%>
+      <%if !hoja.porcion.blank? and hoja.porcion>0 and hoja.porcion<10%>
+      <%else%>
+       <div class="be-re">DEBE INGRESAR NUMEROS ENTRE 0 Y 10</div>
+       <%hoja.delete%>
+      <%end%>
+      <%producto_actual = Hoja.where(producto_id: [@producto.id])%>
+      <%producto_actual = producto_actual.where(insumo_id: [hoja.insumo.id])%>
+      <%n = producto_actual.count%>
+      <%if n>1%>
+        <div class="be-re">YA AGREGÓ <%=hoja.insumo.nombre.upcase%> A LA RECETA</div>
+        <%hoja.delete%>
+      <%end%>
     <%end%>
 
 

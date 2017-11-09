@@ -4,6 +4,7 @@ class CreateProductos < ActiveRecord::Migration[5.1]
       t.string :nombre
       t.integer :precio
       t.integer :costo
+      t.integer :creado
 
       t.timestamps
     end

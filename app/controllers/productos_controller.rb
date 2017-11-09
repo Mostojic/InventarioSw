@@ -71,6 +71,7 @@ class ProductosController < ApplicationController
 	   			 @producto.save()
 	   			render :edit
 	   		else
+	   			@producto.creado=@producto.id
 	   			if @producto.save()
 	   				redirect_to productos_path
 	   			else
