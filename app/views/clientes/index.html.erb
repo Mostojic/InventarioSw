@@ -3,6 +3,7 @@
 		<title>Clientes</title>
 	</head>
 	<body>
+		<%=194%11%>
 		<%if Cliente.last%>
 			<div class="container">
 				<div class="col-md-3 col-md-offset-2">
@@ -15,7 +16,7 @@
 			          	</thead>
 			        	<% @clientes.each do |a| %>
 							<tr>
-								<td><%=a.rut%></td>
+								<td><%=a.rut%>-<%=a.direccion%></td>
 								<td><%=a.nombre%></td>
 							</tr>
 						<% end %>
