@@ -6,8 +6,12 @@ class ElementosController < ApplicationController
 	end
 
 	#get/elemento/id
-	def show
+	def listar
 		@elemento = Insumo.find(params[:id])
+	end
+
+	def show
+		@elemento = Elemento.find(params[:id])
 	end
 
 	def new

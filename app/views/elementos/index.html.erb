@@ -6,6 +6,7 @@
 	<body>
 		<h1>Insumos en inventario</h1>
 		<%if Insumo.last%>
+		<%insumos=Insumo.all%>
 		    <div class="container">
 		      <div class="col-md-4 col-md-offset-2">
 		        <table class="table table-striped table-hover table-condensed   " >
@@ -19,7 +20,7 @@
 		              
 		            </tr>                  
 		          </thead>
-		          <% @insumos.each do |a| %>
+		          <% insumos.each do |a| %>
 		            <tr>
 		              <%if Elemento.find_by insumo_id: a.id%>
 			              <td><%=a.nombre%></td>
@@ -39,7 +40,7 @@
 			          	  <%else%>
 			              	<td><%=ele.last.vencimiento%></td>
 			              <% end -%>
-			              <td><input type="button" value="Detalles" onClick="location.href='elementos/<%=elemento.insumo.id%>'" /></td>
+			              <td><input type="button" value="Detalles" onClick="location.href='elementos/listar/<%=elemento.insumo.id%>'" /></td>
 		              <%else%>
 		              	<td><%=a.nombre%></td>
 		              	<td class="be-alert"><%="0.0"%></td>

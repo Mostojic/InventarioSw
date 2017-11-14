@@ -25,19 +25,26 @@
 	<%n = a.porcion%>
 	<%elementos = Elemento.all.order('vencimiento')%>
 	<% elementos.each  do |b|%>
-		<%if n > 0.00 %>
+		<%=b.insumo.nombre%>
+		<%if n > 0 %>
 			<%if b.insumo_id==a.insumo_id%>
 				<%if b.cantidad > n%>
 					<%e = Elemento.find_by(id: b.id)%>
 					<%en = e.cantidad%>
-					<% en = en - n%>
-					<%Elemento.update(b.id, :cantidad => en)%>
-					<%n=0.00%>
+					<%en = en - n%>
+					<%en.to_d.truncate(2).to_f%>
+					<%if en<=0.01%>	
+						<%b.delete%>
+						<%n=0.00%>
+					<%else%>
+						<%Elemento.update(b.id, :cantidad => en)%>
+						<%n=0.00%>
+					<%end%>
 				<%else%>
 					<%e = Elemento.find_by(id: b.id)%>
 					<%en = e.cantidad%>
-					<% n = n - en%>
-					<%e.delete%>
+					<%n = n-en%>
+					<%b.delete%>
 				<%end%>
 			<%end%>
 		<%end%>

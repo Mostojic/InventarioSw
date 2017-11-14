@@ -4,6 +4,7 @@
 
   root 'welcome#index'
   resources :usuarios
+  get 'elementos/listar/:id', to: 'elementos#listar', as: 'insumos'
   resources :elementos  
   resources :insumos 
   resources :medidas	
