@@ -3,7 +3,7 @@
 	<head>
 	<title>Agregar insumos </title>
 	</head>
-	<h1>Piezas de <%=@elemento.insumo.nombre%></h1>
+	<h1>Piezas de <%=@elemento.nombre%></h1>
 	<body>
 		    <div class="container">
 		      <div class="col-md-4 col-md-offset-2">
@@ -17,7 +17,7 @@
 
 		            </tr>                  
 		          </thead>
-		          <%elementos=Elemento.where(insumo_id: [@elemento.insumo_id])%>
+		          <%elementos=Elemento.where(insumo_id: [@elemento])%>
 		          <%elementos=elementos.order(vencimiento: :desc)%>
 		          <% elementos.each do |a| %>
 		        		<tr>

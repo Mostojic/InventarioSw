@@ -13,7 +13,8 @@
               </tr>                  
             </thead>
             
-            <% @pedidos.each do |a| %>
+            
+            <% @entregado.each do |a| %>
             
               <tr>
                 <td><%=a.cliente%></td>
@@ -39,7 +40,7 @@
             
             <%end%>
           </table>
-          <%=will_paginate @pedidos%>
+          <%=will_paginate @entregado%>
           </div>
         </div>
   <%else%>

@@ -26,7 +26,7 @@
 		<%= f.submit "Guardar" %>
 	</div>
 	<P></P>
-	 <td><u class="be-re"><%= link_to "REGRESAR A PEDIDOS", :action => "index" %></u></td>
+	<input type="button" value="Volver" onClick="history.back()" />
 	<%end%>
 <%else%>
 	<h3 class="be-re">No se han ingresado productos al sistema. Conmuníquese con administrador</h3>

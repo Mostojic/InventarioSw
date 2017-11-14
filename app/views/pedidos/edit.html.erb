@@ -14,10 +14,10 @@
 			<h2>Desea entregar de todas formas?</h2>
 			</br>
 			</br>
-			<u class="be-re"> <%= link_to "--SI--", controller: "pedidos", action: "edit", id: @pedido.id %></u>
+			<td><%= button_to '- Si -',@pedido, method: :entregar%></td> </u>
 			</br>
 			</br>
-			<u class="be-re"> <%= link_to "--NO--", :action => "index" %></u>
+    		<td><button type="button"  onClick="location.href='listas/<%= @pedido.id%>'" />- No -</button></td>
 		<%end%>
 
 	<%"Pedido en espera"%>

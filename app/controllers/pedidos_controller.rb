@@ -2,11 +2,19 @@ class PedidosController < ApplicationController
 	
 	before_action :validate_user	
 	def index
-	@pedidos_pendiente =	Pedido.where(estado: [1]).order('entrega')
-	@pedidos_espera =	Pedido.where(estado: [0]).order('entrega')
-	@pedidos_entregado =	Pedido.where(estado: [2]).paginate(page: params[:page],per_page:2)
 	end
 
+	def ver_pedido
+		@pedido = Pedido.find(params[:id])
+		@item = Item.new
+		@items = Item.all
+	end
+
+	def entregados
+		@entregado = Pedido.where(estado: [2]).paginate(page: params[:page],per_page:2)
+		@items = Item.all
+	end
+	
 	def edit
 		@pedido = Pedido.find(params[:id])
 		@abonado = @pedido.abonado

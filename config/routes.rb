@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+  Rails.application.routes.draw do
   devise_for :usuarios
   get 'welcome/index'
 
@@ -13,6 +13,11 @@ Rails.application.routes.draw do
   	resources :hojas
   end
 
+  get 'pedidos/pendientes', to: 'pedidos#pendientes', as: 'pendientes'
+  get 'pedidos/espera', to: 'pedidos#espera', as: 'espera'
+  get 'pedidos/entregados', to: 'pedidos#entregados', as: 'entregados'
+  post "pedidos/:id" => "pedidos#edit"
+  get 'pedidos/listas/:id', to: 'listas#show', as: 'Ver_pedido'
   resources :pedidos do
   	resources :items
   end

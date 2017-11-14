@@ -12,13 +12,14 @@
                 <th><div class="size-100"></div></th>
               </tr>                  
             </thead>
-            <% @pedidos_espera.each do |a| %>
+            <%espera = Pedido.where(estado: [0]).order('entrega')%>
+            <%espera.each do |a| %>
             
               <tr>
                 <td><%=a.cliente%></td>
                 <td><%=a.precio%></td>
                 <td><%=a.entrega%></td>
-                <td><button type="button"  onClick="location.href='pedidos/<%= a.id%>/edit'" />Confirmar</button></td>
+                <td><%= button_to 'Confirmars',a, method: :edit%></td> 
                 <td><%= button_to 'Cancelar',a, method: :delete%></td> 
                 
               </tr>

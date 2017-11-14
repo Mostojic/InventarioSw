@@ -14,16 +14,13 @@ class ListasController < ApplicationController
 	end
 	
 	def edit
-		@pedido = Pedido.find(params[:id])
-		pedido=Pedido.last
-		Pedido.update(pedido.id, :mostrar => 0)
-		redirect_to pedidos_path
 	end
 	
 	def show
 		@pedido = Pedido.find(params[:id])
-		@item = Item.new
-		@items = Item.all
+		@items=Item.all
+
+	
 	end
 	private
   		def validate_user

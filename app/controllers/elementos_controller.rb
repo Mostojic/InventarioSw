@@ -7,7 +7,7 @@ class ElementosController < ApplicationController
 
 	#get/elemento/id
 	def show
-		@elemento = Elemento.find(params[:id])
+		@elemento = Insumo.find(params[:id])
 	end
 
 	def new

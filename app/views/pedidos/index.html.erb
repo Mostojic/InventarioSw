@@ -1,43 +1,25 @@
 <html>
-<head>
-<title>Pedidos</title>
-</head>
-<body>
-
-<%if Pedido.find_by estado: 3%>
-<%pe=Pedido.find_by estado: 3%>
-    <%Pedido.update(pe.id, :estado => 1)%>
-<%end%>
-
-<%if Pedido.find_by mostrar: 0 or Pedido.find_by mostrar: 1%>
-
-  <%if Pedido.find_by mostrar: 1%>
-    <%p=Pedido.find_by mostrar: 1%>
-    <%Pedido.update(p.id, :mostrar => 3)%>
-    <%= render :partial => "mostrar_pendientes.html" %> 
-  <%end%>
-
-  <%if Pedido.find_by mostrar: 0%>
-    <%p=Pedido.find_by mostrar: 0%>
-    <%Pedido.update(p.id, :mostrar => 3)%>
-    <%= render :partial => "mostrar_espera.html" %>
-  <%end%>
-
-<%else%>
-</br>
-<p><input type="button" value="Ingresar nuevo pedido" onClick="location.href='pedidos/new'" />
-  <%if Pedido.last%>  
-  <%pe=Pedido.last%>  
-  <p class="be-re"><u><%=link_to "PEDIDOS PENDIENTES", controller: "listas", action: "new"%></u></p>
-  <%end%>
-  <%if Pedido.last%>  
-  <%pe=Pedido.last%>
-  <p class="be-re"><u><%=link_to "PEDIDOS EN ESPERA", controller: "listas", action: "edit", id: pe.id%></u></p>
-  <%end%>
-  <p class="be-re"><u><%=link_to "PEDIDOS ENTREGADOS", controller: "listas", action: "index"%></u></p>
-<%end%>
+  <head>
+    <title>Pedidos</title>
+  </head>
+  <body>
+    <center>
+    </br>
+    </br>
+    <p><input type="button" value="Ingresar nuevo pedido" onClick="location.href='pedidos/new'" />
+    </br>
+    
+    <p><input type="button" value="   Pedidos pendientes   " onClick="location.href='pedidos/pendientes'" />
+    </br>
+    
+    <p><input type="button" value="    Pedidos en espera    " onClick="location.href='pedidos/espera'" />
+    </br>
+    
+    <p><input type="button" value="   Historial entregados   " onClick="location.href='pedidos/entregados'" />
+    </br>
+    </center>
 
   </body>
 
 
-  </html>
+</html>
