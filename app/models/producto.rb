@@ -8,11 +8,9 @@ class Producto < ApplicationRecord
  	validates :precio, length: {maximum: 6, :message => ": no puede exceder los 6 digitos"}
  	validate :positivo
 
-  def positivo
+ 	def positivo
     if !precio.blank? and precio<0
       errors.add(:precio, ": Debe ingresar precio superior a $0")
     end
   end
-  
-
 end

@@ -88,6 +88,8 @@ ActiveRecord::Schema.define(version: 20171109045511) do
     t.integer "precio"
     t.integer "abonado"
     t.integer "mostrar"
+    t.integer "rut"
+    t.integer "digito"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

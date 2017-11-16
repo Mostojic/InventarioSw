@@ -16,6 +16,7 @@ class MedidasController < ApplicationController
 	def create
 		@medida = Medida.new(nombre: params[:medida][:nombre])
 		@medida.nombre=@medida.nombre.strip
+		@medida.nombre=@medida.nombre.downcase
 		@medida.nombre=@medida.nombre.capitalize
 		if @medida.save
 			redirect_to @medida
@@ -52,6 +53,9 @@ class MedidasController < ApplicationController
 	   @nombre = params[:medida]["nombre"]
 	   @medida = Medida.find(params[:id])
 	   @medida.nombre = @nombre
+	   @medida.nombre=@medida.nombre.strip
+		@medida.nombre=@medida.nombre.downcase
+		@medida.nombre=@medida.nombre.capitalize
 	     if @medida.save
 			redirect_to medidas_path
 		else

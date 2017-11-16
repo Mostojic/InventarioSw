@@ -6,7 +6,7 @@ class Insumo < ApplicationRecord
   
  	validates :nombre, presence: {:message => ': SE NECESITA NOMBRE DEL INSUMO'}
   validates :nombre, uniqueness: {:message => ': INSUMO INGRESADO YA EXISTE'}
-  validates :nombre, length: {maximum: 25, :message => ": NO PUEDE ESCEDER LOS 25 CARACTERES"}
+  validates :nombre, length: {maximum: 25, :message => ": NO PUEDE EXCEDER LOS 25 CARACTERES"}
   validates :precio, presence: {:message => ': INGRESE PRECIO DE PRODUCTO'}
   validates :precio, numericality: {:message => ': SOLO DEBE INGRESAR NÚMEROS'}
   validates :precio, length: {maximum: 6, :message => ": NO PUEDE EXCEDER LAS 6 CIFRAS"}

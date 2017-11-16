@@ -16,6 +16,7 @@
 		              <th><div class="size-165">Precio</div></th>
 		              <th><div class="size-165">Unidad</div></th>
 		              <th><div class="size-165"></div></th>
+		              <th><div class="size-165"></div></th>
 		            </tr>                  
 		          </thead>
 		          <%insumos = @insumos.order('nombre')%>
@@ -38,9 +39,11 @@
 							<%end%>
 						<%end%>
 						<%if si_hay==0%>
-							<td><%= button_to 'Eliminar', a, method: :delete%></td>  
+							<td><%= button_to 'Eliminar', a, method: :delete%></td> 
+							<td><input type="button" value="Editar" onClick="location.href='insumos/<%=a.id%>/edit'" /></td> 
 						<%else%>
 							<td><input type="button" value="Editar" onClick="location.href='insumos/<%=a.id%>/edit'" /></td>
+							<td></td>
 						<%end%>
 		              
 		            </tr>

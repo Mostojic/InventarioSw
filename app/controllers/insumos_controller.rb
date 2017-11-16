@@ -20,6 +20,7 @@ class InsumosController < ApplicationController
 			nombre: params[:insumo][:nombre],
 			medida_id: params[:insumo][:medida_id])
 		@insumo.nombre=@insumo.nombre.strip
+		@insumo.nombre=@insumo.nombre.downcase
 		@insumo.nombre=@insumo.nombre.capitalize
 		if @insumo.save
 			redirect_to @insumo		
@@ -63,6 +64,9 @@ class InsumosController < ApplicationController
 	   @insumo = Insumo.find(params[:id])
 	   @insumo.nombre = @nombre
 	   @insumo.precio = @precio
+	   @insumo.nombre=@insumo.nombre.strip
+		@insumo.nombre=@insumo.nombre.downcase
+		@insumo.nombre=@insumo.nombre.capitalize
 	   if @insumo.save
 			redirect_to insumos_path
 		else

@@ -11,10 +11,14 @@ class PedidosController < ApplicationController
 	end
 
 	def entregados
-		@entregado = Pedido.where(estado: [2]).paginate(page: params[:page],per_page:2)
+		@entregado = Pedido.where(estado: [2]).order('entrega').paginate(page: params[:page],per_page:10)
 		@items = Item.all
 	end
 	
+	def pendientes
+		@pendiente = Pedido.where(estado: [1]).order('entrega').paginate(page: params[:page],per_page:10)
+	end
+
 	def edit
 		@pedido = Pedido.find(params[:id])
 		@abonado = @pedido.abonado
@@ -34,10 +38,7 @@ class PedidosController < ApplicationController
 	    	 @pedido.save()
 	    		render :edit
 	    	
-	    end
-
-
-	   
+	    end  
 	end
 
 
@@ -50,13 +51,12 @@ class PedidosController < ApplicationController
 
 	def new
 	@pedido = Pedido.new
-
 	end
 
 	def create
-		@pedido = Pedido.new(cliente: params[:pedido][:cliente],
-			entrega: params[:pedido][:entrega],
-			comentario: params[:pedido][:comentario])
+		@pedido = Pedido.new(cliente: params[:pedido][:cliente],entrega: params[:pedido][:entrega],
+			comentario: params[:pedido][:comentario],rut: params[:pedido][:rut],
+			digito: params[:pedido][:digito])
 		@pedido.cliente=@pedido.cliente.strip
 	   	@pedido.cliente=@pedido.cliente.capitalize
 		if @pedido.save

@@ -5,6 +5,7 @@ one:
   precio: 1
   costo: 1
   creado: 1
+  
 
 two:
   nombre: MyString

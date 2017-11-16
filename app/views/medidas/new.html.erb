@@ -1,6 +1,6 @@
 <%if can? :create, Medida%>
 	<%= form_for(@medida) do |f| %>
-	<h1>Agregar nueva unidad demedida</h1>
+	<h1>Agregar nueva unidad de medida</h1>
 	<% @medida.errors.full_messages.each do |message|%>
 		<div class="be-re"><%=message%></div>
 	<%end%>

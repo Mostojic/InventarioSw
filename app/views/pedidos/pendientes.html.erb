@@ -1,5 +1,4 @@
 <%if Pedido.find_by estado: 1%>
-<%pendiente =  Pedido.where(estado: [1]).order('entrega')%>
 <h1>Pedidos pendientes</h1>
 <div class="container">
       <div class="col-md-6">
@@ -16,7 +15,7 @@
             </tr>                  
           </thead>
           
-          <% pendiente.each do |a| %>
+          <% @pendiente.each do |a| %>
           
             <tr>
               <td><%=a.cliente%></td>
@@ -24,13 +23,16 @@
               <td><%=a.abonado%></td>
               <td><%=a.entrega%></td>
               <td><button type="button"  onClick="location.href='listas/<%= a.id%>'" />Detalles</button></td>
-              <td><%= button_to 'Entregars',a, method: :edit%></td> </u>
+              <td><%= button_to 'Entregar',a, method: :edit%></td> </u>
               
             </tr>
           
           <%end%>
         </table>
+        <%=will_paginate @pendiente%>
         </div>
+
+
       </div>
 <%else%>
 <h1>No existen pedidos pendientes</h1>

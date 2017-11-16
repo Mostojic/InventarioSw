@@ -1,12 +1,7 @@
 <%if can? :read, Pedido%>
    <h1>Pedido a nombre de : <%=@pedido.cliente%></h1>
    <h2>Fecha entrega : <%=@pedido.entrega%></h2>
-   <%if !@pedido.estado.blank?%>
-      <%if @pedido.estado==3%>
-        <%Pedido.update(@pedido.id, :estado => 1)%>
-      <% end -%>
-    <% end -%>
-
+  
    <div class="container">
    <table class="table table-striped table-hover table-condensed   " >
               <thead>
@@ -54,9 +49,16 @@
   </div>
 
 
-  <p>  
-  </p>
-  <input type="button" value="Volver" onClick="history.back()" /></br></br></br></br></br></br>
-  </br>
-  </br>
+  <%if !@pedido.estado.blank?%>
+      <%if @pedido.estado==3%>
+        <%Pedido.update(@pedido.id, :estado => 1)%>
+      <%else%>
+        <p>  
+        </p>
+        <input type="button" value="Volver" onClick="history.back()" /></br></br></br></br></br></br>
+        </br>
+        </br>
+      <% end -%>
+    <% end -%>
+
 <%end%>

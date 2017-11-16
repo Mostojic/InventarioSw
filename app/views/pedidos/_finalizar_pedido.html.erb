@@ -7,43 +7,46 @@
 		<% if Formula.find_by(insumo_id: b.insumo_id)%>
 			<% formulas.each do |c|%>
 				<%if c.insumo_id == b.insumo_id %>
-					<% d=0.00 %>
+					<% d=0.0 %>
 					<%d = b.porcion*a.cantidad + c.porcion%>
+					<%d=d.round(1)%>
 					<%Formula.update(c.id, :porcion => d)%>
 				<%end%>
 			<%end%>
 		<%else%>
-			<% Formula.create(porcion: b.porcion*a.cantidad, insumo_id: b.insumo_id)%>			
+			<%d=b.porcion*a.cantidad%>
+			<%d=d.round(1)%>
+			<% Formula.create(porcion: d, insumo_id: b.insumo_id)%>			
 		<%end%>
 	<%end%>
 <%end%>
 
 <%"descontar elementos a usar"%>
 
-<% formulas = Formula.all%>
+<%formulas = Formula.all%>
 <%formulas.each do |a|%>
 	<%n = a.porcion%>
 	<%elementos = Elemento.all.order('vencimiento')%>
-	<% elementos.each  do |b|%>
-		<%=b.insumo.nombre%>
-		<%if n > 0 %>
+	<%elementos.each  do |b|%>
+		<%if n > 0.0 %>
 			<%if b.insumo_id==a.insumo_id%>
 				<%if b.cantidad > n%>
 					<%e = Elemento.find_by(id: b.id)%>
 					<%en = e.cantidad%>
 					<%en = en - n%>
-					<%en.to_d.truncate(2).to_f%>
-					<%if en<=0.01%>	
+					<%en=en.round(1)%>
+					<%if en<0.1%>	
 						<%b.delete%>
-						<%n=0.00%>
+						<%n=0.0%>
 					<%else%>
 						<%Elemento.update(b.id, :cantidad => en)%>
-						<%n=0.00%>
+						<%n=0.0%>
 					<%end%>
 				<%else%>
 					<%e = Elemento.find_by(id: b.id)%>
 					<%en = e.cantidad%>
 					<%n = n-en%>
+					<%n=n.round(1)%>
 					<%b.delete%>
 				<%end%>
 			<%end%>

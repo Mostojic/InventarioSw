@@ -38,7 +38,7 @@
 	<%end%>
 	<%= render :partial => "confirmacion_pedido.html" %>
 <%else%>
-	<h2>Pedido en espera. Falta de insumos<%=%></h2>
+	<h2>Pedido en espera por falta de insumos<%=%></h2>
 	<h3>Se necesitan los siguientes insumos en inventrario:</h3>
 	<div class="container">
 	    <div class="col-md-3 col-md-offset-2">
@@ -56,7 +56,12 @@
 		  			<tr>
 				  		<td><%=n.nombre%></td>
 				 		<td><%= a.porcion%></td>
-				 		<td><%= Elemento.where(insumo_id: [a.insumo_id]).sum("cantidad")%></td>
+				 		<%hay=Elemento.where(insumo_id: [a.insumo_id]).sum("cantidad")%>
+				 		<%if hay < a.porcion%>
+				 			<td class="be-alert"><%=hay%></td>
+				 		<%else%>
+				 			<td><%=hay%></td>
+				 		<% end -%>
 					</tr>
 					<%a.delete%>
 		 	   	<% end %>

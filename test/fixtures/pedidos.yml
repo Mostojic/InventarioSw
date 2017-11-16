@@ -9,6 +9,8 @@ one:
   precio: 1
   abonado: 1
   mostrar: 1
+  rut: 1
+  digito: 1
 
 two:
   cliente: MyString
@@ -19,3 +21,5 @@ two:
   precio: 1
   abonado: 1
   mostrar: 1
+  rut: 1
+  digito: 1

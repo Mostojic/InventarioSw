@@ -15,6 +15,13 @@
 	<div class="field">
 	<%=f.text_field :entrega, placeholder: "AAAA-MM-DD"%></div>
 
+	</br	><div>Rut(sin puntos):</div>
+	<div class="field">
+		<%= f.text_field :rut, placeholder: "11222333", :maxlength=>"8" %>
+	<%="  -  "%>
+	<class="field" size-80">
+		<%= f.text_field :digito, placeholder: "1" , :maxlength=>"1" %>
+	</div></br>
 	<p></p>
 	<div>Comentario:</div>
 	<div class="field">
@@ -28,6 +35,13 @@
 	<P></P>
 	<input type="button" value="Volver" onClick="history.back()" />
 	<%end%>
+	</br>
+	</br>
+	</br>
+	</br>
+	</br>
+	</br>
+	</br>
 <%else%>
 	<h3 class="be-re">No se han ingresado productos al sistema. Conmuníquese con administrador</h3>
 <%end%>

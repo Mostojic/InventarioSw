@@ -4,8 +4,7 @@
 
   root 'welcome#index'
   resources :usuarios
-  get 'elementos/listar/:id', to: 'elementos#listar', as: 'insumos'
-  resources :elementos  
+  
   resources :insumos 
   resources :medidas	
   resources :listas
@@ -22,6 +21,7 @@
   resources :pedidos do
   	resources :items
   end
-  
+  get 'elementos/listar/:id', to: 'elementos#listar'
+  resources :elementos  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

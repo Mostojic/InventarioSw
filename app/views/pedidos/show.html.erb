@@ -13,16 +13,16 @@
 
 <body>
 <h3>Cliente: <%= @pedido.cliente%></h3>
-<h3>Fechaentrega: <%= @pedido.entrega%></h3>
+<h3>Fecha de entrega: <%= @pedido.entrega%></h3>
 
 <span class="izq">
-  <h1>Agregar productos a pedido .</h1>
+  <h1>Agregar productos al pedido.</h1>
 <%if Item.last%>
   <%item=Item.last%>
 
     <%if !item.cantidad.blank? and item.cantidad>0 and item.cantidad<100%>
     <%else%>
-     <div class="be-re">DEBE INGRESAR NUMEROS ENTRE 0 Y 99</div>
+     <div class="be-re">DEBE INGRESAR NUMEROS ENTRE 1 Y 99</div>
      <%item.delete%>
      </br>
     <%end%>
@@ -39,25 +39,26 @@
 
 <%= form_for([@pedido,@item]) do |f| %>
 
-
+</br>
 <div class="field">
-  <div>Producto:</div>
+  <%="Producto:"%>
   <%productos=Producto.all%>
   <%productos = productos.order('nombre')%>
     <%= f.collection_select :producto_id, productos, :id, :nombre %>
   </div>
-
+</br>
 <div class="field">
-  <div>Cantidad:</div>
-
-  <%= f.text_field :cantidad, placeholder: "0" %>
+<%="Cantidad:"%>
+<%= f.text_field :cantidad, placeholder: "0" %>
 </div>
+</br>
 <div class="field">
   <%= f.submit "Agregar" %>
 </div>
 <%end%>
-<p></p>
- <td><%= button_to 'Finalizar pedido',@pedido, method: :edit%></td> </u>
+ </br>
+ </br>
+<%= button_to 'Finalizar pedido',@pedido, method: :edit%>
  </br>
  </br>
 </span>

@@ -20,6 +20,11 @@
     <%if Hoja.last%>
       <%hoja=Hoja.last%>
       <%if !hoja.porcion.blank? and hoja.porcion>0 and hoja.porcion<10%>
+        <%digitos=hoja.porcion.to_s.length()%>
+        <%if digitos > 5%>
+        <div class="be-re">PORCION NO DEBE TENER MAS DE 3 DECIMALES</div>
+        <%hoja.delete%>
+        <% end -%>
       <%else%>
        <div class="be-re">DEBE INGRESAR NUMEROS ENTRE 0 Y 10</div>
        <%hoja.delete%>
