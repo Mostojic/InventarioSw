@@ -1,7 +1,12 @@
 class ClientesController < ApplicationController
 	before_action :validate_user	
+
 def index
 	@clientes = Cliente.all
+end
+
+def show
+		@cliente = Cliente.find(params[:id])
 end
 
 def new
@@ -19,6 +24,20 @@ end
 
 	end
 
+def edit
+		@cliente = Cliente.find(params[:id])
+	end
+
+	def update
+	   @cumple = params[:cliente]["cumple"]
+	   @telefono = params[:cliente]["telefono"]
+	   @cliente = Cliente.find(params[:id])
+	   @cliente.cumple = @cumple
+	   @cliente.telefono = @telefono
+	   		@cliente.save()
+	    	redirect_to @cliente
+	    
+	end
 
 
 

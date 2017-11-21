@@ -1,0 +1,23 @@
+<%= form_for(@cliente) do |f| %>
+		<h1>Cliente frecuente</h1>
+
+	<div>Nombre: <%=@cliente.nombre%></div></br>
+	<div>Rut: <%=@cliente.rut%>-<%=@cliente.digito%></div></br>
+	<div class="field">
+		Cumpleaños:
+		<%= f.text_field :cumple, placeholder: "AAAA-MM-DD", :maxlength=>"10" %>
+	</div></br>
+	<div class="field">
+		Telefono: 
+		<%= f.text_field :telefono, placeholder: "telefono" %>
+	</div></br>
+
+
+		<%= f.submit "Guardar" %>
+
+	</div></br>
+
+	<% @cliente.errors.full_messages.each do |message|%>
+			<div class="be-re"><%=message%></div>
+		<%end%>
+	<%end%>

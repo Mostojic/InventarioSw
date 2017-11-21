@@ -26,7 +26,38 @@
 	<%elsif @pedido.estado==3%>
 	<%"entregar pedido"%>
 			<%Pedido.update(@pedido.id, :estado => 2)%>
-			<h1>Pedido a nombre de <%=@pedido.cliente%> ha sido entregado</h1>
+			<h1>Pedido entregado</h1>
+			<table class="table table-striped table-hover table-condensed " >
+	          <thead>
+	            <tr>
+	              <th class="be-tittle"><div class="size-150">Cliente</div></th>
+	              <th class="be-tittle"><div class="size-80">Abonado</div></th>
+	              <th class="be-tittle"><div class="size-80">Total</div></th>
+	              <th class="be-tittle"><div class="size-80">Entrega</div></th>
+	              <th class="be-tittle"><div class="size-150">Productos</div></th>
+	            </tr>                  
+	          </thead>
+	          <tr>
+	          	<th class="be-fond"><%=@pedido.cliente%></th>
+			              <td class="be-fond"><%=@pedido.abonado%></td>
+			              <td class="be-fond"><%=@pedido.precio%></td>
+			              <td class="be-fond"><%=@pedido.entrega%></td>
+			              <%pro=Item.find_by pedido_id: @pedido.id%>
+			              <td class="be-fond"><%=pro.cantidad%> <%=pro.producto.nombre%></td>
+			              </tr>
+			              <%pr=Item.where(pedido_id: [@pedido.id])%>
+			              <%pr.each do |r|%>
+			              	<%if r.id != pro.id%>
+			              		<tr>
+			              		<td class="be-fond"><%=%></td>
+			              		<td class="be-fond"><%=%></td>
+			              		<td class="be-fond"></td>
+			              		<td class="be-fond"><%=%></td>		          
+			              		<td class="be-fond"><%=r.cantidad%> <%=r.producto.nombre%></td>
+			              		</tr>
+			              	<%end%>
+			              <% end -%>
+	          </table>
 			<u class="be-re"> <%= link_to "REGRESAR A PEDIDOS", :action => "index" %></u>	
 
 	<%end%>

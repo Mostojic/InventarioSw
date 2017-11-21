@@ -1,0 +1,10 @@
+<h3>Cliente frecuente</h3>
+<div>Nombre: <%=@cliente.nombre%></div></br>
+<div>Rut: <%=@cliente.rut%>-<%=@cliente.digito%></div></br>
+<%if !@cliente.cumple.blank?%>
+	<div>Cumpleaños: <%=@cliente.cumple%></div></br>
+<% end -%>
+
+<%if !@cliente.telefono.blank?%>
+	<div>Telefono: <%=@cliente.telefono%></div></br>
+<% end -%>
