@@ -13,6 +13,7 @@
 			              		<th><div class="size-220">Nombre</div></th>
 			              		<th><div class="size-150">cumpleaños</div></th>
 			              		<th><div class="size-150">telefono</div></th>
+			              		<th><div class="size-150"></div></th>
 
 			            	</tr>                  
 			          	</thead>
@@ -20,8 +21,18 @@
 							<tr>
 								<td><%=a.rut%>-<%=a.digito%></td>
 								<td><%=a.nombre%></td>
-								<td><%=a.cumple%></td>
-								<td><%=a.telefono%></td>
+								<%if a.cumple.blank? %>
+									<td class="be-re">No ingresado</td>
+								<%else%>
+									<td><%=a.cumple%></td>
+								<%end%>
+								<%if a.telefono.blank? %>
+									<td class="be-re">No ingresado</td>
+								<%else%>
+									<td><%=a.telefono%></td>
+								<%end%>
+								<td><input type="button" value="Actualizar datos" onClick="
+                  location.href='clientes/<%=a.id%>/edit'" /></td>
 							</tr>
 						<% end %>
 			        </table>  

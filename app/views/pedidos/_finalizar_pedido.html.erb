@@ -138,12 +138,12 @@
 		<h3>¡El cliente ya se encuentra registrado en clientes frecuentes!</h3>
 		<%if cli.cumple.blank? or cli.telefono.blank?%>
 			<h3>¡Datos del cliente no están actualizados!</h3>
-			<u class="be-re"> <%= link_to "IR A ACTUALIZAR DATOS", controller:"clientes", action: "edit", id:cli.id%></u>
+			<u class="be-re"> <%= link_to "ACTUALIZAR DATOS CLIENTE", controller:"clientes", action: "edit", id:cli.id%></u>
 		<%end%>
 	<%else%>
 		<h3>¡Cliente registrado como cliente frecuente!</h3>
 		<%nuevo=Cliente.create(rut: @pedido.rut, digito: @pedido.digito, nombre: @pedido.cliente)%>
-		<u class="be-re"> <%= link_to "IR A ACTUALIZAR DATOS", controller:"clientes", action: "edit", id:nuevo.id%></u>
+		<u class="be-re"> <%= link_to "ACTUALIZAR DATOS CLIENTE", controller:"clientes", action: "edit", id:nuevo.id%></u>
 	<%end%>
 <% end -%>
 

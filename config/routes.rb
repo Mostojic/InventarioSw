@@ -8,6 +8,7 @@
   resources :insumos 
   resources :medidas	
   resources :listas
+  get 'clientes/cumple', to: 'clientes#cumple', as: 'cumple'
   resources :clientes
   resources :productos do
   	resources :hojas
