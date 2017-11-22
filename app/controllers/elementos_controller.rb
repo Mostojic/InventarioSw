@@ -20,7 +20,7 @@ class ElementosController < ApplicationController
 
 	def create
 		@elemento = Elemento.new(insumo_id: params[:elemento][:insumo_id],cantidad: params[:elemento][:cantidad],
-					vencimiento: params[:elemento][:vencimiento])
+					vencimiento: params[:elemento][:vencimiento],cod_elemento: params[:elemento][:cod_elemento],)
 		if @elemento.save
 			redirect_to @elemento
 		else

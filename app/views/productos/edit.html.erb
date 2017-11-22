@@ -11,10 +11,39 @@
 	                <%total=total+a.porcion*a.insumo.precio%>
 	              <%end%>
 	            <%end%>
-
+	<%@total=0.0%>
+	<%elementos=Elemento.all%>
+	<%hojas=Hoja.all%>
+	<%hojas.each do |h|%>
+        <%if @producto.id == h.producto_id%>
+            <%@pcfinal=0.0%>
+            <%@cuantos=0.0%>
+            <%elementos.each do |e|%>
+                <%if h.insumo_id==e.insumo_id%>
+                    <%hoy=Date.today%>
+                    <%comprado=e.created_at%>
+                    <%ano=comprado.year.to_i%>
+                    <%mes=comprado.month.to_i%>
+                    <%dia=comprado.day.to_i%>
+                    <%time = Date.new ano, mes, dia%>
+                    <%dias=(hoy-time).to_i%>
+                    <%if !e.cod_elemento.blank? and dias < 32%>
+                    	<%@pcfinal=@pcfinal+e.cod_elemento*e.cantidad%>
+                        <%@cuantos=@cuantos+e.cantidad%>
+                   	<%else%>
+                        <%@pcfinal=@pcfinal+e.insumo.precio%>
+                        <%@cuantos=@cuantos+1%>
+                    <% end -%>
+                <% end -%>
+            <% end -%>
+            <%pfinal=@pcfinal/@cuantos%>
+            <%@total=@total+h.porcion*pfinal%>
+        <% end -%>
+	<% end -%>
 	<%Producto.update(@producto.id, :costo => total)%>
-	<p><h3>Costo total: <%=total%></h3></p>
-	<p><h3>Precio sugerido: <%=total*2%></h3></p>
+	<p><h3>Costo total: <%=total.to_i%></h3></p>
+	<p><h3>Precio sugerido: <%=(total*2).to_i%></h3></p>
+	<p><h3>Precio sugerido(Precios ultimo mes): <%=(@total).to_i%></h3></p>
 
 	<%= form_for(@producto) do |f| %>
 	<%if !@producto.precio.blank? and @producto.precio==0%>

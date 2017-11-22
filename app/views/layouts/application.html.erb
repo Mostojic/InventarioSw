@@ -81,6 +81,11 @@ body > #wrap {
         <%=link_to "Medidas", medidas_path%>
       </li>
       <%end%>
+      <%if can? :read,Cliente%>
+      <li class="col-md">
+        <%=link_to "Clientes",clientes_path%>
+      </li>
+      <% end -%>
       <%if usuario_signed_in?%>
       <li class="col-md">
         <%=link_to "Salir",destroy_usuario_session_path, method: :delete%>
