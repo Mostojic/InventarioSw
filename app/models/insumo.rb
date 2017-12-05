@@ -11,6 +11,7 @@ class Insumo < ApplicationRecord
   validates :precio, numericality: {:message => ': SOLO DEBE INGRESAR NÚMEROS'}
   validates :precio, length: {maximum: 6, :message => ": NO PUEDE EXCEDER LAS 6 CIFRAS"}
   validate :positivo
+  validate :entero
 
   def positivo
     if !precio.blank? and precio<1
@@ -18,4 +19,16 @@ class Insumo < ApplicationRecord
     end
   end
   
+  def entero
+     if !precio.blank? 
+      entero=precio.to_s
+      ent= /\D/.match(entero)
+      unless ent
+
+      else
+        errors.add(:precio, ": INGRESE NUMEROS ENTEROS")
+      end
+     end
+  end
+
 end

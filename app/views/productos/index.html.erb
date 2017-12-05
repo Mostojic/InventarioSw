@@ -66,13 +66,24 @@
                     <% end -%>
                   <% end -%>
 
-                  <td><center><%=@total.to_i%></center></td>
-                  <%if @total.to_i*2 > a.precio%>
-                    <td class="be-alert"><center><%=@total.to_i*2%></center></td>
-                  <%elsif @total.to_i*2 == a.precio%>
-                    <td ><center><%=@total.to_i*2%></center></td>
+                  <%if @total>0%>
+                    <td><center><%=@total.to_i%></center></td>
+                    <%if @total.to_i*2 > a.precio%>
+                      <td class="be-alert"><center><%=@total.to_i*2%></center></td>
+                    <%elsif @total.to_i*2 == a.precio%>
+                      <td ><center><%=@total.to_i*2%></center></td>
+                    <%else%>
+                      <td class="be-red"><center><%=@total.to_i*2%></center></td>
+                    <%end%>
                   <%else%>
-                    <td class="be-red"><center><%=@total.to_i*2%></center></td>
+                    <td><center>Sin compra</center></td>
+                    <%if a.costo*2 > a.precio%>
+                      <td class="be-alert"><center><%=a.costo*2%></center></td>
+                    <%elsif a.costo*2 == a.precio%>
+                      <td ><center><%=a.costo*2%></center></td>
+                    <%else%>
+                      <td class="be-red"><center><%=a.costo*2%></center></td>
+                    <%end%>
                   <%end%>
                         
                   <td><input type="button" value="Editar receta" onClick="

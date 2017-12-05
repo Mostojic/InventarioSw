@@ -1,6 +1,7 @@
 class PedidosController < ApplicationController
 	
 	before_action :validate_user	
+	skip_before_action :verify_authenticity_token, :only => [:pendientes, :edit]
 	def index
 	end
 

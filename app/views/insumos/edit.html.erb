@@ -15,9 +15,11 @@
 		<%= f.text_field :precio, placeholder: "000000" %>
 		<p></p>
 	</div>
+	<div>Unidad de medida:</div>
+		    <%= f.collection_select :medida_id, Medida.all, :id, :nombre %>
+		  </div>
 
-
-	<p></p>
+		<p></p>
 	<div class="field">
 		<%= f.submit "Guardar" %>
 	</div>

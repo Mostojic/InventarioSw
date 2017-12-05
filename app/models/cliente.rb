@@ -1,7 +1,12 @@
 class Cliente < ApplicationRecord
 
 	validate :rut_valido
-
+    validates :telefono ,length: {maximum: 9, :message => ":INGRESE NUMERO DE 9 CIFRAS"}
+    validates :telefono ,length: {minimum: 9, :message => ":INGRESE NUMERO DE 9 CIFRAS"}
+    validates :telefono, numericality: {:message => ': SOLO DEBE INGRESAR NÚMEROS'}
+    validates :cumple, presence: { message: ": DEBE INGRESAR FECHA CORRECTAMENTE" }
+    validate :fecha_esta_en_futuro, :fecha_muy_viejo
+  
   def rut_valido
   	suma=0
   	c=2
@@ -35,4 +40,18 @@ class Cliente < ApplicationRecord
     	end
     end
    end
+
+   def fecha_esta_en_futuro
+        if !cumple.blank? and cumple > Date.today
+            errors.add(:cumple,": FECHA CUMPLEAÑOS NO PUEDE ESTAR EN FUTURO")
+        end
+    end
+
+    def fecha_muy_viejo
+        if !cumple.blank? and Date.today-cumple>37000
+            errors.add(:cumple,": FECHA CUMPLEAÑOS NO PUEDE SUPERAR 100 AÑOS")
+        end
+    end
+
+        
 end

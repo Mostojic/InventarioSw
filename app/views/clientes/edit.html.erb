@@ -1,5 +1,9 @@
 <%= form_for(@cliente) do |f| %>
 		<h1>Cliente frecuente</h1>
+		<% @cliente.errors.full_messages.each do |message|%>
+				<div class="be-re"><%=message%></div>
+		<%end%>
+		</br>
 
 	<div>Nombre: <%=@cliente.nombre%></div></br>
 	<div>Rut: <%=@cliente.rut%>-<%=@cliente.digito%></div></br>
@@ -9,7 +13,7 @@
 	</div></br>
 	<div class="field">
 		Telefono: 
-		<%= f.text_field :telefono, placeholder: "telefono" %>
+		<%= f.text_field :telefono, placeholder: "telefono", :maxlength=>"9"  %>
 	</div></br>
 
 
@@ -17,9 +21,7 @@
 
 	</div></br>
 
-	<% @cliente.errors.full_messages.each do |message|%>
-			<div class="be-re"><%=message%></div>
-		<%end%>
+		
 	<%end%>
 
 	<u class="be-re"> <%= link_to "REGRESAR A CLIENTES", :action => "index" %></u>

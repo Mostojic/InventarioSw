@@ -61,9 +61,11 @@ class InsumosController < ApplicationController
 	def update
 	   @nombre = params[:insumo]["nombre"]
 	   @precio = params[:insumo]["precio"]
+	   @medida = params[:insumo]["medida_id"]
 	   @insumo = Insumo.find(params[:id])
 	   @insumo.nombre = @nombre
 	   @insumo.precio = @precio
+	   @insumo.medida_id = @medida
 	   @insumo.nombre=@insumo.nombre.strip
 		@insumo.nombre=@insumo.nombre.downcase
 		@insumo.nombre=@insumo.nombre.capitalize

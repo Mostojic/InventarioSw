@@ -6,11 +6,11 @@
 	<h1><%= @producto.nombre%></h1>
 	<%total=0.0%>
 	<%hojas=Hoja.all%>
-	            <%hojas.each do |a|%>
-	              <%if a.producto_id==@producto.id%>
-	                <%total=total+a.porcion*a.insumo.precio%>
-	              <%end%>
-	            <%end%>
+	<%hojas.each do |a|%>
+	    <%if a.producto_id==@producto.id%>
+	        <%total=total+a.porcion*a.insumo.precio%>
+	    <%end%>
+	<%end%>
 	<%@total=0.0%>
 	<%elementos=Elemento.all%>
 	<%hojas=Hoja.all%>
@@ -41,16 +41,41 @@
         <% end -%>
 	<% end -%>
 	<%Producto.update(@producto.id, :costo => total)%>
-	<p><h3>Costo total: <%=total.to_i%></h3></p>
-	<p><h3>Precio sugerido: <%=(total*2).to_i%></h3></p>
-	<p><h3>Precio sugerido(Precios ultimo mes): <%=(@total).to_i%></h3></p>
+	<div class="container">
+		      <div class="col-md-3 col-md-offset-2">
+		        <table class="table table-striped table-hover table-condensed   " >
+		          <thead>
+		            <tr>
+		              <th><center><div class="size-165">Costo mercado</div></center></th>
+		              <th><center><div class="size-220">Precio sugerido mercado</div></center></th>
+		              <th><center><div class="size-165">Costo últimos insumos</div></center></th>
+		              <th><center><div class="size-165">Precio sugerido</div></center></th>
+		            </tr>                  
+		          </thead>
+		          <tr>
+		          	<td><center><%=total.to_i%></center></td>
+		          	<td><center><%=(total*2).to_i%></center></td>
+		          	<% if @total > 0%>
+		          		<td><center><%=(@total).to_i%></center></td>
+		          	<%else%>
+		          		<td><center>Sin compras</center></td>
+		          	<%end%>
+		          	<% if @total > 0%>
+		          		<td><center><%=(@total*2).to_i%></center></td>
+		          	<%else%>
+		          		<td><center><%=(total*2).to_i%></center></td>
+		          	<%end%>
+		          </tr>
+		        </table>
+		       </div>
+	</div>
 
 	<%= form_for(@producto) do |f| %>
 	<%if !@producto.precio.blank? and @producto.precio==0%>
 		<div class="be-re">Precio: DEBE INGRESAR NUMERO SUPERIOR A 0</div>
 	<%end%>
 	<%if !@producto.precio.blank? and @producto.precio==@producto.costo%>
-		<div class="be-re">Precio: DEBE SER IGUAL O SUPERIOR AL COSTO TOTAL</div>
+		<div class="be-re">Precio: DEBE SER IGUAL O SUPERIOR AL COSTO MERCADO</div>
 	<%end%>
 	<% @producto.errors.full_messages.each do |message|%>
 		<div class="be-re"><%=message%></div>
