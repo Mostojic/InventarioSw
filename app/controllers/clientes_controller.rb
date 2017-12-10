@@ -42,6 +42,11 @@ def edit
 	    
 	end
 
+def destroy 
+		@cliente = Cliente.find(params[:id])
+		@cliente.destroy
+		redirect_to clientes_path
+	end
 
 
 	private
