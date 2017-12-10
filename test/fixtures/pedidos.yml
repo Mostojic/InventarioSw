@@ -10,7 +10,7 @@ one:
   abonado: 1
   mostrar: 1
   rut: 1
-  digito: 1
+  digito: MyString
 
 two:
   cliente: MyString
@@ -22,4 +22,4 @@ two:
   abonado: 1
   mostrar: 1
   rut: 1
-  digito: 1
+  digito: MyString

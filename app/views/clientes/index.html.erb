@@ -11,9 +11,11 @@
 			            	<tr>
 			              		<th><div class="size-100">Rut</div></th>
 			              		<th><div class="size-220">Nombre</div></th>
-			              		<th><div class="size-150">cumpleaños</div></th>
-			              		<th><div class="size-150">telefono</div></th>
+			              		<th><div class="size-100">cumpleaños</div></th>
+			              		<th><div class="size-100">telefono</div></th>
+			              		<th><div class="size-100">Ultima Entrega</div></th>
 			              		<th><div class="size-150"></div></th>
+			              		<th><div class="size-100"></div></th>
 
 			            	</tr>                  
 			          	</thead>
@@ -28,11 +30,17 @@
 								<%end%>
 								<%if a.telefono.blank? %>
 									<td class="be-re">No ingresado</td>
+								<%elsif a.telefono<100000000%>
+									<td class="be-re">No ingresado</td>
 								<%else%>
 									<td><%=a.telefono%></td>
 								<%end%>
+								<%pedidos=Pedido.where(rut: [a.rut]).order('entrega')%>
+								<%pedido=pedidos.last%>
+								<td><%=pedido.entrega%></td>
 								<td><input type="button" value="Actualizar datos" onClick="
                   location.href='clientes/<%=a.id%>/edit'" /></td>
+                  				<td><%= button_to 'Eliminar', a, method: :delete%></td> 
 							</tr>
 						<% end %>
 			        </table>  

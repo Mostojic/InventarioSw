@@ -46,7 +46,7 @@
 		<div class="letter-red"><%="CANTIDAD ABONADA NO UEDE SUPERAR EL COSTO TOTALDELPEDIDO"%></div>
 	<%end%>
 		<%if !@pedido.abonado.blank? and @pedido.abonado ==0%>
-		<div class="letter-red"><%="CANTIDAD ABONADA: INGRESE UN NUMERO ENTRE 1 Y 99"%></div>
+		<div class="letter-red"><%="CANTIDAD ABONADA: INGRESE UN NUMERO ENTRE MAYOR A 0"%></div>
 	<%end%>
 		<% @pedido.errors.full_messages.each do |message|%>
 			<div class="letter-red"><%=message%></div>

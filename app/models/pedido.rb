@@ -35,11 +35,19 @@ class Pedido < ApplicationRecord
     	end
     	resto=suma%11
     	digi=11-resto
-    	if 	digi==11 and digito !='0'
-    		errors.add(:rut, ": RUT INGRESADO NO ES VALIDO")
+      string1 = '0'
+      string2 = 'k'
+    	if 	digi==11 
+        if digito==string1
+        else
+          errors.add(:rut, ": RUT INGRESADO NO ES VALIDO")
+        end
     	end
-    	if 	digi==10 and digito !='k'
-    		errors.add(:rut, ": RUT INGRESADO NO ES VALIDO")
+    	if 	digi==10 
+        if digito == string2
+        else
+          errors.add(:rut, ": RUT INGRESADO NO ES VALIDO")
+        end
     	end
     	if 	digi<10 and digito.to_i !=digi
     		errors.add(:rut, ": RUT INGRESADO NO ES VALIDO")

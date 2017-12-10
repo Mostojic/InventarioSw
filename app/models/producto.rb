@@ -4,8 +4,8 @@ class Producto < ApplicationRecord
 
 	validates :nombre, presence: {:message => ': Se necesita nombre del producto'}
 	validates :nombre, uniqueness: {:message => ': Producto ingresado ya existe'}
-	validates :nombre, length: {maximum: 40, :message => ": no puede exceder los 40 caracteres"}
- 	validates :precio, length: {maximum: 6, :message => ": no puede exceder los 6 digitos"}
+	validates :nombre, length: {maximum: 40, :message => ": No puede exceder los 40 caracteres"}
+ 	validates :precio, length: {maximum: 6, :message => ": No puede exceder los 6 digitos"}
  	validate :positivo
 
  	def positivo

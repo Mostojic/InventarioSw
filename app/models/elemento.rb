@@ -5,8 +5,16 @@ class Elemento < ApplicationRecord
    	validates :cantidad, presence: {:message => ': INGRESE CANTIDAD QUE DESEA AGREGAR	'}
    	validates :vencimiento, presence: {:message => ': INGRESE FECHA DE VENCIMIENTO CORRECTAMENTE'}
    	validates :cantidad, length: {maximum: 5, :message => ": NO PUEDE SUPERAR LAS 4 CIFRAS"}
-   	validate :fecha_esta_en_pasado, :positivo, :esta_decada
-	
+    validates :cod_elemento, presence: {:message => ': INGRESE PRECIO DE COMPRA UNITARIO '}
+    validates :cod_elemento, length: {maximum: 6, :message => ": NO PUEDE EXCEDER 6 CIFRAS"}
+    validates :cod_elemento, numericality: {:message => ': SOLO DEBE INGRESAR NÚMEROS'}
+    validate :fecha_esta_en_pasado, :positivo, :esta_decada, :positivo_precio
+
+  def positivo_precio
+    if !cod_elemento.blank? and cod_elemento<0
+      errors.add(:cod_elemento, ": Debe ingresar precio superior a $0")
+    end
+  end
 
 	def fecha_esta_en_pasado
 		if !vencimiento.blank? and vencimiento < Date.today

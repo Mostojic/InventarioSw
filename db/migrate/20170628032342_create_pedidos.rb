@@ -10,7 +10,7 @@ class CreatePedidos < ActiveRecord::Migration[5.1]
       t.integer :abonado
       t.integer :mostrar
       t.integer :rut
-      t.integer :digito
+      t.string :digito
 
       t.timestamps
     end
