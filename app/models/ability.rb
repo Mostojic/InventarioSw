@@ -10,9 +10,11 @@ class Ability
    can :cru, Producto
    can :cru, Hoja
    can :cru, Usuario
-   can :read, Pedido
+   can :cru, Pedido
    can :cru, Cliente
-   
+   can :cru, Item
+   can :cru, Elemento
+    
  elsif usuario.role == "usuario"
    alias_action :create, :read, :update, :edit, :delete, :destroy,:to => :cru
    can :cru, Item

@@ -46,24 +46,27 @@
 		        <table class="table table-striped table-hover table-condensed   " >
 		          <thead>
 		            <tr>
-		              <th><center><div class="size-165">Costo mercado</div></center></th>
-		              <th><center><div class="size-220">Precio sugerido mercado</div></center></th>
-		              <th><center><div class="size-165">Costo últimos insumos</div></center></th>
+		              <th><center><div class="size-165">Costo insumos</div></center></th>
+		              <th><center><div class="size-165">Costo Total</div></center></th>
 		              <th><center><div class="size-165">Precio sugerido</div></center></th>
 		            </tr>                  
 		          </thead>
 		          <tr>
 		          	<td><center><%=total.to_i%></center></td>
-		          	<td><center><%=(total*2).to_i%></center></td>
+
 		          	<% if @total > 0%>
 		          		<td><center><%=(@total).to_i%></center></td>
 		          	<%else%>
-		          		<td><center>Sin compras</center></td>
+					<%if !@producto.costo.blank?%>
+						<td><center><%=@producto.costo*2%></center></td>
+					<%else%>
+		          			<td><center><%"0"%></center></td>
+					<%end%>
 		          	<%end%>
 		          	<% if @total > 0%>
-		          		<td><center><%=(@total*2).to_i%></center></td>
+		          		<td><center><%=(@total*4).to_i%></center></td>
 		          	<%else%>
-		          		<td><center><%=(total*2).to_i%></center></td>
+		          		<td><center><%=(total*4).to_i%></center></td>
 		          	<%end%>
 		          </tr>
 		        </table>

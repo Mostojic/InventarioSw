@@ -19,11 +19,11 @@
             <table class="table table-striped table-hover table-condensed   " >
               <thead>
                 <tr>
-                  <th><div class="size-165">Producto</div></th>
-                  <th><div class="size-110">Precio</div></th>
+                  <th><center><div class="size-165">Producto</div></center></th>
+                  <th><center><div class="size-110">Precio</div></center></th>
                   <%if can? :create,Hoja%>         
-                    <th><div class="size-165">Costo ultimo mes</div></th>
-                    <th><div class="size-165">Nuevo precio sugerido</div></th>
+                    <th><center><div class="size-165">Costo Total</div></center></th>
+                    <th><center><div class="size-165">Precio sugerido</div></center></th>
                     <th><div class="size-110">     </div></th>
                     <th><div class="size-110">     </div></th>
                   <%end%>
@@ -68,22 +68,31 @@
 
                   <%if @total>0%>
                     <td><center><%=@total.to_i%></center></td>
-                    <%if @total.to_i*2 > a.precio%>
-                      <td class="be-alert"><center><%=@total.to_i*2%></center></td>
-                    <%elsif @total.to_i*2 == a.precio%>
-                      <td ><center><%=@total.to_i*2%></center></td>
+                    <%if @total.to_i*4 > a.precio%>
+                      <td class="be-alert"><center><%=@total.to_i*4%></center></td>
+                    <%elsif @total.to_i*4 == a.precio%>
+                      <td ><center><%=@total.to_i*4%></center></td>
                     <%else%>
-                      <td class="be-red"><center><%=@total.to_i*2%></center></td>
+                      <td class="be-red"><center><%=@total.to_i*4%></center></td>
                     <%end%>
                   <%else%>
-                    <td><center>Sin compra</center></td>
-                    <%if a.costo*2 > a.precio%>
-                      <td class="be-alert"><center><%=a.costo*2%></center></td>
-                    <%elsif a.costo*2 == a.precio%>
-                      <td ><center><%=a.costo*2%></center></td>
-                    <%else%>
-                      <td class="be-red"><center><%=a.costo*2%></center></td>
-                    <%end%>
+			<%if !a.costo.blank?%>
+                    		<td><center><%=a.costo*2%></center></td>
+			<%else%>
+				<td><center><%="0"%></center></td>
+			<%end%>
+		    <%if !a.precio.blank? and !a.costo.blank?%>
+
+                    	<%if a.costo*4 > a.precio%>
+                      		<td class="be-alert"><center><%=a.costo*4%></center></td>
+                    	<%elsif a.costo*4 == a.precio%>
+                      		<td ><center><%=a.costo*4%></center></td>
+                    	<%else%>
+                      		<td class="be-red"><center><%=a.costo*4%></center></td>
+                    	<%end%>
+		    <%else%>
+                      	<td class="be-alert"><center><%="0"%></center></td>
+		    <%end%>
                   <%end%>
                         
                   <td><input type="button" value="Editar receta" onClick="
